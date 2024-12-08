@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace MVVMFirma.Views
 {
-    /// <summary>
-    /// Interaction logic for WszystkieFakturyView.xaml
-    /// </summary>
+
     public partial class AllInvoicesView : AllViewBase
     {
         public AllInvoicesView()
