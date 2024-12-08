@@ -1,0 +1,1071 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AptekaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dostawcy">
+          <Key>
+            <PropertyRef Name="ID_Dostawcy" />
+          </Key>
+          <Property Name="ID_Dostawcy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Ulica" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Miasto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kod_Pocztowy" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Faktury_Dostawców">
+          <Key>
+            <PropertyRef Name="ID_Faktury" />
+          </Key>
+          <Property Name="ID_Faktury" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numer_Faktury" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_Dostawcy" Type="int" Nullable="false" />
+          <Property Name="Data_Wystawienia" Type="datetime" Nullable="false" />
+          <Property Name="Kwota" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ID_Zamówienia" Type="int" />
+        </EntityType>
+        <EntityType Name="Farmaceuci">
+          <Key>
+            <PropertyRef Name="ID_Farmaceuty" />
+          </Key>
+          <Property Name="ID_Farmaceuty" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imię" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nazwisko" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Numer_Licencji" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grafiki_Pracowników">
+          <Key>
+            <PropertyRef Name="ID_Grafiku" />
+          </Key>
+          <Property Name="ID_Grafiku" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Farmaceuty" Type="int" Nullable="false" />
+          <Property Name="Data" Type="date" Nullable="false" />
+          <Property Name="Godzina_Rozpoczęcia" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Godzina_Zakończenia" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategorie_Leków">
+          <Key>
+            <PropertyRef Name="ID_Kategorii" />
+          </Key>
+          <Property Name="ID_Kategorii" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa_Kategorii" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Leki">
+          <Key>
+            <PropertyRef Name="ID_Leku" />
+          </Key>
+          <Property Name="ID_Leku" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa_Leku" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID_Kategorii" Type="int" Nullable="false" />
+          <Property Name="Cena_Zakupu" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Cena_Sprzedaży" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Data_Waznosci" Type="date" Nullable="false" />
+          <Property Name="ID_Producenta" Type="int" Nullable="false" />
+          <Property Name="Na_Recepte" Type="bit" Nullable="false" />
+          <Property Name="Refundacja" Type="bit" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Magazyn">
+          <Key>
+            <PropertyRef Name="ID_Magazynu" />
+          </Key>
+          <Property Name="ID_Magazynu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Leku" Type="int" Nullable="false" />
+          <Property Name="Ilość" Type="int" Nullable="false" />
+          <Property Name="Ulica" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Miasto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kod_Pocztowy" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pacjenci">
+          <Key>
+            <PropertyRef Name="ID_Pacjenta" />
+          </Key>
+          <Property Name="ID_Pacjenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imię" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nazwisko" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Data_Urodzenia" Type="date" Nullable="false" />
+          <Property Name="PESEL" Type="nvarchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Paragony">
+          <Key>
+            <PropertyRef Name="ID_Paragonu" />
+          </Key>
+          <Property Name="ID_Paragonu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numer_Paragonu" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_Sprzedaży" Type="int" Nullable="false" />
+          <Property Name="Data_Wystawienia" Type="datetime" Nullable="false" />
+          <Property Name="Kwota" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producent_Leków">
+          <Key>
+            <PropertyRef Name="ID_Producenta" />
+          </Key>
+          <Property Name="ID_Producenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa_Producenta" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Ulica" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Miasto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kod_Pocztowy" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produkty_Zamówienia">
+          <Key>
+            <PropertyRef Name="ID_Produktu_Zamówienia" />
+          </Key>
+          <Property Name="ID_Produktu_Zamówienia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Zamówienia" Type="int" Nullable="false" />
+          <Property Name="ID_Leku" Type="int" Nullable="false" />
+          <Property Name="Ilość" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Raporty_Sprzedaży">
+          <Key>
+            <PropertyRef Name="ID_Raportu" />
+          </Key>
+          <Property Name="ID_Raportu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data_Rozpoczęcia" Type="date" Nullable="false" />
+          <Property Name="Data_Zakończenia" Type="date" Nullable="false" />
+          <Property Name="Łączna_Sprzedaż" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Liczba_Transakcji" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recepty">
+          <Key>
+            <PropertyRef Name="ID_Recepty" />
+          </Key>
+          <Property Name="ID_Recepty" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Pacjenta" Type="int" Nullable="false" />
+          <Property Name="ID_Farmaceuty" Type="int" Nullable="false" />
+          <Property Name="Data_Wystawienia" Type="datetime" Nullable="false" />
+          <Property Name="Data_Realizacji" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Sprzedaż">
+          <Key>
+            <PropertyRef Name="ID_Sprzedaży" />
+          </Key>
+          <Property Name="ID_Sprzedaży" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Leku" Type="int" Nullable="false" />
+          <Property Name="ID_Pacjenta" Type="int" />
+          <Property Name="Data_Sprzedaży" Type="datetime" Nullable="false" />
+          <Property Name="Kwota" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Forma_Płatności" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Zamówienia">
+          <Key>
+            <PropertyRef Name="ID_Zamówienia" />
+          </Key>
+          <Property Name="ID_Zamówienia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Dostawcy" Type="int" Nullable="false" />
+          <Property Name="Data_Zamówienia" Type="datetime" Nullable="false" />
+          <Property Name="Data_Dostawy" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Faktury_Dostawców_Dostawcy">
+          <End Role="Dostawcy" Type="Self.Dostawcy" Multiplicity="1" />
+          <End Role="Faktury_Dostawców" Type="Self.Faktury_Dostawców" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dostawcy">
+              <PropertyRef Name="ID_Dostawcy" />
+            </Principal>
+            <Dependent Role="Faktury_Dostawców">
+              <PropertyRef Name="ID_Dostawcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Faktury_Dostawców_Zamówienia">
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="0..1" />
+          <End Role="Faktury_Dostawców" Type="Self.Faktury_Dostawców" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamówienia">
+              <PropertyRef Name="ID_Zamówienia" />
+            </Principal>
+            <Dependent Role="Faktury_Dostawców">
+              <PropertyRef Name="ID_Zamówienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grafiki_Pracowników_Farmaceuci">
+          <End Role="Farmaceuci" Type="Self.Farmaceuci" Multiplicity="1" />
+          <End Role="Grafiki_Pracowników" Type="Self.Grafiki_Pracowników" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmaceuci">
+              <PropertyRef Name="ID_Farmaceuty" />
+            </Principal>
+            <Dependent Role="Grafiki_Pracowników">
+              <PropertyRef Name="ID_Farmaceuty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leki_Kategorie">
+          <End Role="Kategorie_Leków" Type="Self.Kategorie_Leków" Multiplicity="1" />
+          <End Role="Leki" Type="Self.Leki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie_Leków">
+              <PropertyRef Name="ID_Kategorii" />
+            </Principal>
+            <Dependent Role="Leki">
+              <PropertyRef Name="ID_Kategorii" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leki_Producent">
+          <End Role="Producent_Leków" Type="Self.Producent_Leków" Multiplicity="1" />
+          <End Role="Leki" Type="Self.Leki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producent_Leków">
+              <PropertyRef Name="ID_Producenta" />
+            </Principal>
+            <Dependent Role="Leki">
+              <PropertyRef Name="ID_Producenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Magazyn_Leki">
+          <End Role="Leki" Type="Self.Leki" Multiplicity="1" />
+          <End Role="Magazyn" Type="Self.Magazyn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Leki">
+              <PropertyRef Name="ID_Leku" />
+            </Principal>
+            <Dependent Role="Magazyn">
+              <PropertyRef Name="ID_Leku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paragony_Sprzedaż">
+          <End Role="Sprzedaż" Type="Self.Sprzedaż" Multiplicity="1" />
+          <End Role="Paragony" Type="Self.Paragony" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprzedaż">
+              <PropertyRef Name="ID_Sprzedaży" />
+            </Principal>
+            <Dependent Role="Paragony">
+              <PropertyRef Name="ID_Sprzedaży" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produkty_Zamówienia_Leki">
+          <End Role="Leki" Type="Self.Leki" Multiplicity="1" />
+          <End Role="Produkty_Zamówienia" Type="Self.Produkty_Zamówienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Leki">
+              <PropertyRef Name="ID_Leku" />
+            </Principal>
+            <Dependent Role="Produkty_Zamówienia">
+              <PropertyRef Name="ID_Leku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produkty_Zamówienia_Zamówienia">
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="1" />
+          <End Role="Produkty_Zamówienia" Type="Self.Produkty_Zamówienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamówienia">
+              <PropertyRef Name="ID_Zamówienia" />
+            </Principal>
+            <Dependent Role="Produkty_Zamówienia">
+              <PropertyRef Name="ID_Zamówienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recepty_Farmaceuci">
+          <End Role="Farmaceuci" Type="Self.Farmaceuci" Multiplicity="1" />
+          <End Role="Recepty" Type="Self.Recepty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmaceuci">
+              <PropertyRef Name="ID_Farmaceuty" />
+            </Principal>
+            <Dependent Role="Recepty">
+              <PropertyRef Name="ID_Farmaceuty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recepty_Pacjenci">
+          <End Role="Pacjenci" Type="Self.Pacjenci" Multiplicity="1" />
+          <End Role="Recepty" Type="Self.Recepty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacjenci">
+              <PropertyRef Name="ID_Pacjenta" />
+            </Principal>
+            <Dependent Role="Recepty">
+              <PropertyRef Name="ID_Pacjenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sprzedaż_Leki">
+          <End Role="Leki" Type="Self.Leki" Multiplicity="1" />
+          <End Role="Sprzedaż" Type="Self.Sprzedaż" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Leki">
+              <PropertyRef Name="ID_Leku" />
+            </Principal>
+            <Dependent Role="Sprzedaż">
+              <PropertyRef Name="ID_Leku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sprzedaż_Pacjenci">
+          <End Role="Pacjenci" Type="Self.Pacjenci" Multiplicity="0..1" />
+          <End Role="Sprzedaż" Type="Self.Sprzedaż" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacjenci">
+              <PropertyRef Name="ID_Pacjenta" />
+            </Principal>
+            <Dependent Role="Sprzedaż">
+              <PropertyRef Name="ID_Pacjenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zamówienia_Dostawcy">
+          <End Role="Dostawcy" Type="Self.Dostawcy" Multiplicity="1" />
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dostawcy">
+              <PropertyRef Name="ID_Dostawcy" />
+            </Principal>
+            <Dependent Role="Zamówienia">
+              <PropertyRef Name="ID_Dostawcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AptekaModelStoreContainer">
+          <EntitySet Name="Dostawcy" EntityType="Self.Dostawcy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faktury_Dostawców" EntityType="Self.Faktury_Dostawców" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Farmaceuci" EntityType="Self.Farmaceuci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grafiki_Pracowników" EntityType="Self.Grafiki_Pracowników" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategorie_Leków" EntityType="Self.Kategorie_Leków" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leki" EntityType="Self.Leki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Magazyn" EntityType="Self.Magazyn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pacjenci" EntityType="Self.Pacjenci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paragony" EntityType="Self.Paragony" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producent_Leków" EntityType="Self.Producent_Leków" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produkty_Zamówienia" EntityType="Self.Produkty_Zamówienia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Raporty_Sprzedaży" EntityType="Self.Raporty_Sprzedaży" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recepty" EntityType="Self.Recepty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sprzedaż" EntityType="Self.Sprzedaż" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zamówienia" EntityType="Self.Zamówienia" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Faktury_Dostawców_Dostawcy" Association="Self.FK_Faktury_Dostawców_Dostawcy">
+            <End Role="Dostawcy" EntitySet="Dostawcy" />
+            <End Role="Faktury_Dostawców" EntitySet="Faktury_Dostawców" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Faktury_Dostawców_Zamówienia" Association="Self.FK_Faktury_Dostawców_Zamówienia">
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+            <End Role="Faktury_Dostawców" EntitySet="Faktury_Dostawców" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grafiki_Pracowników_Farmaceuci" Association="Self.FK_Grafiki_Pracowników_Farmaceuci">
+            <End Role="Farmaceuci" EntitySet="Farmaceuci" />
+            <End Role="Grafiki_Pracowników" EntitySet="Grafiki_Pracowników" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leki_Kategorie" Association="Self.FK_Leki_Kategorie">
+            <End Role="Kategorie_Leków" EntitySet="Kategorie_Leków" />
+            <End Role="Leki" EntitySet="Leki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leki_Producent" Association="Self.FK_Leki_Producent">
+            <End Role="Producent_Leków" EntitySet="Producent_Leków" />
+            <End Role="Leki" EntitySet="Leki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Magazyn_Leki" Association="Self.FK_Magazyn_Leki">
+            <End Role="Leki" EntitySet="Leki" />
+            <End Role="Magazyn" EntitySet="Magazyn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paragony_Sprzedaż" Association="Self.FK_Paragony_Sprzedaż">
+            <End Role="Sprzedaż" EntitySet="Sprzedaż" />
+            <End Role="Paragony" EntitySet="Paragony" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produkty_Zamówienia_Leki" Association="Self.FK_Produkty_Zamówienia_Leki">
+            <End Role="Leki" EntitySet="Leki" />
+            <End Role="Produkty_Zamówienia" EntitySet="Produkty_Zamówienia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produkty_Zamówienia_Zamówienia" Association="Self.FK_Produkty_Zamówienia_Zamówienia">
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+            <End Role="Produkty_Zamówienia" EntitySet="Produkty_Zamówienia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recepty_Farmaceuci" Association="Self.FK_Recepty_Farmaceuci">
+            <End Role="Farmaceuci" EntitySet="Farmaceuci" />
+            <End Role="Recepty" EntitySet="Recepty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recepty_Pacjenci" Association="Self.FK_Recepty_Pacjenci">
+            <End Role="Pacjenci" EntitySet="Pacjenci" />
+            <End Role="Recepty" EntitySet="Recepty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sprzedaż_Leki" Association="Self.FK_Sprzedaż_Leki">
+            <End Role="Leki" EntitySet="Leki" />
+            <End Role="Sprzedaż" EntitySet="Sprzedaż" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sprzedaż_Pacjenci" Association="Self.FK_Sprzedaż_Pacjenci">
+            <End Role="Pacjenci" EntitySet="Pacjenci" />
+            <End Role="Sprzedaż" EntitySet="Sprzedaż" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zamówienia_Dostawcy" Association="Self.FK_Zamówienia_Dostawcy">
+            <End Role="Dostawcy" EntitySet="Dostawcy" />
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AptekaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dostawcy">
+          <Key>
+            <PropertyRef Name="ID_Dostawcy" />
+          </Key>
+          <Property Name="ID_Dostawcy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ulica" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Miasto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Kod_Pocztowy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Faktury_Dostawców" Relationship="Self.FK_Faktury_Dostawców_Dostawcy" FromRole="Dostawcy" ToRole="Faktury_Dostawców" />
+          <NavigationProperty Name="Zamówienia" Relationship="Self.FK_Zamówienia_Dostawcy" FromRole="Dostawcy" ToRole="Zamówienia" />
+        </EntityType>
+        <EntityType Name="Faktury_Dostawców">
+          <Key>
+            <PropertyRef Name="ID_Faktury" />
+          </Key>
+          <Property Name="ID_Faktury" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numer_Faktury" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_Dostawcy" Type="Int32" Nullable="false" />
+          <Property Name="Data_Wystawienia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Kwota" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ID_Zamówienia" Type="Int32" />
+          <NavigationProperty Name="Dostawcy" Relationship="Self.FK_Faktury_Dostawców_Dostawcy" FromRole="Faktury_Dostawców" ToRole="Dostawcy" />
+          <NavigationProperty Name="Zamówienia" Relationship="Self.FK_Faktury_Dostawców_Zamówienia" FromRole="Faktury_Dostawców" ToRole="Zamówienia" />
+        </EntityType>
+        <EntityType Name="Farmaceuci">
+          <Key>
+            <PropertyRef Name="ID_Farmaceuty" />
+          </Key>
+          <Property Name="ID_Farmaceuty" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imię" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Numer_Licencji" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Grafiki_Pracowników" Relationship="Self.FK_Grafiki_Pracowników_Farmaceuci" FromRole="Farmaceuci" ToRole="Grafiki_Pracowników" />
+          <NavigationProperty Name="Recepty" Relationship="Self.FK_Recepty_Farmaceuci" FromRole="Farmaceuci" ToRole="Recepty" />
+        </EntityType>
+        <EntityType Name="Grafiki_Pracowników">
+          <Key>
+            <PropertyRef Name="ID_Grafiku" />
+          </Key>
+          <Property Name="ID_Grafiku" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Farmaceuty" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Godzina_Rozpoczęcia" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Godzina_Zakończenia" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Farmaceuci" Relationship="Self.FK_Grafiki_Pracowników_Farmaceuci" FromRole="Grafiki_Pracowników" ToRole="Farmaceuci" />
+        </EntityType>
+        <EntityType Name="Kategorie_Leków">
+          <Key>
+            <PropertyRef Name="ID_Kategorii" />
+          </Key>
+          <Property Name="ID_Kategorii" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa_Kategorii" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Leki" Relationship="Self.FK_Leki_Kategorie" FromRole="Kategorie_Leków" ToRole="Leki" />
+        </EntityType>
+        <EntityType Name="Leki">
+          <Key>
+            <PropertyRef Name="ID_Leku" />
+          </Key>
+          <Property Name="ID_Leku" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa_Leku" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_Kategorii" Type="Int32" Nullable="false" />
+          <Property Name="Cena_Zakupu" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Cena_Sprzedaży" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Data_Waznosci" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID_Producenta" Type="Int32" Nullable="false" />
+          <Property Name="Na_Recepte" Type="Boolean" Nullable="false" />
+          <Property Name="Refundacja" Type="Boolean" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Kategorie_Leków" Relationship="Self.FK_Leki_Kategorie" FromRole="Leki" ToRole="Kategorie_Leków" />
+          <NavigationProperty Name="Producent_Leków" Relationship="Self.FK_Leki_Producent" FromRole="Leki" ToRole="Producent_Leków" />
+          <NavigationProperty Name="Magazyn" Relationship="Self.FK_Magazyn_Leki" FromRole="Leki" ToRole="Magazyn" />
+          <NavigationProperty Name="Produkty_Zamówienia" Relationship="Self.FK_Produkty_Zamówienia_Leki" FromRole="Leki" ToRole="Produkty_Zamówienia" />
+          <NavigationProperty Name="Sprzedaż" Relationship="Self.FK_Sprzedaż_Leki" FromRole="Leki" ToRole="Sprzedaż" />
+        </EntityType>
+        <EntityType Name="Magazyn">
+          <Key>
+            <PropertyRef Name="ID_Magazynu" />
+          </Key>
+          <Property Name="ID_Magazynu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Leku" Type="Int32" Nullable="false" />
+          <Property Name="Ilość" Type="Int32" Nullable="false" />
+          <Property Name="Ulica" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Miasto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Kod_Pocztowy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Leki" Relationship="Self.FK_Magazyn_Leki" FromRole="Magazyn" ToRole="Leki" />
+        </EntityType>
+        <EntityType Name="Pacjenci">
+          <Key>
+            <PropertyRef Name="ID_Pacjenta" />
+          </Key>
+          <Property Name="ID_Pacjenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imię" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Data_Urodzenia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Recepty" Relationship="Self.FK_Recepty_Pacjenci" FromRole="Pacjenci" ToRole="Recepty" />
+          <NavigationProperty Name="Sprzedaż" Relationship="Self.FK_Sprzedaż_Pacjenci" FromRole="Pacjenci" ToRole="Sprzedaż" />
+        </EntityType>
+        <EntityType Name="Paragony">
+          <Key>
+            <PropertyRef Name="ID_Paragonu" />
+          </Key>
+          <Property Name="ID_Paragonu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numer_Paragonu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_Sprzedaży" Type="Int32" Nullable="false" />
+          <Property Name="Data_Wystawienia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Kwota" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Sprzedaż" Relationship="Self.FK_Paragony_Sprzedaż" FromRole="Paragony" ToRole="Sprzedaż" />
+        </EntityType>
+        <EntityType Name="Producent_Leków">
+          <Key>
+            <PropertyRef Name="ID_Producenta" />
+          </Key>
+          <Property Name="ID_Producenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa_Producenta" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ulica" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Miasto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Kod_Pocztowy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Leki" Relationship="Self.FK_Leki_Producent" FromRole="Producent_Leków" ToRole="Leki" />
+        </EntityType>
+        <EntityType Name="Produkty_Zamówienia">
+          <Key>
+            <PropertyRef Name="ID_Produktu_Zamówienia" />
+          </Key>
+          <Property Name="ID_Produktu_Zamówienia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Zamówienia" Type="Int32" Nullable="false" />
+          <Property Name="ID_Leku" Type="Int32" Nullable="false" />
+          <Property Name="Ilość" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Leki" Relationship="Self.FK_Produkty_Zamówienia_Leki" FromRole="Produkty_Zamówienia" ToRole="Leki" />
+          <NavigationProperty Name="Zamówienia" Relationship="Self.FK_Produkty_Zamówienia_Zamówienia" FromRole="Produkty_Zamówienia" ToRole="Zamówienia" />
+        </EntityType>
+        <EntityType Name="Raporty_Sprzedaży">
+          <Key>
+            <PropertyRef Name="ID_Raportu" />
+          </Key>
+          <Property Name="ID_Raportu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data_Rozpoczęcia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Data_Zakończenia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Łączna_Sprzedaż" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Liczba_Transakcji" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recepty">
+          <Key>
+            <PropertyRef Name="ID_Recepty" />
+          </Key>
+          <Property Name="ID_Recepty" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Pacjenta" Type="Int32" Nullable="false" />
+          <Property Name="ID_Farmaceuty" Type="Int32" Nullable="false" />
+          <Property Name="Data_Wystawienia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Data_Realizacji" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Farmaceuci" Relationship="Self.FK_Recepty_Farmaceuci" FromRole="Recepty" ToRole="Farmaceuci" />
+          <NavigationProperty Name="Pacjenci" Relationship="Self.FK_Recepty_Pacjenci" FromRole="Recepty" ToRole="Pacjenci" />
+        </EntityType>
+        <EntityType Name="Sprzedaż">
+          <Key>
+            <PropertyRef Name="ID_Sprzedaży" />
+          </Key>
+          <Property Name="ID_Sprzedaży" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Leku" Type="Int32" Nullable="false" />
+          <Property Name="ID_Pacjenta" Type="Int32" />
+          <Property Name="Data_Sprzedaży" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Kwota" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Forma_Płatności" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Leki" Relationship="Self.FK_Sprzedaż_Leki" FromRole="Sprzedaż" ToRole="Leki" />
+          <NavigationProperty Name="Pacjenci" Relationship="Self.FK_Sprzedaż_Pacjenci" FromRole="Sprzedaż" ToRole="Pacjenci" />
+          <NavigationProperty Name="Paragony" Relationship="Self.FK_Paragony_Sprzedaż" FromRole="Sprzedaż" ToRole="Paragony" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Zamówienia">
+          <Key>
+            <PropertyRef Name="ID_Zamówienia" />
+          </Key>
+          <Property Name="ID_Zamówienia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Dostawcy" Type="Int32" Nullable="false" />
+          <Property Name="Data_Zamówienia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Data_Dostawy" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Dostawcy" Relationship="Self.FK_Zamówienia_Dostawcy" FromRole="Zamówienia" ToRole="Dostawcy" />
+          <NavigationProperty Name="Faktury_Dostawców" Relationship="Self.FK_Faktury_Dostawców_Zamówienia" FromRole="Zamówienia" ToRole="Faktury_Dostawców" />
+          <NavigationProperty Name="Produkty_Zamówienia" Relationship="Self.FK_Produkty_Zamówienia_Zamówienia" FromRole="Zamówienia" ToRole="Produkty_Zamówienia" />
+        </EntityType>
+        <Association Name="FK_Faktury_Dostawców_Dostawcy">
+          <End Role="Dostawcy" Type="Self.Dostawcy" Multiplicity="1" />
+          <End Role="Faktury_Dostawców" Type="Self.Faktury_Dostawców" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dostawcy">
+              <PropertyRef Name="ID_Dostawcy" />
+            </Principal>
+            <Dependent Role="Faktury_Dostawców">
+              <PropertyRef Name="ID_Dostawcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zamówienia_Dostawcy">
+          <End Role="Dostawcy" Type="Self.Dostawcy" Multiplicity="1" />
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dostawcy">
+              <PropertyRef Name="ID_Dostawcy" />
+            </Principal>
+            <Dependent Role="Zamówienia">
+              <PropertyRef Name="ID_Dostawcy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Faktury_Dostawców_Zamówienia">
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="0..1" />
+          <End Role="Faktury_Dostawców" Type="Self.Faktury_Dostawców" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamówienia">
+              <PropertyRef Name="ID_Zamówienia" />
+            </Principal>
+            <Dependent Role="Faktury_Dostawców">
+              <PropertyRef Name="ID_Zamówienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grafiki_Pracowników_Farmaceuci">
+          <End Role="Farmaceuci" Type="Self.Farmaceuci" Multiplicity="1" />
+          <End Role="Grafiki_Pracowników" Type="Self.Grafiki_Pracowników" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmaceuci">
+              <PropertyRef Name="ID_Farmaceuty" />
+            </Principal>
+            <Dependent Role="Grafiki_Pracowników">
+              <PropertyRef Name="ID_Farmaceuty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recepty_Farmaceuci">
+          <End Role="Farmaceuci" Type="Self.Farmaceuci" Multiplicity="1" />
+          <End Role="Recepty" Type="Self.Recepty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmaceuci">
+              <PropertyRef Name="ID_Farmaceuty" />
+            </Principal>
+            <Dependent Role="Recepty">
+              <PropertyRef Name="ID_Farmaceuty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leki_Kategorie">
+          <End Role="Kategorie_Leków" Type="Self.Kategorie_Leków" Multiplicity="1" />
+          <End Role="Leki" Type="Self.Leki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie_Leków">
+              <PropertyRef Name="ID_Kategorii" />
+            </Principal>
+            <Dependent Role="Leki">
+              <PropertyRef Name="ID_Kategorii" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leki_Producent">
+          <End Role="Producent_Leków" Type="Self.Producent_Leków" Multiplicity="1" />
+          <End Role="Leki" Type="Self.Leki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producent_Leków">
+              <PropertyRef Name="ID_Producenta" />
+            </Principal>
+            <Dependent Role="Leki">
+              <PropertyRef Name="ID_Producenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Magazyn_Leki">
+          <End Role="Leki" Type="Self.Leki" Multiplicity="1" />
+          <End Role="Magazyn" Type="Self.Magazyn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Leki">
+              <PropertyRef Name="ID_Leku" />
+            </Principal>
+            <Dependent Role="Magazyn">
+              <PropertyRef Name="ID_Leku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produkty_Zamówienia_Leki">
+          <End Role="Leki" Type="Self.Leki" Multiplicity="1" />
+          <End Role="Produkty_Zamówienia" Type="Self.Produkty_Zamówienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Leki">
+              <PropertyRef Name="ID_Leku" />
+            </Principal>
+            <Dependent Role="Produkty_Zamówienia">
+              <PropertyRef Name="ID_Leku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sprzedaż_Leki">
+          <End Role="Leki" Type="Self.Leki" Multiplicity="1" />
+          <End Role="Sprzedaż" Type="Self.Sprzedaż" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Leki">
+              <PropertyRef Name="ID_Leku" />
+            </Principal>
+            <Dependent Role="Sprzedaż">
+              <PropertyRef Name="ID_Leku" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recepty_Pacjenci">
+          <End Role="Pacjenci" Type="Self.Pacjenci" Multiplicity="1" />
+          <End Role="Recepty" Type="Self.Recepty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacjenci">
+              <PropertyRef Name="ID_Pacjenta" />
+            </Principal>
+            <Dependent Role="Recepty">
+              <PropertyRef Name="ID_Pacjenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sprzedaż_Pacjenci">
+          <End Role="Pacjenci" Type="Self.Pacjenci" Multiplicity="0..1" />
+          <End Role="Sprzedaż" Type="Self.Sprzedaż" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacjenci">
+              <PropertyRef Name="ID_Pacjenta" />
+            </Principal>
+            <Dependent Role="Sprzedaż">
+              <PropertyRef Name="ID_Pacjenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Paragony_Sprzedaż">
+          <End Role="Sprzedaż" Type="Self.Sprzedaż" Multiplicity="1" />
+          <End Role="Paragony" Type="Self.Paragony" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprzedaż">
+              <PropertyRef Name="ID_Sprzedaży" />
+            </Principal>
+            <Dependent Role="Paragony">
+              <PropertyRef Name="ID_Sprzedaży" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produkty_Zamówienia_Zamówienia">
+          <End Role="Zamówienia" Type="Self.Zamówienia" Multiplicity="1" />
+          <End Role="Produkty_Zamówienia" Type="Self.Produkty_Zamówienia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zamówienia">
+              <PropertyRef Name="ID_Zamówienia" />
+            </Principal>
+            <Dependent Role="Produkty_Zamówienia">
+              <PropertyRef Name="ID_Zamówienia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AptekaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dostawcy" EntityType="Self.Dostawcy" />
+          <EntitySet Name="Faktury_Dostawców" EntityType="Self.Faktury_Dostawców" />
+          <EntitySet Name="Farmaceuci" EntityType="Self.Farmaceuci" />
+          <EntitySet Name="Grafiki_Pracowników" EntityType="Self.Grafiki_Pracowników" />
+          <EntitySet Name="Kategorie_Leków" EntityType="Self.Kategorie_Leków" />
+          <EntitySet Name="Leki" EntityType="Self.Leki" />
+          <EntitySet Name="Magazyn" EntityType="Self.Magazyn" />
+          <EntitySet Name="Pacjenci" EntityType="Self.Pacjenci" />
+          <EntitySet Name="Paragony" EntityType="Self.Paragony" />
+          <EntitySet Name="Producent_Leków" EntityType="Self.Producent_Leków" />
+          <EntitySet Name="Produkty_Zamówienia" EntityType="Self.Produkty_Zamówienia" />
+          <EntitySet Name="Raporty_Sprzedaży" EntityType="Self.Raporty_Sprzedaży" />
+          <EntitySet Name="Recepty" EntityType="Self.Recepty" />
+          <EntitySet Name="Sprzedaż" EntityType="Self.Sprzedaż" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Zamówienia" EntityType="Self.Zamówienia" />
+          <AssociationSet Name="FK_Faktury_Dostawców_Dostawcy" Association="Self.FK_Faktury_Dostawców_Dostawcy">
+            <End Role="Dostawcy" EntitySet="Dostawcy" />
+            <End Role="Faktury_Dostawców" EntitySet="Faktury_Dostawców" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zamówienia_Dostawcy" Association="Self.FK_Zamówienia_Dostawcy">
+            <End Role="Dostawcy" EntitySet="Dostawcy" />
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Faktury_Dostawców_Zamówienia" Association="Self.FK_Faktury_Dostawców_Zamówienia">
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+            <End Role="Faktury_Dostawców" EntitySet="Faktury_Dostawców" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grafiki_Pracowników_Farmaceuci" Association="Self.FK_Grafiki_Pracowników_Farmaceuci">
+            <End Role="Farmaceuci" EntitySet="Farmaceuci" />
+            <End Role="Grafiki_Pracowników" EntitySet="Grafiki_Pracowników" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recepty_Farmaceuci" Association="Self.FK_Recepty_Farmaceuci">
+            <End Role="Farmaceuci" EntitySet="Farmaceuci" />
+            <End Role="Recepty" EntitySet="Recepty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leki_Kategorie" Association="Self.FK_Leki_Kategorie">
+            <End Role="Kategorie_Leków" EntitySet="Kategorie_Leków" />
+            <End Role="Leki" EntitySet="Leki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leki_Producent" Association="Self.FK_Leki_Producent">
+            <End Role="Producent_Leków" EntitySet="Producent_Leków" />
+            <End Role="Leki" EntitySet="Leki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Magazyn_Leki" Association="Self.FK_Magazyn_Leki">
+            <End Role="Leki" EntitySet="Leki" />
+            <End Role="Magazyn" EntitySet="Magazyn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produkty_Zamówienia_Leki" Association="Self.FK_Produkty_Zamówienia_Leki">
+            <End Role="Leki" EntitySet="Leki" />
+            <End Role="Produkty_Zamówienia" EntitySet="Produkty_Zamówienia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sprzedaż_Leki" Association="Self.FK_Sprzedaż_Leki">
+            <End Role="Leki" EntitySet="Leki" />
+            <End Role="Sprzedaż" EntitySet="Sprzedaż" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recepty_Pacjenci" Association="Self.FK_Recepty_Pacjenci">
+            <End Role="Pacjenci" EntitySet="Pacjenci" />
+            <End Role="Recepty" EntitySet="Recepty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sprzedaż_Pacjenci" Association="Self.FK_Sprzedaż_Pacjenci">
+            <End Role="Pacjenci" EntitySet="Pacjenci" />
+            <End Role="Sprzedaż" EntitySet="Sprzedaż" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Paragony_Sprzedaż" Association="Self.FK_Paragony_Sprzedaż">
+            <End Role="Sprzedaż" EntitySet="Sprzedaż" />
+            <End Role="Paragony" EntitySet="Paragony" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produkty_Zamówienia_Zamówienia" Association="Self.FK_Produkty_Zamówienia_Zamówienia">
+            <End Role="Zamówienia" EntitySet="Zamówienia" />
+            <End Role="Produkty_Zamówienia" EntitySet="Produkty_Zamówienia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AptekaModelStoreContainer" CdmEntityContainer="AptekaEntities">
+          <EntitySetMapping Name="Dostawcy">
+            <EntityTypeMapping TypeName="AptekaModel.Dostawcy">
+              <MappingFragment StoreEntitySet="Dostawcy">
+                <ScalarProperty Name="ID_Dostawcy" ColumnName="ID_Dostawcy" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+                <ScalarProperty Name="Kod_Pocztowy" ColumnName="Kod_Pocztowy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faktury_Dostawców">
+            <EntityTypeMapping TypeName="AptekaModel.Faktury_Dostawców">
+              <MappingFragment StoreEntitySet="Faktury_Dostawców">
+                <ScalarProperty Name="ID_Faktury" ColumnName="ID_Faktury" />
+                <ScalarProperty Name="Numer_Faktury" ColumnName="Numer_Faktury" />
+                <ScalarProperty Name="ID_Dostawcy" ColumnName="ID_Dostawcy" />
+                <ScalarProperty Name="Data_Wystawienia" ColumnName="Data_Wystawienia" />
+                <ScalarProperty Name="Kwota" ColumnName="Kwota" />
+                <ScalarProperty Name="ID_Zamówienia" ColumnName="ID_Zamówienia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Farmaceuci">
+            <EntityTypeMapping TypeName="AptekaModel.Farmaceuci">
+              <MappingFragment StoreEntitySet="Farmaceuci">
+                <ScalarProperty Name="ID_Farmaceuty" ColumnName="ID_Farmaceuty" />
+                <ScalarProperty Name="Imię" ColumnName="Imię" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Numer_Licencji" ColumnName="Numer_Licencji" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grafiki_Pracowników">
+            <EntityTypeMapping TypeName="AptekaModel.Grafiki_Pracowników">
+              <MappingFragment StoreEntitySet="Grafiki_Pracowników">
+                <ScalarProperty Name="ID_Grafiku" ColumnName="ID_Grafiku" />
+                <ScalarProperty Name="ID_Farmaceuty" ColumnName="ID_Farmaceuty" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Godzina_Rozpoczęcia" ColumnName="Godzina_Rozpoczęcia" />
+                <ScalarProperty Name="Godzina_Zakończenia" ColumnName="Godzina_Zakończenia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategorie_Leków">
+            <EntityTypeMapping TypeName="AptekaModel.Kategorie_Leków">
+              <MappingFragment StoreEntitySet="Kategorie_Leków">
+                <ScalarProperty Name="ID_Kategorii" ColumnName="ID_Kategorii" />
+                <ScalarProperty Name="Nazwa_Kategorii" ColumnName="Nazwa_Kategorii" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leki">
+            <EntityTypeMapping TypeName="AptekaModel.Leki">
+              <MappingFragment StoreEntitySet="Leki">
+                <ScalarProperty Name="ID_Leku" ColumnName="ID_Leku" />
+                <ScalarProperty Name="Nazwa_Leku" ColumnName="Nazwa_Leku" />
+                <ScalarProperty Name="ID_Kategorii" ColumnName="ID_Kategorii" />
+                <ScalarProperty Name="Cena_Zakupu" ColumnName="Cena_Zakupu" />
+                <ScalarProperty Name="Cena_Sprzedaży" ColumnName="Cena_Sprzedaży" />
+                <ScalarProperty Name="Data_Waznosci" ColumnName="Data_Waznosci" />
+                <ScalarProperty Name="ID_Producenta" ColumnName="ID_Producenta" />
+                <ScalarProperty Name="Na_Recepte" ColumnName="Na_Recepte" />
+                <ScalarProperty Name="Refundacja" ColumnName="Refundacja" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Magazyn">
+            <EntityTypeMapping TypeName="AptekaModel.Magazyn">
+              <MappingFragment StoreEntitySet="Magazyn">
+                <ScalarProperty Name="ID_Magazynu" ColumnName="ID_Magazynu" />
+                <ScalarProperty Name="ID_Leku" ColumnName="ID_Leku" />
+                <ScalarProperty Name="Ilość" ColumnName="Ilość" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+                <ScalarProperty Name="Kod_Pocztowy" ColumnName="Kod_Pocztowy" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pacjenci">
+            <EntityTypeMapping TypeName="AptekaModel.Pacjenci">
+              <MappingFragment StoreEntitySet="Pacjenci">
+                <ScalarProperty Name="ID_Pacjenta" ColumnName="ID_Pacjenta" />
+                <ScalarProperty Name="Imię" ColumnName="Imię" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Data_Urodzenia" ColumnName="Data_Urodzenia" />
+                <ScalarProperty Name="PESEL" ColumnName="PESEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paragony">
+            <EntityTypeMapping TypeName="AptekaModel.Paragony">
+              <MappingFragment StoreEntitySet="Paragony">
+                <ScalarProperty Name="ID_Paragonu" ColumnName="ID_Paragonu" />
+                <ScalarProperty Name="Numer_Paragonu" ColumnName="Numer_Paragonu" />
+                <ScalarProperty Name="ID_Sprzedaży" ColumnName="ID_Sprzedaży" />
+                <ScalarProperty Name="Data_Wystawienia" ColumnName="Data_Wystawienia" />
+                <ScalarProperty Name="Kwota" ColumnName="Kwota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producent_Leków">
+            <EntityTypeMapping TypeName="AptekaModel.Producent_Leków">
+              <MappingFragment StoreEntitySet="Producent_Leków">
+                <ScalarProperty Name="ID_Producenta" ColumnName="ID_Producenta" />
+                <ScalarProperty Name="Nazwa_Producenta" ColumnName="Nazwa_Producenta" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+                <ScalarProperty Name="Kod_Pocztowy" ColumnName="Kod_Pocztowy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produkty_Zamówienia">
+            <EntityTypeMapping TypeName="AptekaModel.Produkty_Zamówienia">
+              <MappingFragment StoreEntitySet="Produkty_Zamówienia">
+                <ScalarProperty Name="ID_Produktu_Zamówienia" ColumnName="ID_Produktu_Zamówienia" />
+                <ScalarProperty Name="ID_Zamówienia" ColumnName="ID_Zamówienia" />
+                <ScalarProperty Name="ID_Leku" ColumnName="ID_Leku" />
+                <ScalarProperty Name="Ilość" ColumnName="Ilość" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Raporty_Sprzedaży">
+            <EntityTypeMapping TypeName="AptekaModel.Raporty_Sprzedaży">
+              <MappingFragment StoreEntitySet="Raporty_Sprzedaży">
+                <ScalarProperty Name="ID_Raportu" ColumnName="ID_Raportu" />
+                <ScalarProperty Name="Data_Rozpoczęcia" ColumnName="Data_Rozpoczęcia" />
+                <ScalarProperty Name="Data_Zakończenia" ColumnName="Data_Zakończenia" />
+                <ScalarProperty Name="Łączna_Sprzedaż" ColumnName="Łączna_Sprzedaż" />
+                <ScalarProperty Name="Liczba_Transakcji" ColumnName="Liczba_Transakcji" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recepty">
+            <EntityTypeMapping TypeName="AptekaModel.Recepty">
+              <MappingFragment StoreEntitySet="Recepty">
+                <ScalarProperty Name="ID_Recepty" ColumnName="ID_Recepty" />
+                <ScalarProperty Name="ID_Pacjenta" ColumnName="ID_Pacjenta" />
+                <ScalarProperty Name="ID_Farmaceuty" ColumnName="ID_Farmaceuty" />
+                <ScalarProperty Name="Data_Wystawienia" ColumnName="Data_Wystawienia" />
+                <ScalarProperty Name="Data_Realizacji" ColumnName="Data_Realizacji" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sprzedaż">
+            <EntityTypeMapping TypeName="AptekaModel.Sprzedaż">
+              <MappingFragment StoreEntitySet="Sprzedaż">
+                <ScalarProperty Name="ID_Sprzedaży" ColumnName="ID_Sprzedaży" />
+                <ScalarProperty Name="ID_Leku" ColumnName="ID_Leku" />
+                <ScalarProperty Name="ID_Pacjenta" ColumnName="ID_Pacjenta" />
+                <ScalarProperty Name="Data_Sprzedaży" ColumnName="Data_Sprzedaży" />
+                <ScalarProperty Name="Kwota" ColumnName="Kwota" />
+                <ScalarProperty Name="Forma_Płatności" ColumnName="Forma_Płatności" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AptekaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zamówienia">
+            <EntityTypeMapping TypeName="AptekaModel.Zamówienia">
+              <MappingFragment StoreEntitySet="Zamówienia">
+                <ScalarProperty Name="ID_Zamówienia" ColumnName="ID_Zamówienia" />
+                <ScalarProperty Name="ID_Dostawcy" ColumnName="ID_Dostawcy" />
+                <ScalarProperty Name="Data_Zamówienia" ColumnName="Data_Zamówienia" />
+                <ScalarProperty Name="Data_Dostawy" ColumnName="Data_Dostawy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
