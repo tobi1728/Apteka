@@ -8,9 +8,17 @@ namespace MVVMFirma.ViewModels
 {
     public class AllInvoicesViewModel : WorkspaceViewModel
     {
-        public AllInvoicesViewModel() 
-        { 
+        #region Fields
+        #endregion
+        #region Constructor
+        public AllInvoicesViewModel()
+        {
             base.DisplayName = "Faktury";
         }
+        #endregion
+        #region Helpers
+
+        #endregion
+
     }
 }
