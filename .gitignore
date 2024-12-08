@@ -1,0 +1,74 @@
+# Build Folders
+bin/
+obj/
+
+# Visual Studio Code Coverage Results
+*.coverage
+*.coveragexml
+
+# User-Specific Files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Log Files
+*.log
+
+# Auto-Generated Files
+.g.
+.i.
+*_TemporaryKey.pfx
+*.publishsettings
+
+# Dependency Directories
+packages/
+.vs/
+.vscode/
+
+# Resharper Files
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Rider Files
+.idea/
+
+# NuGet Packages
+project.lock.json
+*.nuget.props
+*.nuget.targets
+
+# Dotnet Tooling
+*/.pidb
+*.mdb
+*.opendb
+*.pdb
+*.rsp
+
+# Temporary Files
+*.tmp
+*.temp
+~$*
+
+# Windows Thumbnail Cache Files
+Thumbs.db
+ehthumbs.db
+
+# Mac Files
+.DS_Store
+
+# Additional Visual Studio Directories
+debug/
+release/
+ipch/
+# Uncomment if using Snippets
+# *.snippet
+
+# Publish Output
+PublishProfiles/
+
+# Other Backup Files
+*.bak
+*.swp
+*.orig
+*.tmp
