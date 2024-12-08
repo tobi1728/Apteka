@@ -8,14 +8,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:AllViewBase}">
-                    <Grid>
+                    <Grid Margin="0,10,0,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="34"/>
+                            <RowDefinition Height="40"/>
                             <RowDefinition Height="60"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0">Tu beda elementy wspolne</Label>
-                        <ContentPresenter Grid.Row="1"/>
+                        <ToolBar Grid.Row="0" Margin="0,2,0,2">
+                            <Button Content="Dodaj" Margin="0,2,0,2"/>
+                            <Button Content="Edytuj" Margin="0,2,0,2"/>
+                            <Button Content="Usun" Margin="0,2,0,2"/>
+                            <Button Content="Odswiez" Margin="0,2,0,2"/>
+                        </ToolBar>
+                        <StackPanel Grid.Row="1" Margin="0,2,0,2">
+                            <Label>Tu bedzie sortowanie i filtrowanie</Label>
+                        </StackPanel>
+                        <ContentPresenter Grid.Row="2" Margin="0,5,0,5"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
