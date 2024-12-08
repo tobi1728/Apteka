@@ -10,7 +10,7 @@ namespace MVVMFirma.ViewModels
     {
         public AllProductsViewModel()
         {
-            base.DisplayName = "Towary";
+            base.DisplayName = "Products";
 
         }
     }
