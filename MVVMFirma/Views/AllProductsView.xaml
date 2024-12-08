@@ -9,7 +9,7 @@
     <Grid>
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding ID_Faktury}"/>
                 <DataGridTextColumn Header="Nazwa"/>
                 <DataGridTextColumn Header="Opis"/>
                 <DataGridTextColumn Header="Kategoria"/>

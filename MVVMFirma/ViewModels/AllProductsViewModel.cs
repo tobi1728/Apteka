@@ -12,6 +12,7 @@ namespace MVVMFirma.ViewModels
         #region Fields
         private readonly AptekaEntities aptekaEntities; // to jest pole, ktore reprezentuje baze danych
         #endregion
+
         #region Constructor
         public AllProductsViewModel()
         {
@@ -19,6 +20,7 @@ namespace MVVMFirma.ViewModels
 
         }
         #endregion
+
         #region Helpers
 
         #endregion
