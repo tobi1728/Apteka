@@ -7,6 +7,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Label Content="To jest UC Wszystkie Towary"></Label>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id"/>
+                <DataGridTextColumn Header="Nazwa"/>
+                <DataGridTextColumn Header="Opis"/>
+                <DataGridTextColumn Header="Kategoria"/>
+                <DataGridTextColumn Header="Cena zakupu"/>
+                <DataGridTextColumn Header="Cena sprzedazy"/>
+                <DataGridTextColumn Header="Data waznosci"/>
+                <DataGridTextColumn Header="Producent"/>
+                <DataGridTextColumn Header="Na recepte"/>
+                <DataGridTextColumn Header="Refundacja"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </local:AllViewBase>

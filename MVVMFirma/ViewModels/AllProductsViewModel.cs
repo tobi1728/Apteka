@@ -8,6 +8,9 @@ namespace MVVMFirma.ViewModels
 {
     public class AllProductsViewModel : WorkspaceViewModel
     {
+        #region Fields
+
+        #endregion
         public AllProductsViewModel()
         {
             base.DisplayName = "Products";
