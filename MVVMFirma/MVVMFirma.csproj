@@ -178,6 +178,7 @@
     <Compile Include="Views\AllProductsView.xaml.cs">
       <DependentUpon>AllProductsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\OneViewBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

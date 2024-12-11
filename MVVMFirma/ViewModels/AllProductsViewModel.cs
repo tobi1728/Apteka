@@ -15,9 +15,8 @@ namespace MVVMFirma.ViewModels
     {
         #region Constructor
         public AllProductsViewModel()
-            :base()
+            :base("Leki")
         {
-            base.DisplayName = "Leki";
         }
         #endregion
 

@@ -18,7 +18,7 @@ namespace MVVMFirma.Views
     /// <summary>
     /// Interaction logic for NowaFakturaView.xaml
     /// </summary>
-    public partial class NewInvoiceView : UserControl
+    public partial class NewInvoiceView : OneViewBase
     {
         public NewInvoiceView()
         {

@@ -13,11 +13,11 @@ namespace MVVMFirma.ViewModels
 {
     public class AllInvoicesViewModel : AllViewModel<Faktury_Dostawców>
     {
+
         #region Constructor
         public AllInvoicesViewModel()
-            :base()
+            :base("Faktury dostawcow")
         {
-            base.DisplayName = "Faktury";
         }
         #endregion
 

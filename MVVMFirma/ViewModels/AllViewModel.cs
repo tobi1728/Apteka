@@ -51,9 +51,10 @@ namespace MVVMFirma.ViewModels
         #endregion
 
         #region Constructor
-        public AllViewModel()
+        public AllViewModel(string displayName)
         {
             aptekaEntities = new AptekaEntities();
+            base.DisplayName = displayName;
         }
         #endregion
 
