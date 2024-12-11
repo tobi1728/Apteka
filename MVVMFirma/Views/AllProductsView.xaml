@@ -9,16 +9,17 @@
     <Grid>
         <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding ID_Faktury}"/>
-                <DataGridTextColumn Header="Nazwa"/>
-                <DataGridTextColumn Header="Opis"/>
-                <DataGridTextColumn Header="Kategoria"/>
-                <DataGridTextColumn Header="Cena zakupu"/>
-                <DataGridTextColumn Header="Cena sprzedazy"/>
-                <DataGridTextColumn Header="Data waznosci"/>
-                <DataGridTextColumn Header="Producent"/>
-                <DataGridTextColumn Header="Na recepte"/>
-                <DataGridTextColumn Header="Refundacja"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding ID_Leku}"/>
+                <DataGridTextColumn Header="Nazwa" Binding="{Binding Nazwa_Leku}"/>
+                <DataGridTextColumn Header="Opis" Binding="{Binding Opis}"/>
+                <DataGridTextColumn Header="Kategoria" Binding="{Binding ID_Kategorii}"/>
+                <DataGridTextColumn Header="Cena zakupu" Binding="{Binding Cena_Zakupu}"/>
+                <DataGridTextColumn Header="Cena sprzedazy" Binding="{Binding Cena_Sprzedazy}"/>
+                <DataGridTextColumn Header="Data waznosci" Binding="{Binding Data_Waznosci}"/>
+                <DataGridTextColumn Header="Producent" Binding="{Binding ID_Producenta}"/>
+                <DataGridTextColumn Header="Na recepte" Binding="{Binding Na_Recepte}"/>
+                <DataGridTextColumn Header="Refundacja" Binding="{Binding Refundacja}"/>
+                
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

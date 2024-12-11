@@ -153,6 +153,7 @@
     <Compile Include="Models\Entities\Zamówienia.cs">
       <DependentUpon>Apteka.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AllViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
