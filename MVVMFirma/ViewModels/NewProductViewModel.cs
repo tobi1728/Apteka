@@ -86,7 +86,7 @@ namespace MVVMFirma.ViewModels
         }
 
         // ID Kategorii
-        public int? IDKategorii
+        public int IDKategorii
         {
             get
             {
@@ -94,13 +94,13 @@ namespace MVVMFirma.ViewModels
             }
             set
             {
-                leki.ID_Kategorii = value ?? 0;
+                leki.ID_Kategorii = value;
                 OnPropertyChanged(() => IDKategorii);
             }
         }
 
         // ID Producenta
-        public int? IDProducenta
+        public int IDProducenta
         {
             get
             {
@@ -108,7 +108,7 @@ namespace MVVMFirma.ViewModels
             }
             set
             {
-                leki.ID_Producenta = value ?? 0;
+                leki.ID_Producenta = value;
                 OnPropertyChanged(() => IDProducenta);
             }
         }
@@ -214,7 +214,7 @@ namespace MVVMFirma.ViewModels
         }
         public void Save()
         {
-            if (!IDKategorii.HasValue || !IDProducenta.HasValue || IDKategorii == 0 || IDProducenta == 0)
+            if (IDKategorii == 0 || IDProducenta == 0)
             {
                 throw new InvalidOperationException("Musisz wybrać kategorię i producenta.");
             }
