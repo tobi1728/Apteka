@@ -14,10 +14,10 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Button Grid.Row="2" Content="Dodaj" Width="70" HorizontalAlignment="Left" Margin="10,10,0,0" />
+                        <Button Grid.Row="2" Content="Dodaj" Width="70" HorizontalAlignment="Left" Margin="10,10,0,0" Command="{Binding AddCommand}"/>
                         <Button Grid.Row="2" Content="Edytuj" Width="70" HorizontalAlignment="Left" Margin="90,10,0,0" />
                         <Button Grid.Row="2" Content="Usun" Width="70" HorizontalAlignment="Left" Margin="170,10,0,0" />
-                        <Button Grid.Row="2" Content="Odswiez" Width="70" HorizontalAlignment="Left" Margin="250,10,0,0" />
+                        <Button Grid.Row="2" Content="Odswiez" Width="70" HorizontalAlignment="Left" Margin="250,10,0,0" Command="{Binding LoadCommand}"/>
                         <!--
                         <StackPanel Grid.Row="1" Margin="0,2,0,2">
                             <Label>Tu bedzie sortowanie i filtrowanie</Label>

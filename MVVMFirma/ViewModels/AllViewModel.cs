@@ -1,4 +1,5 @@
-﻿using MVVMFirma.Helper;
+﻿using GalaSoft.MvvmLight.Messaging;
+using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace MVVMFirma.ViewModels
 
         #endregion
 
-        #region LoadCommand
+        #region Command
         private BaseCommand _LoadCommand; // to jest komenda ktora bedzie wywolywala funkcje Load pobierajaca z bazy danych 
 
         public ICommand LoadCommand
@@ -27,6 +28,18 @@ namespace MVVMFirma.ViewModels
                 if (_LoadCommand == null)
                     _LoadCommand = new BaseCommand(() => Load());
                 return _LoadCommand;
+            }
+        }
+
+        private BaseCommand _AddCommand; // to jest komenda ktora bedzie wywolywala funkcje Add wywolujaca okno do dodawania i bedzie podpieta pod dodaj
+
+        public ICommand AddCommand
+        {
+            get
+            {
+                if (_AddCommand == null)
+                    _AddCommand = new BaseCommand(() => add());
+                return _AddCommand;
             }
         }
         #endregion
@@ -59,6 +72,12 @@ namespace MVVMFirma.ViewModels
         #endregion
 
         #region Helpers
+        private void add()
+        {
+            // messenger jest z biblioteki MVVM light, dzieki jej wysylami do innych obiektow komunikat Display Name Add gdzie display name jest nazwa widoku
+            // ten komunikat odbierze mainwindowviewmodel, ktore jest odpowiedzialne za otwieranie okien
+            Messenger.Default.Send(DisplayName + "Add");
+        }
         public abstract void Load();
         #endregion
     }

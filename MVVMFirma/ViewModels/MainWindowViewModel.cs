@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Data;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace MVVMFirma.ViewModels
 {
@@ -32,7 +33,8 @@ namespace MVVMFirma.ViewModels
             }
         }
         private List<CommandViewModel> CreateCommands()
-        {
+        {   
+            Messenger.Default.Register<string>(this, open);
             return new List<CommandViewModel>
             {
                 new CommandViewModel(
@@ -148,6 +150,14 @@ namespace MVVMFirma.ViewModels
             ICollectionView collectionView = CollectionViewSource.GetDefaultView(this.Workspaces);
             if (collectionView != null)
                 collectionView.MoveCurrentTo(workspace);
+        }
+
+        private void open(string name) // name to wyslany komunikat
+        {
+            if (name == "Wszystkie lekiAdd")
+                CreateView(new NewProductViewModel());
+            if (name == "Faktury dostawcowAdd")
+                CreateView(new NewProductViewModel());
         }
         #endregion
     }
