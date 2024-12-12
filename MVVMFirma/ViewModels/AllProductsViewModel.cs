@@ -16,7 +16,7 @@ namespace MVVMFirma.ViewModels
     {
         #region Constructor
         public AllProductsViewModel()
-            :base("Leki")
+            :base("Wszystkie leki")
         {
         }
         #endregion
@@ -27,7 +27,7 @@ namespace MVVMFirma.ViewModels
         {
             List = new ObservableCollection<ProductForAllView>
                 (
-                    from product in aptekaEntities.Leki // dla kazdej faktury z bazy danych faktur
+                    from product in aptekaEntities.Leki // dla kazdego leku z bazy danych lekow
                     select new ProductForAllView // tworzymy nowy ProductForAllView
                     {
                         ID_Leku = product.ID_Leku,

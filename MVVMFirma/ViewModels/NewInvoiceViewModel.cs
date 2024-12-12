@@ -10,7 +10,7 @@ namespace MVVMFirma.ViewModels
     {
         public NewInvoiceViewModel() 
         {
-            base.DisplayName = "Faktura"; // nazwa zakladki
+            base.DisplayName = "Nowa faktura"; // nazwa zakladki
         }
     }
 }

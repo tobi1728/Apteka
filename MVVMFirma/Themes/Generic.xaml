@@ -10,20 +10,19 @@
                 <ControlTemplate TargetType="{x:Type local:AllViewBase}">
                     <Grid Margin="0,10,0,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="60"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <ToolBar Grid.Row="0" Margin="0,2,0,2">
-                            <Button Content="Dodaj" Margin="0,2,0,2"/>
-                            <Button Content="Edytuj" Margin="0,2,0,2"/>
-                            <Button Content="Usun" Margin="0,2,0,2"/>
-                            <Button Content="Odswiez" Margin="0,2,0,2"/>
-                        </ToolBar>
+                        <Button Grid.Row="2" Content="Dodaj" Width="70" HorizontalAlignment="Left" Margin="10,10,0,0" />
+                        <Button Grid.Row="2" Content="Edytuj" Width="70" HorizontalAlignment="Left" Margin="90,10,0,0" />
+                        <Button Grid.Row="2" Content="Usun" Width="70" HorizontalAlignment="Left" Margin="170,10,0,0" />
+                        <Button Grid.Row="2" Content="Odswiez" Width="70" HorizontalAlignment="Left" Margin="250,10,0,0" />
+                        <!--
                         <StackPanel Grid.Row="1" Margin="0,2,0,2">
                             <Label>Tu bedzie sortowanie i filtrowanie</Label>
-                        </StackPanel>
-                        <ContentPresenter Grid.Row="2" Margin="0,5,0,5"/>
+                        </StackPanel>-->
+                        <ContentPresenter Grid.Row="1" Margin="0,5,0,5"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

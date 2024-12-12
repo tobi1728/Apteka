@@ -13,7 +13,7 @@ namespace MVVMFirma.ViewModels
        
         #region Constructor
         public NewProductViewModel()
-            :base("Leki")
+            :base("Nowy lek")
         {
             aptekaEntities = new AptekaEntities();
             item = new Leki();
@@ -182,13 +182,11 @@ namespace MVVMFirma.ViewModels
         public void LoadKategorie()
         {
             KategorieLekow = aptekaEntities.Kategorie_Leków.ToList();
-            Console.WriteLine($"Załadowano {KategorieLekow.Count} kategorii.");
         }
 
         public void LoadProducenci()
         {
             Producenci = aptekaEntities.Producent_Leków.ToList();
-            Console.WriteLine($"Załadowano {Producenci.Count} producentów.");
         }
         public override void Save()
         {

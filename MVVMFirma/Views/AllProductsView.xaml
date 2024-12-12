@@ -5,22 +5,45 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MVVMFirma.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding ID_Leku}"/>
-                <DataGridTextColumn Header="Nazwa" Binding="{Binding Nazwa_Leku}"/>
-                <DataGridTextColumn Header="Opis" Binding="{Binding Opis}"/>
-                <DataGridTextColumn Header="Kategoria" Binding="{Binding Nazwa_Kategorii}"/>
-                <DataGridTextColumn Header="Cena zakupu" Binding="{Binding Cena_Zakupu}"/>
-                <DataGridTextColumn Header="Cena sprzedazy" Binding="{Binding Cena_Sprzedaży}"/>
-                <DataGridTextColumn Header="Data waznosci" Binding="{Binding Data_Waznosci}"/>
-                <DataGridTextColumn Header="Producent" Binding="{Binding Nazwa_Producenta}"/>
-                <DataGridTextColumn Header="Na recepte" Binding="{Binding Na_Recepte}"/>
-                <DataGridTextColumn Header="Refundacja" Binding="{Binding Refundacja}"/>
-                
-            </DataGrid.Columns>
-        </DataGrid>
+             d:DesignHeight="500" d:DesignWidth="800">
+    <Grid Background="#fff">
+        <Grid.RowDefinitions>
+            <!-- Nagłówek -->
+            <RowDefinition Height="Auto"/>
+            <!-- Główna sekcja -->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Nagłówek -->
+        <TextBlock Grid.Row="0" Text="Lista produktów" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" 
+                   FontSize="20" FontWeight="Bold" Margin="5,10,0,10"/>
+
+        <!-- Główna tabela dla produktów -->
+        <Grid Grid.Row="1" HorizontalAlignment="Left">
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}" 
+                      CanUserAddRows="False" IsReadOnly="True" Margin="10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID_Leku}" />
+                    <DataGridTextColumn Header="Nazwa" Binding="{Binding Nazwa_Leku}" />
+                    <DataGridTextColumn Header="Opis" Binding="{Binding Opis}" />
+                    <DataGridTextColumn Header="Kategoria" Binding="{Binding Nazwa_Kategorii}" />
+                    <DataGridTextColumn Header="Cena zakupu" Width="Auto">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="Cena_Zakupu" StringFormat="{}{0} zł" />
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Cena sprzedaży" Width="Auto">
+                        <DataGridTextColumn.Binding>
+                            <Binding Path="Cena_Sprzedaży" StringFormat="{}{0} zł" />
+                        </DataGridTextColumn.Binding>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Data ważności" Binding="{Binding Data_Waznosci, StringFormat=d}" />
+                    <DataGridTextColumn Header="Producent" Binding="{Binding Nazwa_Producenta}" />
+                    <DataGridCheckBoxColumn Header="Na receptę" Binding="{Binding Na_Recepte}" />
+                    <DataGridCheckBoxColumn Header="Refundacja" Binding="{Binding Refundacja}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </local:AllViewBase>

@@ -36,19 +36,19 @@ namespace MVVMFirma.ViewModels
             return new List<CommandViewModel>
             {
                 new CommandViewModel(
-                    "Towary",
+                    "Wszystkie leki",
                     new BaseCommand(() => this.ShowAll<AllProductsViewModel>())),
 
                 new CommandViewModel(
-                    "Towar",
+                    "Dodaj nowy lek",
                     new BaseCommand(() => this.CreateView(new NewProductViewModel()))),
 
                 new CommandViewModel(
-                    "Faktury",
+                    "Wszystkie faktury",
                     new BaseCommand(() => this.ShowAll<AllInvoicesViewModel>())),
 
                 new CommandViewModel(
-                    "Faktura",
+                    "Dodaj nowa fakture",
                     new BaseCommand(() => this.CreateView(new NewInvoiceViewModel()))),
                 };
         }
