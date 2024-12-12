@@ -9,13 +9,6 @@
     <DataTemplate DataType="{x:Type vm:NewProductViewModel}">
         <vw:NewProductView/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:AllInvoicesViewModel}">
-        <vw:AllInvoicesView/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type vm:NewInvoiceViewModel}">
-        <vw:NewInvoiceView/>
-    </DataTemplate>
-
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">

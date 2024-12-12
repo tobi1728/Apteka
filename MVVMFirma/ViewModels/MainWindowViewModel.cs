@@ -45,13 +45,7 @@ namespace MVVMFirma.ViewModels
                     "Dodaj nowy lek",
                     new BaseCommand(() => this.CreateView(new NewProductViewModel()))),
 
-                new CommandViewModel(
-                    "Wszystkie faktury",
-                    new BaseCommand(() => this.ShowAll<AllInvoicesViewModel>())),
 
-                new CommandViewModel(
-                    "Dodaj nowa fakture",
-                    new BaseCommand(() => this.CreateView(new NewInvoiceViewModel()))),
                 };
         }
         #endregion

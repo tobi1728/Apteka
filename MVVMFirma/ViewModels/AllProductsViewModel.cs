@@ -22,7 +22,6 @@ namespace MVVMFirma.ViewModels
         #endregion
 
         #region Helpers
-        // metoda load pobierze wszystkie produkty z bazy danych
         public override void Load()
         {
             List = new ObservableCollection<ProductForAllView>

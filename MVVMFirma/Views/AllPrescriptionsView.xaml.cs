@@ -15,10 +15,12 @@ using System.Windows.Shapes;
 
 namespace MVVMFirma.Views
 {
-
-    public partial class AllInvoicesView : AllViewBase
+    /// <summary>
+    /// Interaction logic for AllPrescriptionsView.xaml
+    /// </summary>
+    public partial class AllPrescriptionsView : UserControl
     {
-        public AllInvoicesView()
+        public AllPrescriptionsView()
         {
             InitializeComponent();
         }
