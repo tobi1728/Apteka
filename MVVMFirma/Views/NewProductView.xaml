@@ -7,72 +7,87 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="400">
     <Grid Background="#fff">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="300"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="45"/>
-            <RowDefinition Height="45"/>
+            <!-- Nagłówek -->
             <RowDefinition Height="Auto"/>
+            <!-- Formularz -->
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Nazwa -->
-        <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Nazwa:"/>
-        <TextBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8" Padding="3"
-                 Text="{Binding Nazwa, UpdateSourceTrigger=PropertyChanged}" />
+        <!-- Nagłówek -->
+        <TextBlock Grid.Row="0" Text="Dodaj nowy lek" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" 
+                   FontSize="20" FontWeight="Bold" Margin="5,10,0,10"/>
 
-        <!-- Kategoria -->
-        <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Kategoria:"/>
-        <ComboBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" Padding="5"
-          ItemsSource="{Binding KategorieLekow}"
-          SelectedValue="{Binding IDKategorii, UpdateSourceTrigger=PropertyChanged}"
-          DisplayMemberPath="Nazwa_Kategorii" 
-          SelectedValuePath="ID_Kategorii" />
+        <!-- Główna siatka dla formularza -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <!-- Cena zakupu -->
-        <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Cena zakupu:"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" Padding="5"
-                 Text="{Binding CenaZakupu, UpdateSourceTrigger=PropertyChanged}" />
+            <!-- Nazwa -->
+            <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Nazwa:"/>
+            <TextBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8" Padding="3"
+                     Text="{Binding Nazwa, UpdateSourceTrigger=PropertyChanged}" />
 
-        <!-- Cena sprzedaży -->
-        <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Cena sprzedaży:"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" Padding="5"
-                 Text="{Binding CenaSprzedazy, UpdateSourceTrigger=PropertyChanged}" />
+            <!-- Kategoria -->
+            <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Kategoria:"/>
+            <ComboBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" Padding="5"
+                      ItemsSource="{Binding KategorieLekow}"
+                      SelectedValue="{Binding IDKategorii, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="Nazwa_Kategorii" 
+                      SelectedValuePath="ID_Kategorii" />
 
-        <!-- Data ważności -->
-        <Label Grid.Column="0" Grid.Row="4" Margin="0,8,0,8" Content="Data ważności:"/>
-        <DatePicker Grid.Column="1" Grid.Row="4" Margin="0,8,0,8"
-                    SelectedDate="{Binding DataWaznosci, UpdateSourceTrigger=PropertyChanged}" />
+            <!-- Cena zakupu -->
+            <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Cena zakupu:"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" Padding="5"
+                     Text="{Binding CenaZakupu, UpdateSourceTrigger=PropertyChanged}" />
 
-        <!-- Producent -->
-        <Label Grid.Column="0" Grid.Row="5" Margin="0,8,0,8" Content="Producent:"/>
-        <ComboBox Grid.Column="1" Grid.Row="5" Margin="0,8,0,8" Padding="5"
-          ItemsSource="{Binding Producenci}"
-          SelectedValue="{Binding IDProducenta, UpdateSourceTrigger=PropertyChanged}"
-          DisplayMemberPath="Nazwa_Producenta" 
-          SelectedValuePath="ID_Producenta" />
+            <!-- Cena sprzedaży -->
+            <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Cena sprzedaży:"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" Padding="5"
+                     Text="{Binding CenaSprzedazy, UpdateSourceTrigger=PropertyChanged}" />
 
-        <!-- Recepta -->
-        <Label Grid.Column="0" Grid.Row="6" Margin="0,8,0,8" Content="Recepta:"/>
-        <CheckBox Grid.Column="1" Grid.Row="6" Margin="0,8,0,8"
-                  IsChecked="{Binding Recepta, UpdateSourceTrigger=PropertyChanged}" />
+            <!-- Data ważności -->
+            <Label Grid.Column="0" Grid.Row="4" Margin="0,8,0,8" Content="Data ważności:"/>
+            <DatePicker Grid.Column="1" Grid.Row="4" Margin="0,8,0,8"
+                        SelectedDate="{Binding DataWaznosci, UpdateSourceTrigger=PropertyChanged}" />
 
-        <!-- Refundacja -->
-        <Label Grid.Column="0" Grid.Row="7" Margin="0,8,0,8" Content="Refundacja:"/>
-        <CheckBox Grid.Column="1" Grid.Row="7" Margin="0,8,0,8"
-                  IsChecked="{Binding Refundacja, UpdateSourceTrigger=PropertyChanged}" />
+            <!-- Producent -->
+            <Label Grid.Column="0" Grid.Row="5" Margin="0,8,0,8" Content="Producent:"/>
+            <ComboBox Grid.Column="1" Grid.Row="5" Margin="0,8,0,8" Padding="5"
+                      ItemsSource="{Binding Producenci}"
+                      SelectedValue="{Binding IDProducenta, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="Nazwa_Producenta" 
+                      SelectedValuePath="ID_Producenta" />
 
-        <!-- Opis -->
-        <Label Grid.Column="0" Grid.Row="8" Margin="0,8,0,8" Content="Opis:"/>
-        <TextBox Grid.Column="1" Grid.Row="8" Margin="0,8,0,8" Padding="5" Height="150"
-                 Text="{Binding Opis, UpdateSourceTrigger=PropertyChanged}" 
-                 TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+            <!-- Recepta -->
+            <Label Grid.Column="0" Grid.Row="6" Margin="0,8,0,8" Content="Recepta:"/>
+            <CheckBox Grid.Column="1" Grid.Row="6" Margin="0,8,0,8"
+                      IsChecked="{Binding Recepta, UpdateSourceTrigger=PropertyChanged}" />
+
+            <!-- Refundacja -->
+            <Label Grid.Column="0" Grid.Row="7" Margin="0,8,0,8" Content="Refundacja:"/>
+            <CheckBox Grid.Column="1" Grid.Row="7" Margin="0,8,0,8"
+                      IsChecked="{Binding Refundacja, UpdateSourceTrigger=PropertyChanged}" />
+
+            <!-- Opis -->
+            <Label Grid.Column="0" Grid.Row="8" Margin="0,8,0,8" Content="Opis:"/>
+            <TextBox Grid.Column="1" Grid.Row="8" Margin="0,8,0,8" Padding="5" Height="150"
+                     Text="{Binding Opis, UpdateSourceTrigger=PropertyChanged}" 
+                     TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+        </Grid>
     </Grid>
 </local:OneViewBase>

@@ -12,11 +12,11 @@
                 <DataGridTextColumn Header="Id" Binding="{Binding ID_Leku}"/>
                 <DataGridTextColumn Header="Nazwa" Binding="{Binding Nazwa_Leku}"/>
                 <DataGridTextColumn Header="Opis" Binding="{Binding Opis}"/>
-                <DataGridTextColumn Header="Kategoria" Binding="{Binding ID_Kategorii}"/>
+                <DataGridTextColumn Header="Kategoria" Binding="{Binding Nazwa_Kategorii}"/>
                 <DataGridTextColumn Header="Cena zakupu" Binding="{Binding Cena_Zakupu}"/>
-                <DataGridTextColumn Header="Cena sprzedazy" Binding="{Binding Cena_Sprzedazy}"/>
+                <DataGridTextColumn Header="Cena sprzedazy" Binding="{Binding Cena_Sprzedaży}"/>
                 <DataGridTextColumn Header="Data waznosci" Binding="{Binding Data_Waznosci}"/>
-                <DataGridTextColumn Header="Producent" Binding="{Binding ID_Producenta}"/>
+                <DataGridTextColumn Header="Producent" Binding="{Binding Nazwa_Producenta}"/>
                 <DataGridTextColumn Header="Na recepte" Binding="{Binding Na_Recepte}"/>
                 <DataGridTextColumn Header="Refundacja" Binding="{Binding Refundacja}"/>
                 

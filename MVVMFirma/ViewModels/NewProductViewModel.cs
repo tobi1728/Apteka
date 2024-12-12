@@ -8,42 +8,22 @@ using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewProductViewModel : WorkspaceViewModel
+    public class NewProductViewModel : OneViewModel<Leki>
     {
-        #region DB
-        private AptekaEntities aptekaEntities;
-        #endregion
-
-        #region Item
-        private Leki leki;
-        #endregion
-
-        #region Command
-        //to jest komenda, ktora zostanie podpieta pod przycisk zapisz i zamknij
-        private BaseCommand _SaveCommand;
-        public ICommand SaveCommand
-        { get 
-            {
-                if (_SaveCommand == null)
-                    _SaveCommand = new BaseCommand(() => SaveAndClose());
-                return _SaveCommand; 
-            } 
-        }
-        #endregion
+       
         #region Constructor
         public NewProductViewModel()
+            :base("Leki")
         {
-            base.DisplayName = "Leki";
             aptekaEntities = new AptekaEntities();
-            leki = new Leki();
+            item = new Leki();
+
+            DataWaznosci = DateTime.Today;
 
             LoadKategorie();
             LoadProducenci();
         }
         #endregion
-
-        #region Properties
-        //dla kazdego pola na interface towrzymy properties
 
         #region Properties
 
@@ -71,16 +51,15 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        #endregion
         public string Nazwa
         {
             get
             {
-                return leki.Nazwa_Leku;
+                return item.Nazwa_Leku;
             }
             set
             {
-                leki.Nazwa_Leku = value;
+                item.Nazwa_Leku = value;
                 OnPropertyChanged(() => Nazwa);
             }
         }
@@ -90,11 +69,11 @@ namespace MVVMFirma.ViewModels
         {
             get
             {
-                return leki.ID_Kategorii;
+                return item.ID_Kategorii;
             }
             set
             {
-                leki.ID_Kategorii = value;
+                item.ID_Kategorii = value;
                 OnPropertyChanged(() => IDKategorii);
             }
         }
@@ -104,11 +83,11 @@ namespace MVVMFirma.ViewModels
         {
             get
             {
-                return leki.ID_Producenta;
+                return item.ID_Producenta;
             }
             set
             {
-                leki.ID_Producenta = value;
+                item.ID_Producenta = value;
                 OnPropertyChanged(() => IDProducenta);
             }
         }
@@ -118,11 +97,11 @@ namespace MVVMFirma.ViewModels
         {
             get
             {
-                return leki.Cena_Zakupu;
+                return item.Cena_Zakupu;
             }
             set
             {
-                leki.Cena_Zakupu = value;
+                item.Cena_Zakupu = value;
                 OnPropertyChanged(() => CenaZakupu);
             }
         }
@@ -132,11 +111,11 @@ namespace MVVMFirma.ViewModels
         {
             get
             {
-                return leki.Cena_Sprzedaży;
+                return item.Cena_Sprzedaży;
             }
             set
             {
-                leki.Cena_Sprzedaży = value;
+                item.Cena_Sprzedaży = value;
                 OnPropertyChanged(() => CenaSprzedazy);
             }
         }
@@ -146,11 +125,11 @@ namespace MVVMFirma.ViewModels
         {
             get
             {
-                return leki.Data_Waznosci;
+                return item.Data_Waznosci;
             }
             set
             {
-                leki.Data_Waznosci = value;
+                item.Data_Waznosci = value;
                 OnPropertyChanged(() => DataWaznosci);
             }
         }
@@ -160,11 +139,11 @@ namespace MVVMFirma.ViewModels
         {
             get
             {
-                return leki.Na_Recepte;
+                return item.Na_Recepte;
             }
             set
             {
-                leki.Na_Recepte = value;
+                item.Na_Recepte = value;
                 OnPropertyChanged(() => Recepta);
             }
         }
@@ -174,11 +153,11 @@ namespace MVVMFirma.ViewModels
         {
             get
             {
-                return leki.Refundacja;
+                return item.Refundacja;
             }
             set
             {
-                leki.Refundacja = value;
+                item.Refundacja = value;
                 OnPropertyChanged(() => Refundacja);
             }
         }
@@ -188,15 +167,14 @@ namespace MVVMFirma.ViewModels
         {
             get
             {
-                return leki.Opis;
+                return item.Opis;
             }
             set
             {
-                leki.Opis = value;
+                item.Opis = value;
                 OnPropertyChanged(() => Opis);
             }
         }
-
 
         #endregion
 
@@ -212,21 +190,17 @@ namespace MVVMFirma.ViewModels
             Producenci = aptekaEntities.Producent_Leków.ToList();
             Console.WriteLine($"Załadowano {Producenci.Count} producentów.");
         }
-        public void Save()
+        public override void Save()
         {
             if (IDKategorii == 0 || IDProducenta == 0)
             {
                 throw new InvalidOperationException("Musisz wybrać kategorię i producenta.");
             }
 
-            aptekaEntities.Leki.Add(leki); // Dodaje do lokalnej kolekcji
+            aptekaEntities.Leki.Add(item); // Dodaje do lokalnej kolekcji
             aptekaEntities.SaveChanges(); // Zapisuje zmiany do bazy danych
         }
-        public void SaveAndClose()
-        {
-            Save();
-            OnRequestClose();
-        }
+
         #endregion
     }
 }
