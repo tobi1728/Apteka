@@ -51,6 +51,9 @@
     <DataTemplate DataType="{x:Type vm:AllSalesViewModel}">
         <vw:AllSalesView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NewCategoryViewModel}">
+        <vw:NewCategoryView/>
+    </DataTemplate>
 
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">

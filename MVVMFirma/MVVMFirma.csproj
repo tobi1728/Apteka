@@ -201,6 +201,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\NewCategoryViewModel.cs" />
     <Compile Include="ViewModels\NewProductViewModel.cs" />
     <Compile Include="ViewModels\OneViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
@@ -252,6 +253,9 @@
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewCategoryView.xaml.cs">
+      <DependentUpon>NewCategoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewProductView.xaml.cs">
       <DependentUpon>NewProductView.xaml</DependentUpon>
@@ -360,6 +364,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindowResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewCategoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
