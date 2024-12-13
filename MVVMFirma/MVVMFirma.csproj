@@ -203,6 +203,8 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NewCategoryViewModel.cs" />
     <Compile Include="ViewModels\NewInvoiceViewModel.cs" />
+    <Compile Include="ViewModels\NewParagonViewModel.cs" />
+    <Compile Include="ViewModels\NewPatientViewModel.cs" />
     <Compile Include="ViewModels\NewPharmacistViewMode.cs" />
     <Compile Include="ViewModels\NewProductViewModel.cs" />
     <Compile Include="ViewModels\NewScheduleViewModel.cs" />
@@ -264,6 +266,12 @@
     </Compile>
     <Compile Include="Views\NewInvoiceView.xaml.cs">
       <DependentUpon>NewInvoiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewParagonView.xaml.cs">
+      <DependentUpon>NewParagonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewPatientView.xaml.cs">
+      <DependentUpon>NewPatientView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewPharmacistView.xaml.cs">
       <DependentUpon>NewPharmacistView.xaml</DependentUpon>
@@ -392,6 +400,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\NewInvoiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewParagonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewPatientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

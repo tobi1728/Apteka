@@ -54,6 +54,10 @@ namespace MVVMFirma.ViewModels
                     new BaseCommand(() => this.ShowAll<AllPatientsViewModel>())),
 
                 new CommandViewModel(
+                    "Dodaj nowego pacjenta",
+                    new BaseCommand(() => this.CreateView(new NewPatientViewModel()))),
+
+                new CommandViewModel(
                     "Wszyscy farmaceuci",
                     new BaseCommand(() => this.ShowAll<AllPharmacistsViewModel>())),
 
@@ -88,7 +92,11 @@ namespace MVVMFirma.ViewModels
                 new CommandViewModel(
                     "Wszystkie paragony",
                     new BaseCommand(() => this.ShowAll<AllReceiptsViewModel>())),
-                
+
+                new CommandViewModel(
+                    "Dodaj nowy paragon",
+                    new BaseCommand(() => this.CreateView(new NewParagonViewModel()))),
+
                 new CommandViewModel(
                     "Wszyscy Producenci",
                     new BaseCommand(() => this.ShowAll<AllProducersViewModel>())),
@@ -241,7 +249,11 @@ namespace MVVMFirma.ViewModels
                 CreateView(new NewScheduleViewModel());
             if (name == "Wszystkie magazynyAdd")
                 CreateView(new NewWarehouseViewModel());
-            
+            if (name == "Wszyscy pacjenciAdd")
+                CreateView(new NewPatientViewModel());
+            if (name == "Wszystkie paragonyAdd")
+                CreateView(new NewParagonViewModel());
+
 
 
 

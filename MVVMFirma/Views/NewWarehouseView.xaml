@@ -40,7 +40,7 @@
                       ItemsSource="{Binding Products}"
                       SelectedValue="{Binding IDLeku, UpdateSourceTrigger=PropertyChanged}"
                       DisplayMemberPath="Nazwa_Leku" 
-                      SelectedValuePath="ID" />
+                      SelectedValuePath="ID_Leku" />
 
             <!-- Ilość -->
             <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Ilość:"/>
