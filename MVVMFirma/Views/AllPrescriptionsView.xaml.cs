@@ -18,7 +18,7 @@ namespace MVVMFirma.Views
     /// <summary>
     /// Interaction logic for AllPrescriptionsView.xaml
     /// </summary>
-    public partial class AllPrescriptionsView : UserControl
+    public partial class AllPrescriptionsView : AllViewBase
     {
         public AllPrescriptionsView()
         {

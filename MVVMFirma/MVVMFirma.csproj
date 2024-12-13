@@ -105,6 +105,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helper\BaseCommand.cs" />
+    <Compile Include="Models\EntitiesForView\PrescriptionForAllView.cs" />
     <Compile Include="Models\EntitiesForView\ProductForAllView.cs" />
     <Compile Include="Models\Entities\Apteka.Context.cs">
       <AutoGen>True</AutoGen>
@@ -169,6 +170,7 @@
     <Compile Include="Models\Entities\Zamówienia.cs">
       <DependentUpon>Apteka.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AllPrescriptionsViewModel.cs" />
     <Compile Include="ViewModels\AllViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
@@ -179,6 +181,9 @@
     <Compile Include="ViewModels\AllProductsViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\AllPrescriptionsView.xaml.cs">
+      <DependentUpon>AllPrescriptionsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AllViewBase.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -228,6 +233,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AllPrescriptionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
       <SubType>Designer</SubType>

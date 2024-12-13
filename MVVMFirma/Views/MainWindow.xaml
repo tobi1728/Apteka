@@ -51,7 +51,7 @@
         </Border>
         <StatusBar Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
             <StatusBarItem>
-                <TextBlock>Artur Kornatka</TextBlock>
+                <TextBlock>Łukasz Tobolski</TextBlock>
             </StatusBarItem>
             <Separator/>
             <StatusBarItem>
