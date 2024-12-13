@@ -60,13 +60,18 @@ namespace MVVMFirma.ViewModels
                 new CommandViewModel(
                     "Wszyscy dostawcy",
                     new BaseCommand(() => this.ShowAll<AllSuppliersViewModel>())),
+
                 new CommandViewModel(
                     "Wszystkie kategorie leków",
                     new BaseCommand(() => this.ShowAll<AllDrugCategoriesViewModel>())),
+
                 new CommandViewModel(
                     "Wszystkie magazyny",
                     new BaseCommand(() => this.ShowAll<AllWarehousesViewModel>())),
 
+                new CommandViewModel(
+                    "Wszystkie paragony",
+                    new BaseCommand(() => this.ShowAll<AllReceiptsViewModel>())),
 
                 };
         }

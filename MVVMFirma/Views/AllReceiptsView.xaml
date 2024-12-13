@@ -1,0 +1,36 @@
+﻿<local:AllViewBase x:Class="MVVMFirma.Views.AllReceiptsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVMFirma.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="800">
+    <Grid Background="#fff">
+        <Grid.RowDefinitions>
+            <!-- Nagłówek -->
+            <RowDefinition Height="Auto"/>
+            <!-- Główna sekcja -->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Nagłówek -->
+        <TextBlock Grid.Row="0" Text="Lista paragonów" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" 
+                   FontSize="20" FontWeight="Bold" Margin="5,10,0,10"/>
+
+        <!-- Główna tabela dla paragonów -->
+        <Grid Grid.Row="1" HorizontalAlignment="Left">
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}" 
+                      CanUserAddRows="False" IsReadOnly="True" Margin="10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID Paragonu" Binding="{Binding ID_Paragonu}" />
+                    <DataGridTextColumn Header="Numer Paragonu" Binding="{Binding Numer_Paragonu}" />
+                    <DataGridTextColumn Header="ID Sprzedaży" Binding="{Binding ID_Sprzedaży}" />
+                    <DataGridTextColumn Header="Data Wystawienia" Binding="{Binding Data_Wystawienia, StringFormat=d}" />
+                    <DataGridTextColumn Header="Kwota" Binding="{Binding Kwota}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</local:AllViewBase>

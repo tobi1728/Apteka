@@ -110,6 +110,7 @@
     <Compile Include="Models\EntitiesForView\PharmacistForAllView.cs" />
     <Compile Include="Models\EntitiesForView\PrescriptionForAllView.cs" />
     <Compile Include="Models\EntitiesForView\ProductForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\ReceiptForAllView.cs" />
     <Compile Include="Models\EntitiesForView\SupplierForAllView.cs" />
     <Compile Include="Models\EntitiesForView\WarehouseForAllView.cs" />
     <Compile Include="Models\Entities\Apteka.Context.cs">
@@ -179,6 +180,7 @@
     <Compile Include="ViewModels\AllPatientsViewModel.cs" />
     <Compile Include="ViewModels\AllPharmacistsViewModel.cs" />
     <Compile Include="ViewModels\AllPrescriptionsViewModel.cs" />
+    <Compile Include="ViewModels\AllReceiptsViewModel.cs" />
     <Compile Include="ViewModels\AllSuppliersViewModel.cs" />
     <Compile Include="ViewModels\AllViewModel.cs" />
     <Compile Include="ViewModels\AllWarehousesViewModel.cs" />
@@ -202,6 +204,9 @@
     </Compile>
     <Compile Include="Views\AllPrescriptionsView.xaml.cs">
       <DependentUpon>AllPrescriptionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AllReceiptsView.xaml.cs">
+      <DependentUpon>AllReceiptsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AllSuppliersView.xaml.cs">
       <DependentUpon>AllSuppliersView.xaml</DependentUpon>
@@ -272,6 +277,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AllPrescriptionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AllReceiptsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
