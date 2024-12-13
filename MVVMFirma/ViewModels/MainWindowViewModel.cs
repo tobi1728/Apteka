@@ -54,12 +54,20 @@ namespace MVVMFirma.ViewModels
                     new BaseCommand(() => this.ShowAll<AllPatientsViewModel>())),
 
                 new CommandViewModel(
-                    "Wszyscy Farmaceuci",
+                    "Wszyscy farmaceuci",
                     new BaseCommand(() => this.ShowAll<AllPharmacistsViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowego farmaceutę",
+                    new BaseCommand(() => this.CreateView(new NewPharmacistViewModel()))),
 
                 new CommandViewModel(
                     "Wszyscy dostawcy",
                     new BaseCommand(() => this.ShowAll<AllSuppliersViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowego dostawcę",
+                    new BaseCommand(() => this.CreateView(new NewSupplierViewModel()))),
 
                 new CommandViewModel(
                     "Wszystkie kategorie leków",
@@ -210,10 +218,13 @@ namespace MVVMFirma.ViewModels
         {
             if (name == "Wszystkie lekiAdd")
                 CreateView(new NewProductViewModel());
-            if (name == "Wszystkie ReceptyAdd")
-                CreateView(new NewProductViewModel());
             if (name == "Wszystkie kategorie lekówAdd")
                 CreateView(new NewCategoryViewModel());
+            if (name == "Wszyscy dostawcyAdd")
+                CreateView(new NewSupplierViewModel());
+            if (name == "Wszyscy farmaceuciAdd")
+                CreateView(new NewPharmacistViewModel());
+
 
         }
         #endregion

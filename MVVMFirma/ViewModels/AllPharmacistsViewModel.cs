@@ -14,7 +14,7 @@ namespace MVVMFirma.ViewModels
     {
         #region Constructor
         public AllPharmacistsViewModel()
-            : base("Wszyscy Farmaceuci")
+            : base("Wszyscy farmaceuci")
         {
         }
         #endregion
