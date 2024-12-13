@@ -30,6 +30,12 @@
     <DataTemplate DataType="{x:Type vm:AllReceiptsViewModel}">
         <vw:AllReceiptsView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllProducersViewModel}">
+        <vw:AllProducersView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllSalesReportsViewModel}">
+        <vw:AllSalesReportsView/>
+    </DataTemplate>
 
 
 

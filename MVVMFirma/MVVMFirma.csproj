@@ -105,10 +105,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helper\BaseCommand.cs" />
+    <Compile Include="Models\EntitiesForView\AllSalesReportsViewModel.cs" />
     <Compile Include="Models\EntitiesForView\DrugCategoryForAllView.cs" />
     <Compile Include="Models\EntitiesForView\PatientForAllView.cs" />
     <Compile Include="Models\EntitiesForView\PharmacistForAllView.cs" />
     <Compile Include="Models\EntitiesForView\PrescriptionForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\ProducerForAllView.cs" />
     <Compile Include="Models\EntitiesForView\ProductForAllView.cs" />
     <Compile Include="Models\EntitiesForView\ReceiptForAllView.cs" />
     <Compile Include="Models\EntitiesForView\SupplierForAllView.cs" />
@@ -180,7 +182,9 @@
     <Compile Include="ViewModels\AllPatientsViewModel.cs" />
     <Compile Include="ViewModels\AllPharmacistsViewModel.cs" />
     <Compile Include="ViewModels\AllPrescriptionsViewModel.cs" />
+    <Compile Include="ViewModels\AllProducersViewModel.cs" />
     <Compile Include="ViewModels\AllReceiptsViewModel.cs" />
+    <Compile Include="ViewModels\AllSalesReportsViewModel.cs" />
     <Compile Include="ViewModels\AllSuppliersViewModel.cs" />
     <Compile Include="ViewModels\AllViewModel.cs" />
     <Compile Include="ViewModels\AllWarehousesViewModel.cs" />
@@ -205,8 +209,14 @@
     <Compile Include="Views\AllPrescriptionsView.xaml.cs">
       <DependentUpon>AllPrescriptionsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AllProducersView.xaml.cs">
+      <DependentUpon>AllProducersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AllReceiptsView.xaml.cs">
       <DependentUpon>AllReceiptsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AllSalesReportsView.xaml.cs">
+      <DependentUpon>AllSalesReportsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AllSuppliersView.xaml.cs">
       <DependentUpon>AllSuppliersView.xaml</DependentUpon>
@@ -280,7 +290,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AllProducersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AllReceiptsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AllSalesReportsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

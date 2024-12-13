@@ -72,6 +72,15 @@ namespace MVVMFirma.ViewModels
                 new CommandViewModel(
                     "Wszystkie paragony",
                     new BaseCommand(() => this.ShowAll<AllReceiptsViewModel>())),
+                
+                new CommandViewModel(
+                    "Wszyscy Producenci",
+                    new BaseCommand(() => this.ShowAll<AllProducersViewModel>())),
+
+                new CommandViewModel(
+                    "Wszystkie raporty sprzedaży",
+                    new BaseCommand(() => this.ShowAll<AllSalesReportsViewModel>())),
+
 
                 };
         }
