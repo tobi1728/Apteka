@@ -88,7 +88,10 @@ namespace MVVMFirma.ViewModels
                 new CommandViewModel(
                     "Wszystkie zamówienia",
                     new BaseCommand(() => this.ShowAll<AllOrdersViewModel>())),
-
+                
+                new CommandViewModel(
+                    "Grafiki pracowników",
+                    new BaseCommand(() => this.ShowAll<AllSchedulesViewModel>())),
 
                 };
         }

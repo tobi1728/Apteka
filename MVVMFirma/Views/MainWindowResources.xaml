@@ -42,6 +42,9 @@
     <DataTemplate DataType="{x:Type vm:AllOrdersViewModel}">
         <vw:AllOrdersView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllSchedulesViewModel}">
+        <vw:AllSchedulesView/>
+    </DataTemplate>
 
 
 
