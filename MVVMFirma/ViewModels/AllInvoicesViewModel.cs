@@ -30,7 +30,7 @@ namespace MVVMFirma.ViewModels
                         Nazwa_Dostawcy = invoice.Dostawcy.Nazwa,
                         Data_Wystawienia = invoice.Data_Wystawienia,
                         Kwota = invoice.Kwota,
-                        //Numer_Zamówienia = invoice.Zamówienia != null ? invoice.Zamówienia.Numer_Zamówienia : "Brak"
+                        Numer_Zamówienia = invoice.Zamówienia.ID_Zamówienia.ToString(),
                     }
                 );
         }
