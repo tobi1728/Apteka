@@ -27,7 +27,7 @@
                     <DataGridTextColumn Header="ID Raportu" Binding="{Binding ID_Raportu}" />
                     <DataGridTextColumn Header="Data Rozpoczęcia" Binding="{Binding Data_Rozpoczęcia, StringFormat=d}" />
                     <DataGridTextColumn Header="Data Zakończenia" Binding="{Binding Data_Zakończenia, StringFormat=d}" />
-                    <DataGridTextColumn Header="Łączna Sprzedaż" Binding="{Binding Łączna_Sprzedaż, StringFormat=C}" />
+                    <DataGridTextColumn Header="Łączna Sprzedaż" Binding="{Binding Łączna_Sprzedaż}" />
                     <DataGridTextColumn Header="Liczba Transakcji" Binding="{Binding Liczba_Transakcji}" />
                 </DataGrid.Columns>
             </DataGrid>

@@ -102,8 +102,17 @@ namespace MVVMFirma.ViewModels
                     new BaseCommand(() => this.ShowAll<AllProducersViewModel>())),
 
                 new CommandViewModel(
+                    "Dodaj nowego producenta",
+                    new BaseCommand(() => this.CreateView(new NewProducerViewModel()))),
+
+                new CommandViewModel(
                     "Wszystkie raporty sprzedaży",
                     new BaseCommand(() => this.ShowAll<AllSalesReportsViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowy raport sprzedaży",
+                    new BaseCommand(() => this.CreateView(new NewSalesReportViewModel()))),
+
 
                 new CommandViewModel(
                     "Wszystkie faktury dostawców",
@@ -128,6 +137,10 @@ namespace MVVMFirma.ViewModels
                 new CommandViewModel(
                     "Wszystkie produkty zamówienia",
                     new BaseCommand(() => this.ShowAll<AllOrderProductsViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowy produkt zamówienia",
+                    new BaseCommand(() => this.CreateView(new NewOrderProductViewModel()))),
 
                 new CommandViewModel(
                     "Wszystkie sprzedaże",
@@ -253,6 +266,12 @@ namespace MVVMFirma.ViewModels
                 CreateView(new NewPatientViewModel());
             if (name == "Wszystkie paragonyAdd")
                 CreateView(new NewParagonViewModel());
+            if (name == "Wszyscy ProducenciAdd")
+                CreateView(new NewProducerViewModel());
+            if (name == "Produkty zamówieniaAdd")
+                CreateView(new NewOrderProductViewModel());
+            if (name == "Wszystkie raporty sprzedażyAdd")
+                CreateView(new NewSalesReportViewModel());
 
 
 

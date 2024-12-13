@@ -203,10 +203,13 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NewCategoryViewModel.cs" />
     <Compile Include="ViewModels\NewInvoiceViewModel.cs" />
+    <Compile Include="ViewModels\NewOrderProductViewModel.cs" />
     <Compile Include="ViewModels\NewParagonViewModel.cs" />
     <Compile Include="ViewModels\NewPatientViewModel.cs" />
     <Compile Include="ViewModels\NewPharmacistViewMode.cs" />
+    <Compile Include="ViewModels\NewProducerViewModel.cs" />
     <Compile Include="ViewModels\NewProductViewModel.cs" />
+    <Compile Include="ViewModels\NewSalesReportViewModel.cs" />
     <Compile Include="ViewModels\NewScheduleViewModel.cs" />
     <Compile Include="ViewModels\NewSupplierViewModel.cs" />
     <Compile Include="ViewModels\NewWarehouseViewModel.cs" />
@@ -267,6 +270,9 @@
     <Compile Include="Views\NewInvoiceView.xaml.cs">
       <DependentUpon>NewInvoiceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewOrderProductView.xaml.cs">
+      <DependentUpon>NewOrderProductView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewParagonView.xaml.cs">
       <DependentUpon>NewParagonView.xaml</DependentUpon>
     </Compile>
@@ -276,11 +282,17 @@
     <Compile Include="Views\NewPharmacistView.xaml.cs">
       <DependentUpon>NewPharmacistView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewProducerView.xaml.cs">
+      <DependentUpon>NewProducerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewProductView.xaml.cs">
       <DependentUpon>NewProductView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AllProductsView.xaml.cs">
       <DependentUpon>AllProductsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewSalesReportView.xaml.cs">
+      <DependentUpon>NewSalesReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewScheduleView.xaml.cs">
       <DependentUpon>NewScheduleView.xaml</DependentUpon>
@@ -403,6 +415,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NewOrderProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewParagonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -415,11 +431,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NewProducerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AllProductsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewSalesReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

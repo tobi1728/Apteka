@@ -75,6 +75,15 @@
     <DataTemplate DataType="{x:Type vm:NewParagonViewModel}">
         <vw:NewParagonView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NewProducerViewModel}">
+        <vw:NewProducerView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NewOrderProductViewModel}">
+        <vw:NewOrderProductView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NewSalesReportViewModel}">
+        <vw:NewSalesReportView/>
+    </DataTemplate>
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
