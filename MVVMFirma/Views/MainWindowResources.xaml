@@ -60,6 +60,15 @@
     <DataTemplate DataType="{x:Type vm:NewPharmacistViewModel}">
         <vw:NewPharmacistView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NewInvoiceViewModel}">
+        <vw:NewInvoiceView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NewScheduleViewModel}">
+        <vw:NewScheduleView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NewWarehouseViewModel}">
+        <vw:NewWarehouseView/>
+    </DataTemplate>
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">

@@ -77,10 +77,13 @@ namespace MVVMFirma.ViewModels
                     "Dodaj nową kategorię",
                     new BaseCommand(() => this.CreateView(new NewCategoryViewModel()))),
 
-
                 new CommandViewModel(
                     "Wszystkie magazyny",
                     new BaseCommand(() => this.ShowAll<AllWarehousesViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowy magazyn",
+                    new BaseCommand(() => this.CreateView(new NewWarehouseViewModel()))),
 
                 new CommandViewModel(
                     "Wszystkie paragony",
@@ -99,12 +102,20 @@ namespace MVVMFirma.ViewModels
                     new BaseCommand(() => this.ShowAll<AllInvoicesViewModel>())),
 
                 new CommandViewModel(
+                    "Dodaj nową fakturę",
+                    new BaseCommand(() => this.CreateView(new NewInvoiceViewModel()))),
+
+                new CommandViewModel(
                     "Wszystkie zamówienia",
                     new BaseCommand(() => this.ShowAll<AllOrdersViewModel>())),
                 
                 new CommandViewModel(
                     "Grafiki pracowników",
                     new BaseCommand(() => this.ShowAll<AllSchedulesViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowy grafik",
+                    new BaseCommand(() => this.CreateView(new NewScheduleViewModel()))),
 
                 new CommandViewModel(
                     "Wszystkie produkty zamówienia",
@@ -224,6 +235,14 @@ namespace MVVMFirma.ViewModels
                 CreateView(new NewSupplierViewModel());
             if (name == "Wszyscy farmaceuciAdd")
                 CreateView(new NewPharmacistViewModel());
+            if (name == "Wszystkie faktury dostawcówAdd")
+                CreateView(new NewInvoiceViewModel());
+            if (name == "Grafiki pracownikówAdd")
+                CreateView(new NewScheduleViewModel());
+            if (name == "Wszystkie magazynyAdd")
+                CreateView(new NewWarehouseViewModel());
+            
+
 
 
         }

@@ -202,9 +202,12 @@
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\NewCategoryViewModel.cs" />
+    <Compile Include="ViewModels\NewInvoiceViewModel.cs" />
     <Compile Include="ViewModels\NewPharmacistViewMode.cs" />
     <Compile Include="ViewModels\NewProductViewModel.cs" />
+    <Compile Include="ViewModels\NewScheduleViewModel.cs" />
     <Compile Include="ViewModels\NewSupplierViewModel.cs" />
+    <Compile Include="ViewModels\NewWarehouseViewModel.cs" />
     <Compile Include="ViewModels\OneViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="ViewModels\AllProductsViewModel.cs" />
@@ -259,6 +262,9 @@
     <Compile Include="Views\NewCategoryView.xaml.cs">
       <DependentUpon>NewCategoryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewInvoiceView.xaml.cs">
+      <DependentUpon>NewInvoiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewPharmacistView.xaml.cs">
       <DependentUpon>NewPharmacistView.xaml</DependentUpon>
     </Compile>
@@ -268,8 +274,14 @@
     <Compile Include="Views\AllProductsView.xaml.cs">
       <DependentUpon>AllProductsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewScheduleView.xaml.cs">
+      <DependentUpon>NewScheduleView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewSupplierView.xaml.cs">
       <DependentUpon>NewSupplierView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewWarehouseView.xaml.cs">
+      <DependentUpon>NewWarehouseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OneViewBase.cs" />
   </ItemGroup>
@@ -379,6 +391,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NewInvoiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewPharmacistView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -391,7 +407,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\NewScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NewSupplierView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewWarehouseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

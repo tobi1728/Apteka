@@ -19,7 +19,7 @@ namespace MVVMFirma.Models.Entities
         public int ID_Dostawcy { get; set; }
         public System.DateTime Data_Wystawienia { get; set; }
         public decimal Kwota { get; set; }
-        public Nullable<int> ID_Zamówienia { get; set; }
+        public int ID_Zamówienia { get; set; }
     
         public virtual Dostawcy Dostawcy { get; set; }
         public virtual Zamówienia Zamówienia { get; set; }
