@@ -84,6 +84,16 @@
     <DataTemplate DataType="{x:Type vm:NewSalesReportViewModel}">
         <vw:NewSalesReportView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NewPrescriptionViewModel}">
+        <vw:NewPrescriptionView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:NewSaleViewModel}">
+        <vw:NewSaleView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:NewOrderViewModel}">
+        <vw:NewOrderView/>
+    </DataTemplate>
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">

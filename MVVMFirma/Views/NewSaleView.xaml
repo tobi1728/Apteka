@@ -1,0 +1,68 @@
+﻿<local:OneViewBase x:Class="MVVMFirma.Views.NewSaleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVMFirma.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="400">
+    <Grid Background="#fff">
+        <Grid.RowDefinitions>
+            <!-- Nagłówek -->
+            <RowDefinition Height="Auto"/>
+            <!-- Formularz -->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Nagłówek -->
+        <TextBlock Grid.Row="0" Text="Dodaj nową sprzedaż" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" 
+                   FontSize="20" FontWeight="Bold" Margin="5,10,0,10"/>
+
+        <!-- Główna siatka dla formularza -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+            </Grid.RowDefinitions>
+
+            <!-- Lek -->
+            <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Lek:"/>
+            <ComboBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8" Padding="5"
+                      ItemsSource="{Binding Leki}"
+                      SelectedValue="{Binding IDLeku, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="Nazwa_Leku" 
+                      SelectedValuePath="ID_Leku" />
+
+            <!-- Pacjent -->
+            <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Pacjent:"/>
+            <ComboBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" Padding="5"
+                      ItemsSource="{Binding Pacjenci}"
+                      SelectedValue="{Binding IDPacjenta, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="PESEL" 
+                      SelectedValuePath="ID_Pacjenta" />
+
+            <!-- Data sprzedaży -->
+            <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Data sprzedaży:"/>
+            <DatePicker Grid.Column="1" Grid.Row="2" Margin="0,8,0,8"
+                        SelectedDate="{Binding DataSprzedazy, UpdateSourceTrigger=PropertyChanged}" />
+
+            <!-- Kwota -->
+            <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Kwota:"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" Padding="5"
+                     Text="{Binding Kwota, UpdateSourceTrigger=PropertyChanged}" />
+
+            <!-- Forma płatności -->
+            <Label Grid.Column="0" Grid.Row="4" Margin="0,8,0,8" Content="Forma płatności:"/>
+            <TextBox Grid.Column="1" Grid.Row="4" Margin="0,8,0,8" Padding="5"
+                     Text="{Binding FormaPlatnosci, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+    </Grid>
+</local:OneViewBase>

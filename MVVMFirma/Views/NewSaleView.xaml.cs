@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MVVMFirma.Views
 {
     /// <summary>
-    /// Interaction logic for NewPrescriptionView.xaml
+    /// Interaction logic for NewSaleView.xaml
     /// </summary>
-    public partial class NewPrescriptionView : OneViewBase
+    public partial class NewSaleView : OneViewBase
     {
-        public NewPrescriptionView()
+        public NewSaleView()
         {
             InitializeComponent();
         }

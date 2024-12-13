@@ -9,6 +9,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows.Data;
 using GalaSoft.MvvmLight.Messaging;
+using MVVMFirma.Views;
+using System.Windows;
 
 namespace MVVMFirma.ViewModels
 {
@@ -38,35 +40,7 @@ namespace MVVMFirma.ViewModels
             return new List<CommandViewModel>
             {
                 new CommandViewModel(
-                    "Wszystkie leki",
-                    new BaseCommand(() => this.ShowAll<AllProductsViewModel>())),
-
-                new CommandViewModel(
-                    "Dodaj nowy lek",
-                    new BaseCommand(() => this.CreateView(new NewProductViewModel()))),
-
-                new CommandViewModel(
-                    "Wszystkie recepty",
-                    new BaseCommand(() => this.ShowAll<AllPrescriptionsViewModel>())),
-
-                new CommandViewModel(
-                    "Wszyscy pacjenci",
-                    new BaseCommand(() => this.ShowAll<AllPatientsViewModel>())),
-
-                new CommandViewModel(
-                    "Dodaj nowego pacjenta",
-                    new BaseCommand(() => this.CreateView(new NewPatientViewModel()))),
-
-                new CommandViewModel(
-                    "Wszyscy farmaceuci",
-                    new BaseCommand(() => this.ShowAll<AllPharmacistsViewModel>())),
-
-                new CommandViewModel(
-                    "Dodaj nowego farmaceutę",
-                    new BaseCommand(() => this.CreateView(new NewPharmacistViewModel()))),
-
-                new CommandViewModel(
-                    "Wszyscy dostawcy",
+                    "Dostawcy",
                     new BaseCommand(() => this.ShowAll<AllSuppliersViewModel>())),
 
                 new CommandViewModel(
@@ -74,48 +48,7 @@ namespace MVVMFirma.ViewModels
                     new BaseCommand(() => this.CreateView(new NewSupplierViewModel()))),
 
                 new CommandViewModel(
-                    "Wszystkie kategorie leków",
-                    new BaseCommand(() => this.ShowAll<AllDrugCategoriesViewModel>())),
-
-                new CommandViewModel(
-                    "Dodaj nową kategorię",
-                    new BaseCommand(() => this.CreateView(new NewCategoryViewModel()))),
-
-                new CommandViewModel(
-                    "Wszystkie magazyny",
-                    new BaseCommand(() => this.ShowAll<AllWarehousesViewModel>())),
-
-                new CommandViewModel(
-                    "Dodaj nowy magazyn",
-                    new BaseCommand(() => this.CreateView(new NewWarehouseViewModel()))),
-
-                new CommandViewModel(
-                    "Wszystkie paragony",
-                    new BaseCommand(() => this.ShowAll<AllReceiptsViewModel>())),
-
-                new CommandViewModel(
-                    "Dodaj nowy paragon",
-                    new BaseCommand(() => this.CreateView(new NewParagonViewModel()))),
-
-                new CommandViewModel(
-                    "Wszyscy Producenci",
-                    new BaseCommand(() => this.ShowAll<AllProducersViewModel>())),
-
-                new CommandViewModel(
-                    "Dodaj nowego producenta",
-                    new BaseCommand(() => this.CreateView(new NewProducerViewModel()))),
-
-                new CommandViewModel(
-                    "Wszystkie raporty sprzedaży",
-                    new BaseCommand(() => this.ShowAll<AllSalesReportsViewModel>())),
-
-                new CommandViewModel(
-                    "Dodaj nowy raport sprzedaży",
-                    new BaseCommand(() => this.CreateView(new NewSalesReportViewModel()))),
-
-
-                new CommandViewModel(
-                    "Wszystkie faktury dostawców",
+                    "Faktury dostawców",
                     new BaseCommand(() => this.ShowAll<AllInvoicesViewModel>())),
 
                 new CommandViewModel(
@@ -123,9 +56,13 @@ namespace MVVMFirma.ViewModels
                     new BaseCommand(() => this.CreateView(new NewInvoiceViewModel()))),
 
                 new CommandViewModel(
-                    "Wszystkie zamówienia",
-                    new BaseCommand(() => this.ShowAll<AllOrdersViewModel>())),
-                
+                    "Farmaceuci",
+                    new BaseCommand(() => this.ShowAll<AllPharmacistsViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowego farmaceutę",
+                    new BaseCommand(() => this.CreateView(new NewPharmacistViewModel()))),
+
                 new CommandViewModel(
                     "Grafiki pracowników",
                     new BaseCommand(() => this.ShowAll<AllSchedulesViewModel>())),
@@ -135,16 +72,95 @@ namespace MVVMFirma.ViewModels
                     new BaseCommand(() => this.CreateView(new NewScheduleViewModel()))),
 
                 new CommandViewModel(
-                    "Wszystkie produkty zamówienia",
+                    "Kategorie leków",
+                    new BaseCommand(() => this.ShowAll<AllDrugCategoriesViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nową kategorię",
+                    new BaseCommand(() => this.CreateView(new NewCategoryViewModel()))),
+
+                new CommandViewModel(
+                    "Leki",
+                    new BaseCommand(() => this.ShowAll<AllProductsViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowy lek",
+                    new BaseCommand(() => this.CreateView(new NewProductViewModel()))),
+
+                new CommandViewModel(
+                    "Magazyny",
+                    new BaseCommand(() => this.ShowAll<AllWarehousesViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowy magazyn",
+                    new BaseCommand(() => this.CreateView(new NewWarehouseViewModel()))),
+
+                new CommandViewModel(
+                    "Pacjenci",
+                    new BaseCommand(() => this.ShowAll<AllPatientsViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowego pacjenta",
+                    new BaseCommand(() => this.CreateView(new NewPatientViewModel()))),
+
+                new CommandViewModel(
+                    "Paragony",
+                    new BaseCommand(() => this.ShowAll<AllReceiptsViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowy paragon",
+                    new BaseCommand(() => this.CreateView(new NewParagonViewModel()))),
+
+                new CommandViewModel(
+                    "Producenci",
+                    new BaseCommand(() => this.ShowAll<AllProducersViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowego producenta",
+                    new BaseCommand(() => this.CreateView(new NewProducerViewModel()))),
+
+                new CommandViewModel(
+                    "Raporty sprzedaży",
+                    new BaseCommand(() => this.ShowAll<AllSalesReportsViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowy raport sprzedaży",
+                    new BaseCommand(() => this.CreateView(new NewSalesReportViewModel()))),
+
+                new CommandViewModel(
+                    "Recepty",
+                    new BaseCommand(() => this.ShowAll<AllPrescriptionsViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nową receptę",
+                    new BaseCommand(() => this.CreateView(new NewPrescriptionViewModel()))),
+
+                new CommandViewModel(
+                    "Sprzedaże",
+                    new BaseCommand(() => this.ShowAll<AllSalesViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nową sprzedaż",
+                    new BaseCommand(() => this.CreateView(new NewSaleViewModel()))),
+
+                new CommandViewModel(
+                    "Zamówienia",
+                    new BaseCommand(() => this.ShowAll<AllOrdersViewModel>())),
+
+                new CommandViewModel(
+                    "Dodaj nowe zamówienie",
+                    new BaseCommand(() => this.CreateView(new NewOrderViewModel()))),
+
+                new CommandViewModel(
+                    "Produkty zamówienia",
                     new BaseCommand(() => this.ShowAll<AllOrderProductsViewModel>())),
 
                 new CommandViewModel(
                     "Dodaj nowy produkt zamówienia",
                     new BaseCommand(() => this.CreateView(new NewOrderProductViewModel()))),
 
-                new CommandViewModel(
-                    "Wszystkie sprzedaże",
-                    new BaseCommand(() => this.ShowAll<AllSalesViewModel>())),
+
+
 
                 };
         }
@@ -272,8 +288,12 @@ namespace MVVMFirma.ViewModels
                 CreateView(new NewOrderProductViewModel());
             if (name == "Wszystkie raporty sprzedażyAdd")
                 CreateView(new NewSalesReportViewModel());
-
-
+            if (name == "Wszystkie receptyAdd")
+                CreateView(new NewPrescriptionViewModel());
+            if (name == "Wszystkie zamówieniaAdd")
+                CreateView(new NewOrderViewModel());
+            if (name == "Wszystkie sprzedażeAdd")
+                CreateView(new NewSaleViewModel());
 
 
         }
