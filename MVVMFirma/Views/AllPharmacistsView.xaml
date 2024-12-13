@@ -1,4 +1,4 @@
-﻿<local:AllViewBase x:Class="MVVMFirma.Views.AllPrescriptionsView"
+﻿<local:AllViewBase x:Class="MVVMFirma.Views.AllPharmacistsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,25 +8,26 @@
              d:DesignHeight="500" d:DesignWidth="800">
     <Grid Background="#fff">
         <Grid.RowDefinitions>
+            <!-- Nagłówek -->
             <RowDefinition Height="Auto"/>
+            <!-- Główna sekcja -->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- Nagłówek -->
-        <TextBlock Grid.Row="0" Text="Lista recept" 
+        <TextBlock Grid.Row="0" Text="Lista farmaceutów" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" 
                    FontSize="20" FontWeight="Bold" Margin="5,10,0,10"/>
 
-        <!-- Główna tabela dla produktów -->
+        <!-- Główna tabela -->
         <Grid Grid.Row="1" HorizontalAlignment="Left">
             <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}" 
                       CanUserAddRows="False" IsReadOnly="True" Margin="10">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID Recepty" Binding="{Binding ID_Recepty}" />
-                    <DataGridTextColumn Header="PESEL Pacjenta" Binding="{Binding PESEL}" />
-                    <DataGridTextColumn Header="Licencja farmaceuty" Binding="{Binding Numer_Licencji}" />
-                    <DataGridTextColumn Header="Wystawiona" Binding="{Binding Data_Wystawienia, StringFormat=d}" />
-                    <DataGridTextColumn Header="Zrealizowana" Binding="{Binding Data_Realizacji, StringFormat=d}" />
+                    <DataGridTextColumn Header="ID Farmaceuty" Binding="{Binding ID_Farmaceuty}" />
+                    <DataGridTextColumn Header="Imię" Binding="{Binding Imię}" />
+                    <DataGridTextColumn Header="Nazwisko" Binding="{Binding Nazwisko}" />
+                    <DataGridTextColumn Header="Numer Licencji" Binding="{Binding Numer_Licencji}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

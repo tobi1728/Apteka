@@ -12,6 +12,12 @@
     <DataTemplate DataType="{x:Type vm:AllPrescriptionsViewModel}">
         <vw:AllPrescriptionsView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllPatientsViewModel}">
+        <vw:AllPatientsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllPharmacistsViewModel}">
+        <vw:AllPharmacistsView/>
+    </DataTemplate>
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
