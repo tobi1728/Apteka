@@ -24,6 +24,9 @@
     <DataTemplate DataType="{x:Type vm:AllDrugCategoriesViewModel}">
         <vw:AllDrugCategoriesView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllWarehousesViewModel}">
+        <vw:AllWarehousesView/>
+    </DataTemplate>
 
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">

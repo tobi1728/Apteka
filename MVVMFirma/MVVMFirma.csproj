@@ -111,6 +111,7 @@
     <Compile Include="Models\EntitiesForView\PrescriptionForAllView.cs" />
     <Compile Include="Models\EntitiesForView\ProductForAllView.cs" />
     <Compile Include="Models\EntitiesForView\SupplierForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\WarehouseForAllView.cs" />
     <Compile Include="Models\Entities\Apteka.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,6 +181,7 @@
     <Compile Include="ViewModels\AllPrescriptionsViewModel.cs" />
     <Compile Include="ViewModels\AllSuppliersViewModel.cs" />
     <Compile Include="ViewModels\AllViewModel.cs" />
+    <Compile Include="ViewModels\AllWarehousesViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CommandViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
@@ -205,6 +207,9 @@
       <DependentUpon>AllSuppliersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AllViewBase.cs" />
+    <Compile Include="Views\AllWarehousesView.xaml.cs">
+      <DependentUpon>AllWarehousesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -271,6 +276,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AllSuppliersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AllWarehousesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
