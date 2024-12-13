@@ -36,6 +36,12 @@
     <DataTemplate DataType="{x:Type vm:AllSalesReportsViewModel}">
         <vw:AllSalesReportsView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllInvoicesViewModel}">
+        <vw:AllInvoicesView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllOrdersViewModel}">
+        <vw:AllOrdersView/>
+    </DataTemplate>
 
 
 

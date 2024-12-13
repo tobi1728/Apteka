@@ -81,6 +81,14 @@ namespace MVVMFirma.ViewModels
                     "Wszystkie raporty sprzedaży",
                     new BaseCommand(() => this.ShowAll<AllSalesReportsViewModel>())),
 
+                new CommandViewModel(
+                    "Wszystkie faktury dostawców",
+                    new BaseCommand(() => this.ShowAll<AllInvoicesViewModel>())),
+
+                new CommandViewModel(
+                    "Wszystkie zamówienia",
+                    new BaseCommand(() => this.ShowAll<AllOrdersViewModel>())),
+
 
                 };
         }

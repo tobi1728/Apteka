@@ -105,8 +105,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helper\BaseCommand.cs" />
-    <Compile Include="Models\EntitiesForView\AllSalesReportsViewModel.cs" />
+    <Compile Include="Models\EntitiesForView\OrderForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\SalesReportForAllView.cs" />
     <Compile Include="Models\EntitiesForView\DrugCategoryForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\InvoiceForAllView.cs" />
     <Compile Include="Models\EntitiesForView\PatientForAllView.cs" />
     <Compile Include="Models\EntitiesForView\PharmacistForAllView.cs" />
     <Compile Include="Models\EntitiesForView\PrescriptionForAllView.cs" />
@@ -179,6 +181,8 @@
       <DependentUpon>Apteka.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AllDrugCategoriesViewModel.cs" />
+    <Compile Include="ViewModels\AllInvoicesViewModel.cs" />
+    <Compile Include="ViewModels\AllOrdersViewModel.cs" />
     <Compile Include="ViewModels\AllPatientsViewModel.cs" />
     <Compile Include="ViewModels\AllPharmacistsViewModel.cs" />
     <Compile Include="ViewModels\AllPrescriptionsViewModel.cs" />
@@ -199,6 +203,12 @@
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\AllDrugCategoriesView.xaml.cs">
       <DependentUpon>AllDrugCategoriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AllInvoicesView.xaml.cs">
+      <DependentUpon>AllInvoicesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AllOrdersView.xaml.cs">
+      <DependentUpon>AllOrdersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AllPatientsView.xaml.cs">
       <DependentUpon>AllPatientsView.xaml</DependentUpon>
@@ -275,6 +285,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AllDrugCategoriesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AllInvoicesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AllOrdersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
