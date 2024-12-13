@@ -57,6 +57,9 @@ namespace MVVMFirma.ViewModels
                     "Wszyscy Farmaceuci",
                     new BaseCommand(() => this.ShowAll<AllPharmacistsViewModel>())),
 
+                new CommandViewModel(
+                    "Wszyscy dostawcy",
+                    new BaseCommand(() => this.ShowAll<AllSuppliersViewModel>())),
 
 
                 };

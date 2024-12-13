@@ -18,6 +18,10 @@
     <DataTemplate DataType="{x:Type vm:AllPharmacistsViewModel}">
         <vw:AllPharmacistsView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllSuppliersViewModel}">
+        <vw:AllSuppliersView/>
+    </DataTemplate>
+
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">
         <Setter Property="HeaderTemplate">
