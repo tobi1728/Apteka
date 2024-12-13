@@ -93,6 +93,14 @@ namespace MVVMFirma.ViewModels
                     "Grafiki pracowników",
                     new BaseCommand(() => this.ShowAll<AllSchedulesViewModel>())),
 
+                new CommandViewModel(
+                    "Wszystkie produkty zamówienia",
+                    new BaseCommand(() => this.ShowAll<AllOrderProductsViewModel>())),
+
+                new CommandViewModel(
+                    "Wszystkie sprzedaże",
+                    new BaseCommand(() => this.ShowAll<AllSalesViewModel>())),
+
                 };
         }
         #endregion

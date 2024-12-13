@@ -20,7 +20,7 @@
                       CanUserAddRows="False" IsReadOnly="True" Margin="10">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID Grafiku" Binding="{Binding ID_Grafiku}" />
-                    <DataGridTextColumn Header="Numer Licencji" Binding="{Binding Numer_Licencji}" />
+                    <DataGridTextColumn Header="Numer Licencji" Binding="{Binding Pracownik}" />
                     <DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat=d}" />
                     <DataGridTextColumn Header="Rozpoczęcie" Binding="{Binding Godzina_Rozpoczęcia}" />
                     <DataGridTextColumn Header="Zakończenie" Binding="{Binding Godzina_Zakończenia}" />

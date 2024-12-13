@@ -45,7 +45,12 @@
     <DataTemplate DataType="{x:Type vm:AllSchedulesViewModel}">
         <vw:AllSchedulesView/>
     </DataTemplate>
-
+    <DataTemplate DataType="{x:Type vm:AllOrderProductsViewModel}">
+        <vw:AllOrderProductsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AllSalesViewModel}">
+        <vw:AllSalesView/>
+    </DataTemplate>
 
 
     <Style x:Key="MainHCCStyle" TargetType="{x:Type HeaderedContentControl}">

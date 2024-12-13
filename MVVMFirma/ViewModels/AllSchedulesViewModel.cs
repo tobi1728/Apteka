@@ -21,7 +21,7 @@ namespace MVVMFirma.ViewModels
                 select new ScheduleForAllView
                 {
                     ID_Grafiku = schedule.ID_Grafiku,
-                    Numer_Licencji = schedule.Farmaceuci.Numer_Licencji,
+                    Pracownik = schedule.Farmaceuci.Imię + " " + schedule.Farmaceuci.Nazwisko,
                     Data = schedule.Data,
                     Godzina_Rozpoczęcia = schedule.Godzina_Rozpoczęcia,
                     Godzina_Zakończenia = schedule.Godzina_Zakończenia

@@ -106,6 +106,8 @@
     </Compile>
     <Compile Include="Helper\BaseCommand.cs" />
     <Compile Include="Models\EntitiesForView\OrderForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\OrderProductForAllView.cs" />
+    <Compile Include="Models\EntitiesForView\SaleForAllView.cs" />
     <Compile Include="Models\EntitiesForView\SalesReportForAllView.cs" />
     <Compile Include="Models\EntitiesForView\DrugCategoryForAllView.cs" />
     <Compile Include="Models\EntitiesForView\InvoiceForAllView.cs" />
@@ -183,6 +185,7 @@
     </Compile>
     <Compile Include="ViewModels\AllDrugCategoriesViewModel.cs" />
     <Compile Include="ViewModels\AllInvoicesViewModel.cs" />
+    <Compile Include="ViewModels\AllOrderProductsViewModel.cs" />
     <Compile Include="ViewModels\AllOrdersViewModel.cs" />
     <Compile Include="ViewModels\AllPatientsViewModel.cs" />
     <Compile Include="ViewModels\AllPharmacistsViewModel.cs" />
@@ -190,6 +193,7 @@
     <Compile Include="ViewModels\AllProducersViewModel.cs" />
     <Compile Include="ViewModels\AllReceiptsViewModel.cs" />
     <Compile Include="ViewModels\AllSalesReportsViewModel.cs" />
+    <Compile Include="ViewModels\AllSalesViewModel.cs" />
     <Compile Include="ViewModels\AllSchedulesViewModel.cs" />
     <Compile Include="ViewModels\AllSuppliersViewModel.cs" />
     <Compile Include="ViewModels\AllViewModel.cs" />
@@ -208,6 +212,9 @@
     </Compile>
     <Compile Include="Views\AllInvoicesView.xaml.cs">
       <DependentUpon>AllInvoicesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AllOrderProductsView.xaml.cs">
+      <DependentUpon>AllOrderProductsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AllOrdersView.xaml.cs">
       <DependentUpon>AllOrdersView.xaml</DependentUpon>
@@ -229,6 +236,9 @@
     </Compile>
     <Compile Include="Views\AllSalesReportsView.xaml.cs">
       <DependentUpon>AllSalesReportsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AllSalesView.xaml.cs">
+      <DependentUpon>AllSalesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AllSchedulesView.xaml.cs">
       <DependentUpon>AllSchedulesView.xaml</DependentUpon>
@@ -297,6 +307,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AllOrderProductsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AllOrdersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -322,6 +336,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AllSalesReportsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AllSalesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
