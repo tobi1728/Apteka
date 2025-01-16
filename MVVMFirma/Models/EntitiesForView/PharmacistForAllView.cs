@@ -13,5 +13,7 @@ namespace MVVMFirma.Models.EntitiesForView
         public string Nazwisko { get; set; }
         public string Numer_Licencji { get; set; }
 
+        public string Pracownik { get; set; }
+
     }
 }

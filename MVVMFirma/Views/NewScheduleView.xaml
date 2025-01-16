@@ -37,7 +37,7 @@
             <ComboBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8" Padding="5"
                       ItemsSource="{Binding Farmaceuci}"
                       SelectedValue="{Binding IDFarmaceuty, UpdateSourceTrigger=PropertyChanged}"
-                      DisplayMemberPath="Numer_Licencji" 
+                      DisplayMemberPath="Imię" 
                       SelectedValuePath="ID_Farmaceuty" />
 
             <!-- Data -->

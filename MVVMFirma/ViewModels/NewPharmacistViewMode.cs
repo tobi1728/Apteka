@@ -60,7 +60,6 @@ namespace MVVMFirma.ViewModels
         }
 
 
-
         #endregion
 
         #region Helpers

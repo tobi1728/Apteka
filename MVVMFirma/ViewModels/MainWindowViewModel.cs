@@ -11,6 +11,7 @@ using System.Windows.Data;
 using GalaSoft.MvvmLight.Messaging;
 using MVVMFirma.Views;
 using System.Windows;
+using MVVMFirma.Models.Entities;
 
 namespace MVVMFirma.ViewModels
 {
