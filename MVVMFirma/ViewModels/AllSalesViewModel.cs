@@ -16,7 +16,41 @@ namespace MVVMFirma.ViewModels
         {
         }
         #endregion
+        #region Sort & Find 
+        // tu decydujemy po czym sortowac
+        public override List<string> GetComboboxSortList()
+        {
+            return new List<string> { "Nazwa Leku", "Data Sprzedaży", "Kwota", "Forma Płatności" };
+        }
 
+        public override void Sort()
+        {
+            if (SortField == "Nazwa Leku")
+                List = new ObservableCollection<SaleForAllView>(List.OrderBy(item => item.Nazwa_Leku).ToList());
+            else if (SortField == "Data Sprzedaży")
+                List = new ObservableCollection<SaleForAllView>(List.OrderBy(item => item.Data_Sprzedaży).ToList());
+            else if (SortField == "Kwota")
+                List = new ObservableCollection<SaleForAllView>(List.OrderBy(item => item.Kwota).ToList());
+            else if (SortField == "Forma Płatności")
+                List = new ObservableCollection<SaleForAllView>(List.OrderBy(item => item.Forma_Płatności).ToList());
+        }
+
+        public override List<string> GetComboboxFindList()
+        {
+            return new List<string> { "Nazwa Leku", "Forma Płatności" };
+        }
+
+        public override void Find()
+        {
+            Load();
+            if (FindField == "Nazwa Leku")
+                List = new ObservableCollection<SaleForAllView>(List.Where(item => item.Nazwa_Leku != null && item.Nazwa_Leku.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase)).ToList());
+            else if (FindField == "Forma Płatności")
+                List = new ObservableCollection<SaleForAllView>(List.Where(item => item.Forma_Płatności != null && item.Forma_Płatności.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase)).ToList());
+        }
+
+
+        #endregion
         #region Helpers
         public override void Load()
         {

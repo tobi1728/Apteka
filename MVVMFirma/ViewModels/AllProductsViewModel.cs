@@ -20,7 +20,79 @@ namespace MVVMFirma.ViewModels
         {
         }
         #endregion
+        #region Sort & Find 
+        // tu decydujemy po czym sortowac
+        public override List<string> GetComboboxSortList()
+        {
+            return new List<string> { "Nazwa", "Kategoria", "Cena sprzedaży", "Cena zakupu", "Data ważności" };
+        }
 
+        // tu decydujemy jak sortowac
+        public override void Sort()
+        {
+            if (SortField == "Nazwa")
+            {
+                List = new ObservableCollection<ProductForAllView>(
+                    List.OrderBy(item => item.Nazwa_Leku).ToList()
+                );
+            }
+            else if (SortField == "Kategoria")
+            {
+                List = new ObservableCollection<ProductForAllView>(
+                    List.OrderBy(item => item.Nazwa_Kategorii).ToList()
+                );
+            }
+            else if (SortField == "Cena sprzedaży")
+            {
+                List = new ObservableCollection<ProductForAllView>(
+                    List.OrderBy(item => item.Cena_Sprzedaży).ToList()
+                );
+            }
+            else if (SortField == "Cena zakupu")
+            {
+                List = new ObservableCollection<ProductForAllView>(
+                    List.OrderBy(item => item.Cena_Zakupu).ToList()
+                );
+            }
+            else if (SortField == "Data ważności")
+            {
+                List = new ObservableCollection<ProductForAllView>(
+                    List.OrderBy(item => item.Data_Waznosci).ToList()
+                );
+            }
+        }
+
+        // tu decydujemy po czym wyszukiwac
+        public override List<string> GetComboboxFindList()
+        {
+            return new List<string> { "Nazwa", "Kategoria", "Producent" };
+        }
+
+        // tu decydujemy jak wyszukiwac
+        public override void Find()
+        {
+            Load();
+            if (FindField == "Nazwa")
+            {
+                List = new ObservableCollection<ProductForAllView>(
+                    List.Where(item => item.Nazwa_Leku != null && item.Nazwa_Leku.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase)).ToList()
+                );
+            }
+            else if (FindField == "Kategoria")
+            {
+                List = new ObservableCollection<ProductForAllView>(
+                    List.Where(item => item.Nazwa_Kategorii != null && item.Nazwa_Kategorii.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase)).ToList()
+                );
+            }
+            else if (FindField == "Producent")
+            {
+                List = new ObservableCollection<ProductForAllView>(
+                    List.Where(item => item.Nazwa_Producenta != null && item.Nazwa_Producenta.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase)).ToList()
+                );
+            }
+        }
+
+        #endregion
         #region Helpers
         public override void Load()
         {

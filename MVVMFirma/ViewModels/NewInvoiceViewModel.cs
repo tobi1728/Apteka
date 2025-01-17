@@ -11,39 +11,43 @@ namespace MVVMFirma.ViewModels
 {
     public class NewInvoiceViewModel : OneViewModel<Faktury_Dostawców>
     {
-        #region Constructor
-        public NewInvoiceViewModel()
-            : base("Nowa faktura")
+        private AptekaEntities aptekaEntities;
+        private BaseCommand _ShowSuppliers;
+
+        public NewInvoiceViewModel() : base("Nowa faktura")
         {
             aptekaEntities = new AptekaEntities();
             item = new Faktury_Dostawców();
-            DataWystawienia = DateTime.Today; 
+            DataWystawienia = DateTime.Today;
             LoadDostawcy();
             LoadZamowienia();
-            //Messenger.Default.Register<Dostawcy>(this, getSelectedSupplier);
-        }
-        #endregion
 
-        #region Command
-        private BaseCommand _ShowSuppliers;
+            // Nasłuchujemy na obiekt Dostawcy przesyłany przez Messenger
+            Messenger.Default.Register<Dostawcy>(this, getSelectedSupplier);
+        }
+
+        // Komenda wywoływana przez przycisk "Wybierz" (Dostawca)
         public ICommand ShowSuppliers
         {
             get
             {
                 if (_ShowSuppliers == null)
-                    _ShowSuppliers = new BaseCommand(() => showSuppliers());
+                    _ShowSuppliers = new BaseCommand(() => Messenger.Default.Send("Wszyscy dostawcy"));
                 return _ShowSuppliers;
             }
         }
-        private void showSuppliers()
+
+        private void getSelectedSupplier(Dostawcy supplier)
         {
-            Messenger.Default.Send<string>("KontrahenciAll");
+            if (supplier != null)
+            {
+                IDDostawcy = supplier.ID_Dostawcy;
+                SupplierName = supplier.Nazwa;
+                SupplierPhone = supplier.Telefon;
+            }
         }
-        #endregion
 
-        #region Properties
 
-        // Lista dostawców
         private List<Dostawcy> _Dostawcy;
         public List<Dostawcy> Dostawcy
         {
@@ -55,7 +59,6 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // Lista zamówień
         private List<Zamówienia> _Zamowienia;
         public List<Zamówienia> Zamowienia
         {
@@ -69,10 +72,7 @@ namespace MVVMFirma.ViewModels
 
         public string NumerFaktury
         {
-            get
-            {
-                return item.Numer_Faktury;
-            }
+            get => item.Numer_Faktury;
             set
             {
                 item.Numer_Faktury = value;
@@ -82,10 +82,7 @@ namespace MVVMFirma.ViewModels
 
         public int IDDostawcy
         {
-            get
-            {
-                return item.ID_Dostawcy;
-            }
+            get => item.ID_Dostawcy;
             set
             {
                 item.ID_Dostawcy = value;
@@ -93,15 +90,12 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        public string SupplierName { get; set; }   
-        public string SupplierPhone{ get; set; }
+        public string SupplierName { get; set; }
+        public string SupplierPhone { get; set; }
 
         public DateTime DataWystawienia
         {
-            get
-            {
-                return item.Data_Wystawienia;
-            }
+            get => item.Data_Wystawienia;
             set
             {
                 item.Data_Wystawienia = value;
@@ -111,10 +105,7 @@ namespace MVVMFirma.ViewModels
 
         public decimal Kwota
         {
-            get
-            {
-                return item.Kwota;
-            }
+            get => item.Kwota;
             set
             {
                 item.Kwota = value;
@@ -124,10 +115,7 @@ namespace MVVMFirma.ViewModels
 
         public int IDZamowienia
         {
-            get
-            {
-                return item.ID_Zamówienia;
-            }
+            get => item.ID_Zamówienia;
             set
             {
                 item.ID_Zamówienia = value;
@@ -135,19 +123,6 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-
-
-        #endregion
-
-        #region Helpers
-
-        //private void getSelectedSupplier(Dostawcy supplier)
-        //{
-        //    IDDostawcy = supplier.ID_Dostawcy;
-        //    SupplierName = supplier.Nazwa;
-        //    SupplierPhone = supplier.Telefon;
-        //}
-        
         public void LoadDostawcy()
         {
             Dostawcy = aptekaEntities.Dostawcy.ToList();
@@ -164,11 +139,8 @@ namespace MVVMFirma.ViewModels
             {
                 throw new InvalidOperationException("Musisz wybrać dostawcę.");
             }
-
-            aptekaEntities.Faktury_Dostawców.Add(item); // Dodaje do lokalnej kolekcji
-            aptekaEntities.SaveChanges(); // Zapisuje zmiany do bazy danych
+            aptekaEntities.Faktury_Dostawców.Add(item);
+            aptekaEntities.SaveChanges();
         }
-
-        #endregion
     }
 }

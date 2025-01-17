@@ -8,21 +8,21 @@
              d:DesignHeight="500" d:DesignWidth="800">
     <Grid Background="#fff">
         <Grid.RowDefinitions>
-            <!-- Nagłówek -->
             <RowDefinition Height="Auto"/>
-            <!-- Główna sekcja -->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Nagłówek -->
         <TextBlock Grid.Row="0" Text="Lista dostawców" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" 
                    FontSize="20" FontWeight="Bold" Margin="5,10,0,10"/>
 
-        <!-- Główna tabela dla dostawców -->
         <Grid Grid.Row="1" HorizontalAlignment="Left">
-            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}" SelectedItem="{Binding Path=SelectedSupplier, Mode=TwoWay}" 
-                      CanUserAddRows="False" IsReadOnly="True" Margin="10">
+            <DataGrid AutoGenerateColumns="False"
+                      ItemsSource="{Binding List}"
+                      SelectedItem="{Binding SelectedSupplier, Mode=TwoWay}"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      Margin="10">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID Dostawcy" Binding="{Binding ID_Dostawcy}" />
                     <DataGridTextColumn Header="Nazwa" Binding="{Binding Nazwa}" />

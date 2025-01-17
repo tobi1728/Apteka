@@ -14,5 +14,6 @@ namespace MVVMFirma.Models.EntitiesForView
         public string Ulica { get; set; }
         public string Miasto { get; set; }
         public string Kod_Pocztowy { get; set; }
+
     }
 }

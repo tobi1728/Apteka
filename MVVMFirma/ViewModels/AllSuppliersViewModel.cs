@@ -6,43 +6,67 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MVVMFirma.ViewModels
 {
     public class AllSuppliersViewModel : AllViewModel<SupplierForAllView>
     {
-        #region Constructor
-        public AllSuppliersViewModel()
-            : base("Wszyscy dostawcy")
-        {
-        }
-        #endregion
-        #region Properties
         private Dostawcy _SelectedSupplier;
         public Dostawcy SelectedSupplier
         {
-            get
-            {
-                return _SelectedSupplier;
-            }
+            get => _SelectedSupplier;
             set
             {
                 _SelectedSupplier = value;
-                //Messengerem wysyalmy wybranego Kontrahenta do okna z Faktura
-                Messenger.Default.Send(_SelectedSupplier);
-                //Zamykamy okno po wybraniu
-                OnRequestClose();
+                if (_SelectedSupplier != null)
+                {
+                    Messenger.Default.Send(_SelectedSupplier);
+                    OnRequestClose();
+                }
             }
         }
+
+        #region Sort & Find 
+        // tu decydujemy po czym sortowac
+        public override List<string> GetComboboxSortList()
+        {
+            return new List<string> { "Nazwa", "Miasto", "Kod Pocztowy" };
+        }
+
+        public override void Sort()
+        {
+            if (SortField == "Nazwa")
+                List = new ObservableCollection<SupplierForAllView>(List.OrderBy(item => item.Nazwa).ToList());
+            else if (SortField == "Miasto")
+                List = new ObservableCollection<SupplierForAllView>(List.OrderBy(item => item.Miasto).ToList());
+            else if (SortField == "Kod Pocztowy")
+                List = new ObservableCollection<SupplierForAllView>(List.OrderBy(item => item.Kod_Pocztowy).ToList());
+        }
+
+        public override List<string> GetComboboxFindList()
+        {
+            return new List<string> { "Nazwa", "Miasto" };
+        }
+
+        public override void Find()
+        {
+            Load();
+            if (FindField == "Nazwa")
+                List = new ObservableCollection<SupplierForAllView>(List.Where(item => item.Nazwa != null && item.Nazwa.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase)).ToList());
+            else if (FindField == "Miasto")
+                List = new ObservableCollection<SupplierForAllView>(List.Where(item => item.Miasto != null && item.Miasto.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase)).ToList());
+        }
+
+
         #endregion
-        #region Helpers
+
+        public AllSuppliersViewModel() : base("Wszyscy dostawcy") { }
+
         public override void Load()
         {
             List = new ObservableCollection<SupplierForAllView>
             (
-                from supplier in aptekaEntities.Dostawcy // Dla każdego dostawcy z bazy
+                from supplier in aptekaEntities.Dostawcy
                 select new SupplierForAllView
                 {
                     ID_Dostawcy = supplier.ID_Dostawcy,
@@ -54,9 +78,5 @@ namespace MVVMFirma.ViewModels
                 }
             );
         }
-        #endregion
-
-
-
     }
 }
