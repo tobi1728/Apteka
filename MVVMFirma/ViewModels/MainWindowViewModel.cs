@@ -195,7 +195,8 @@ namespace MVVMFirma.ViewModels
                 CreateView(new NewOrderViewModel());
             if (name == "Wszystkie sprzedażeAdd")
                 CreateView(new NewSaleViewModel());
-
+            if (name == "ShowSuppliers")
+                CreateView(new AllSuppliersViewModel());
           
         }
 

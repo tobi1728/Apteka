@@ -11,8 +11,8 @@ namespace MVVMFirma.ViewModels
 {
     public class AllSuppliersViewModel : AllViewModel<SupplierForAllView>
     {
-        private Dostawcy _SelectedSupplier;
-        public Dostawcy SelectedSupplier
+        private SupplierForAllView _SelectedSupplier;
+        public SupplierForAllView SelectedSupplier
         {
             get => _SelectedSupplier;
             set
@@ -25,6 +25,7 @@ namespace MVVMFirma.ViewModels
                 }
             }
         }
+
 
         #region Sort & Find 
         // tu decydujemy po czym sortowac

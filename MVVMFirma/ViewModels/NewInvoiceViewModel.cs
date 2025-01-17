@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Models.EntitiesForView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace MVVMFirma.ViewModels
             LoadZamowienia();
 
             // Nasłuchujemy na obiekt Dostawcy przesyłany przez Messenger
-            Messenger.Default.Register<Dostawcy>(this, getSelectedSupplier);
+            Messenger.Default.Register<SupplierForAllView>(this, getSelectedSupplier);
         }
 
         // Komenda wywoływana przez przycisk "Wybierz" (Dostawca)
@@ -32,18 +33,19 @@ namespace MVVMFirma.ViewModels
             get
             {
                 if (_ShowSuppliers == null)
-                    _ShowSuppliers = new BaseCommand(() => Messenger.Default.Send("Wszyscy dostawcy"));
+                    _ShowSuppliers = new BaseCommand(() => Messenger.Default.Send("ShowSuppliers"));
                 return _ShowSuppliers;
             }
         }
 
-        private void getSelectedSupplier(Dostawcy supplier)
+        void getSelectedSupplier(SupplierForAllView supplier)
         {
             if (supplier != null)
             {
                 IDDostawcy = supplier.ID_Dostawcy;
                 SupplierName = supplier.Nazwa;
                 SupplierPhone = supplier.Telefon;
+
             }
         }
 
