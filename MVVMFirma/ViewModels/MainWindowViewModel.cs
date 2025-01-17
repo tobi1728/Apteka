@@ -254,6 +254,20 @@ namespace MVVMFirma.ViewModels
         //    this.SetActiveWorkspace(workspace);
         //}
 
+        private void ShowAllSuppliers()
+        {
+            AllSuppliersViewModel workspace =
+                this.Workspaces.FirstOrDefault(vm => vm is AllSuppliersViewModel)
+                as AllSuppliersViewModel;
+            if (workspace == null)
+            {
+                workspace = new AllSuppliersViewModel();
+                this.Workspaces.Add(workspace);
+            }
+
+            this.SetActiveWorkspace(workspace);
+        }
+
         private void SetActiveWorkspace(WorkspaceViewModel workspace)
         {
             Debug.Assert(this.Workspaces.Contains(workspace));
@@ -301,7 +315,8 @@ namespace MVVMFirma.ViewModels
                 CreateView(new NewOrderViewModel());
             if (name == "Wszystkie sprzedażeAdd")
                 CreateView(new NewSaleViewModel());
-
+            if (name == "KontrahenciAll")
+                ShowAllSuppliers();
 
         }
         #endregion

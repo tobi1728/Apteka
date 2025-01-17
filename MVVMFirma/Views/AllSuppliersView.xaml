@@ -21,7 +21,7 @@
 
         <!-- Główna tabela dla dostawców -->
         <Grid Grid.Row="1" HorizontalAlignment="Left">
-            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}" 
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}" SelectedItem="{Binding Path=SelectedSupplier, Mode=TwoWay}" 
                       CanUserAddRows="False" IsReadOnly="True" Margin="10">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID Dostawcy" Binding="{Binding ID_Dostawcy}" />

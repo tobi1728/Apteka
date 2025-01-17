@@ -71,6 +71,10 @@ namespace MVVMFirma.ViewModels
         }
         #endregion
 
+        #region Sort & Filter
+
+        #endregion
+
         #region Helpers
         private void add()
         {

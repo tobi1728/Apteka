@@ -35,7 +35,6 @@
         <Border Grid.Row="2" Grid.Column="0">
             <HeaderedContentControl 
                 Header="Operacje" 
-                Background="Aqua" 
                 Content="{Binding Path=Commands}" 
                 ContentTemplate="{StaticResource CommandsTemplate}"
                 Style="{StaticResource MainHCCStyle}"

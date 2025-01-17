@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
@@ -15,6 +16,11 @@ namespace MVVMFirma.ViewModels
             : base("Wszystkie faktury dostawców")
         {
         }
+        #endregion
+
+        #region Command
+
+
         #endregion
 
         #region Helpers

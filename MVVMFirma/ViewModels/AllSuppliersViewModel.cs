@@ -1,4 +1,5 @@
-﻿using MVVMFirma.Helper;
+﻿using GalaSoft.MvvmLight.Messaging;
+using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
 using MVVMFirma.Models.EntitiesForView;
 using System;
@@ -18,7 +19,24 @@ namespace MVVMFirma.ViewModels
         {
         }
         #endregion
-
+        #region Properties
+        private Dostawcy _SelectedSupplier;
+        public Dostawcy SelectedSupplier
+        {
+            get
+            {
+                return _SelectedSupplier;
+            }
+            set
+            {
+                _SelectedSupplier = value;
+                //Messengerem wysyalmy wybranego Kontrahenta do okna z Faktura
+                Messenger.Default.Send(_SelectedSupplier);
+                //Zamykamy okno po wybraniu
+                OnRequestClose();
+            }
+        }
+        #endregion
         #region Helpers
         public override void Load()
         {
@@ -37,5 +55,8 @@ namespace MVVMFirma.ViewModels
             );
         }
         #endregion
+
+
+
     }
 }

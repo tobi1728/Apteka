@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MVVMFirma.Views"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="400">
-    <Grid Background="#fff">
+    <Grid Background="#fff" Height="318" Margin="0,0,-196,0">
         <Grid.RowDefinitions>
             <!-- Nagłówek -->
             <RowDefinition Height="Auto"/>
@@ -20,12 +20,14 @@
                    FontSize="20" FontWeight="Bold" Margin="5,10,0,10"/>
 
         <!-- Główna siatka dla formularza -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,0,-313,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
                 <RowDefinition Height="45"/>
                 <RowDefinition Height="45"/>
                 <RowDefinition Height="45"/>
@@ -39,24 +41,25 @@
 
             <!-- Dostawca -->
             <Label Grid.Column="0" Grid.Row="1" Content="Dostawca:" Margin="0,8,0,8" Padding="3"/>
-            <ComboBox Grid.Column="1" Grid.Row="1" 
-                      ItemsSource="{Binding Dostawcy}"
-                      SelectedValue="{Binding IDDostawcy}"
-                      DisplayMemberPath="Nazwa" 
-                      SelectedValuePath="ID_Dostawcy" Margin="0,8,0,8" Padding="3"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=SupplierName}" IsEnabled="False" Margin="0,8,0,8" Padding="3"/>
+            <Button Content="Wybierz" Grid.Column="2" Grid.Row="1" Margin="10,8,-10,8" Command="{Binding ShowSuppliers}"></Button>
 
+            <!-- Telefon dostawcy -->
+            <Label Grid.Column="0" Grid.Row="2" Content="Telefon dostawcy:" Margin="0,8,0,8" Padding="3"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=SupplierPhone, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" Margin="0,8,0,8" Padding="3"/>
+            
             <!-- Data wystawienia -->
-            <Label Grid.Column="0" Grid.Row="2" Content="Data wystawienia:" Margin="0,8,0,8" Padding="3"/>
-            <DatePicker Grid.Column="1" Grid.Row="2" 
+            <Label Grid.Column="0" Grid.Row="3" Content="Data wystawienia:" Margin="0,8,0,8" Padding="3"/>
+            <DatePicker Grid.Column="1" Grid.Row="3" 
                         SelectedDate="{Binding DataWystawienia}" Margin="0,8,0,8" Padding="3"/>
 
             <!-- Kwota -->
-            <Label Grid.Column="0" Grid.Row="3" Content="Kwota:" Margin="0,8,0,8" Padding="3"/>
-            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Kwota}" Margin="0,8,0,8" Padding="3"/>
+            <Label Grid.Column="0" Grid.Row="4" Content="Kwota:" Margin="0,8,0,8" Padding="3"/>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Kwota}" Margin="0,8,0,8" Padding="3"/>
 
             <!-- Zamówienie -->
-            <Label Grid.Column="0" Grid.Row="4" Content="Zamówienie:" Margin="0,8,0,8" Padding="3"/>
-            <ComboBox Grid.Column="1" Grid.Row="4" 
+            <Label Grid.Column="0" Grid.Row="5" Content="Zamówienie:" Margin="0,8,0,8" Padding="3"/>
+            <ComboBox Grid.Column="1" Grid.Row="5" 
                       ItemsSource="{Binding Zamowienia}" 
                       SelectedValue="{Binding IDZamowienia}" 
                       DisplayMemberPath="ID_Zamówienia" 

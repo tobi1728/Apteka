@@ -1,4 +1,5 @@
-﻿using MVVMFirma.Helper;
+﻿using GalaSoft.MvvmLight.Messaging;
+using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,24 @@ namespace MVVMFirma.ViewModels
             DataWystawienia = DateTime.Today; 
             LoadDostawcy();
             LoadZamowienia();
+            //Messenger.Default.Register<Dostawcy>(this, getSelectedSupplier);
+        }
+        #endregion
+
+        #region Command
+        private BaseCommand _ShowSuppliers;
+        public ICommand ShowSuppliers
+        {
+            get
+            {
+                if (_ShowSuppliers == null)
+                    _ShowSuppliers = new BaseCommand(() => showSuppliers());
+                return _ShowSuppliers;
+            }
+        }
+        private void showSuppliers()
+        {
+            Messenger.Default.Send<string>("KontrahenciAll");
         }
         #endregion
 
@@ -74,6 +93,9 @@ namespace MVVMFirma.ViewModels
             }
         }
 
+        public string SupplierName { get; set; }   
+        public string SupplierPhone{ get; set; }
+
         public DateTime DataWystawienia
         {
             get
@@ -113,9 +135,19 @@ namespace MVVMFirma.ViewModels
             }
         }
 
+
+
         #endregion
 
         #region Helpers
+
+        //private void getSelectedSupplier(Dostawcy supplier)
+        //{
+        //    IDDostawcy = supplier.ID_Dostawcy;
+        //    SupplierName = supplier.Nazwa;
+        //    SupplierPhone = supplier.Telefon;
+        //}
+        
         public void LoadDostawcy()
         {
             Dostawcy = aptekaEntities.Dostawcy.ToList();
@@ -136,6 +168,7 @@ namespace MVVMFirma.ViewModels
             aptekaEntities.Faktury_Dostawców.Add(item); // Dodaje do lokalnej kolekcji
             aptekaEntities.SaveChanges(); // Zapisuje zmiany do bazy danych
         }
+
         #endregion
     }
 }
