@@ -1,5 +1,7 @@
-﻿using MVVMFirma.Helper;
+﻿using GalaSoft.MvvmLight.Messaging;
+using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Models.EntitiesForView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +24,43 @@ namespace MVVMFirma.ViewModels
 
             LoadKategorie();
             LoadProducenci();
+            Messenger.Default.Register<ProducerForAllView>(this, getSelectedProducer);
+
         }
         #endregion
 
         #region Properties
+
+        public ICommand ShowProducers
+        {
+            get
+            {
+                return new BaseCommand(() => Messenger.Default.Send("Wszyscy producenci"));
+            }
+        }
+
+        void getSelectedProducer(ProducerForAllView producer)
+        {
+            if (producer != null)
+            {
+                IDProducenta = producer.ID_Producenta;
+                ProducerName = producer.Nazwa_Producenta;
+
+            }
+        }
+
+        private string _ProducerName;
+        public string ProducerName
+        {
+            get => _ProducerName;
+            set
+            {
+                _ProducerName = value;
+            }
+        }
+
+
+
 
         // Lista kategorii leków
         private List<Kategorie_Leków> _KategorieLekow;
@@ -79,16 +114,13 @@ namespace MVVMFirma.ViewModels
         }
 
         // ID Producenta
+        private int _IDProducenta;
         public int IDProducenta
         {
-            get
-            {
-                return item.ID_Producenta;
-            }
+            get => _IDProducenta;
             set
             {
-                item.ID_Producenta = value;
-                OnPropertyChanged(() => IDProducenta);
+                _IDProducenta = value;
             }
         }
 
@@ -195,9 +227,13 @@ namespace MVVMFirma.ViewModels
                 throw new InvalidOperationException("Musisz wybrać kategorię i producenta.");
             }
 
+            // Przypisanie ID Producenta do encji
+            item.ID_Producenta = IDProducenta;
+
             aptekaEntities.Leki.Add(item); // Dodaje do lokalnej kolekcji
             aptekaEntities.SaveChanges(); // Zapisuje zmiany do bazy danych
         }
+
 
         #endregion
     }

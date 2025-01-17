@@ -24,6 +24,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="45"/>
@@ -43,12 +44,10 @@
                      Text="{Binding Nazwa, UpdateSourceTrigger=PropertyChanged}" />
 
             <!-- Kategoria -->
-            <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Kategoria:"/>
-            <ComboBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" Padding="5"
-                      ItemsSource="{Binding KategorieLekow}"
-                      SelectedValue="{Binding IDKategorii, UpdateSourceTrigger=PropertyChanged}"
-                      DisplayMemberPath="Nazwa_Kategorii" 
-                      SelectedValuePath="ID_Kategorii" />
+            <Label Grid.Column="0" Grid.Row="1" Content="Producent:" Margin="0,8,0,8" Padding="3"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding ProducerName, Mode=OneWay}" IsEnabled="False" Margin="0,8,0,8" Padding="3"/>
+            <Button Content="Wybierz" Grid.Column="3" Grid.Row="1" Margin="10,8,-10,8" Command="{Binding ShowProducers}" />
+
 
             <!-- Cena zakupu -->
             <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Cena zakupu:"/>
@@ -65,13 +64,13 @@
             <DatePicker Grid.Column="1" Grid.Row="4" Margin="0,8,0,8"
                         SelectedDate="{Binding DataWaznosci, UpdateSourceTrigger=PropertyChanged}" />
 
-            <!-- Producent -->
-            <Label Grid.Column="0" Grid.Row="5" Margin="0,8,0,8" Content="Producent:"/>
+            <!-- Kategoria -->
+            <Label Grid.Column="0" Grid.Row="5" Margin="0,8,0,8" Content="Kategoria:"/>
             <ComboBox Grid.Column="1" Grid.Row="5" Margin="0,8,0,8" Padding="5"
-                      ItemsSource="{Binding Producenci}"
-                      SelectedValue="{Binding IDProducenta, UpdateSourceTrigger=PropertyChanged}"
-                      DisplayMemberPath="Nazwa_Producenta" 
-                      SelectedValuePath="ID_Producenta" />
+                                    ItemsSource="{Binding KategorieLekow}"
+                      SelectedValue="{Binding IDKategorii, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="Nazwa_Kategorii" 
+                      SelectedValuePath="ID_Kategorii" />
 
             <!-- Recepta -->
             <Label Grid.Column="0" Grid.Row="6" Margin="0,8,0,8" Content="Recepta:"/>

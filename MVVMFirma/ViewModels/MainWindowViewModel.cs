@@ -197,7 +197,11 @@ namespace MVVMFirma.ViewModels
                 CreateView(new NewSaleViewModel());
             if (name == "ShowSuppliers")
                 CreateView(new AllSuppliersViewModel());
-          
+            if (name == "ShowPharmacists")
+                CreateView(new AllPharmacistsViewModel());
+            if (name == "Wszyscy producenci")
+                CreateView(new AllProducersViewModel());
+
         }
 
 

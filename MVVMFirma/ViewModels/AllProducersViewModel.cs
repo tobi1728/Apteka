@@ -1,4 +1,5 @@
-﻿using MVVMFirma.Helper;
+﻿using GalaSoft.MvvmLight.Messaging;
+using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
 using MVVMFirma.Models.EntitiesForView;
 using System;
@@ -24,6 +25,23 @@ namespace MVVMFirma.ViewModels
         {
             return new List<string> { "Nazwa Producenta", "Miasto", "Kod Pocztowy" };
         }
+
+        private ProducerForAllView _SelectedProducer;
+        public ProducerForAllView SelectedProducer
+        {
+            get => _SelectedProducer;
+            set
+            {
+                _SelectedProducer = value;
+                if (_SelectedProducer != null)
+                {
+                    Messenger.Default.Send(_SelectedProducer);
+                    OnRequestClose();
+                }
+            }
+        }
+
+
 
         public override void Sort()
         {

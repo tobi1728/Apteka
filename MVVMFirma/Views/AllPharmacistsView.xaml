@@ -21,10 +21,13 @@
 
         <!-- Główna tabela -->
         <Grid Grid.Row="1" HorizontalAlignment="Left">
-            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding List}" 
-                      CanUserAddRows="False" IsReadOnly="True" Margin="10">
+            <DataGrid AutoGenerateColumns="False"
+          ItemsSource="{Binding List}"
+          SelectedItem="{Binding SelectedPharmacist, Mode=TwoWay}"
+          CanUserAddRows="False"
+          IsReadOnly="True"
+          Margin="10">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID Farmaceuty" Binding="{Binding ID_Farmaceuty}" />
                     <DataGridTextColumn Header="Imię" Binding="{Binding Imię}" />
                     <DataGridTextColumn Header="Nazwisko" Binding="{Binding Nazwisko}" />
                     <DataGridTextColumn Header="Numer Licencji" Binding="{Binding Numer_Licencji}" />

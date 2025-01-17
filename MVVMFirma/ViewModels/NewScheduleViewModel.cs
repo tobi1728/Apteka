@@ -1,8 +1,11 @@
-﻿using MVVMFirma.Helper;
+﻿using GalaSoft.MvvmLight.Messaging;
+using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Models.EntitiesForView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
@@ -18,10 +21,42 @@ namespace MVVMFirma.ViewModels
             GodzinaRozpoczecia = new TimeSpan(8, 0, 0); // Default start time
             GodzinaZakonczenia = new TimeSpan(16, 0, 0); // Default end time
             LoadFarmaceuci();
+            Messenger.Default.Register<PharmacistForAllView>(this, getSelectedPharmacist);
+
         }
         #endregion
 
         #region Properties
+        public ICommand ShowPharmacists
+        {
+            get
+            {
+                return new BaseCommand(() => Messenger.Default.Send("ShowPharmacists"));
+            }
+        }
+
+        void getSelectedPharmacist(PharmacistForAllView pharmacist)
+        {
+            if (pharmacist != null)
+            {
+                PharmacistName = pharmacist.Imię + " " + pharmacist.Nazwisko;
+                IDFarmaceuty = pharmacist.ID_Farmaceuty;
+
+
+            }
+        }
+
+
+        private string _PharmacistName;
+        public string PharmacistName
+        {
+            get => _PharmacistName;
+            set
+            {
+                _PharmacistName = value;
+            }
+        }
+
         private List<Farmaceuci> _Farmaceuci;
         public List<Farmaceuci> Farmaceuci
         {

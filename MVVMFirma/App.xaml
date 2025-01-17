@@ -2,6 +2,19 @@
   <Application.Resources>
     <ResourceDictionary>
       <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:MVVMFirma.ViewModel" />
-    </ResourceDictionary>
+            <Style TargetType="TextBox">
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="True">
+                                <TextBlock Foreground="Red" Margin="10,5,0,0" FontStyle="Italic"
+                                       Text="{Binding [0].ErrorContent}" DockPanel.Dock="Right"/>
+                                <AdornedElementPlaceholder/>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
   </Application.Resources>
 </Application>

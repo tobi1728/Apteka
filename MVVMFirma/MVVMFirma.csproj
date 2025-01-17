@@ -183,6 +183,7 @@
     <Compile Include="Models\Entities\Zamówienia.cs">
       <DependentUpon>Apteka.tt</DependentUpon>
     </Compile>
+    <Compile Include="Validators\ValueValidator.cs" />
     <Compile Include="ViewModels\AllDrugCategoriesViewModel.cs" />
     <Compile Include="ViewModels\AllInvoicesViewModel.cs" />
     <Compile Include="ViewModels\AllOrderProductsViewModel.cs" />

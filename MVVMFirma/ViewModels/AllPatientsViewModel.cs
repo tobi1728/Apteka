@@ -1,4 +1,5 @@
-﻿using MVVMFirma.Helper;
+﻿using GalaSoft.MvvmLight.Messaging;
+using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
 using MVVMFirma.Models.EntitiesForView;
 using System;
@@ -21,6 +22,20 @@ namespace MVVMFirma.ViewModels
         public override List<string> GetComboboxSortList()
         {
             return new List<string> { "Imię", "Nazwisko", "PESEL" };
+        }
+        private ProducerForAllView _SelectedProducer;
+        public ProducerForAllView SelectedProducer
+        {
+            get => _SelectedProducer;
+            set
+            {
+                _SelectedProducer = value;
+                if (_SelectedProducer != null)
+                {
+                    Messenger.Default.Send(_SelectedProducer);
+                    OnRequestClose();
+                }
+            }
         }
 
         public override void Sort()

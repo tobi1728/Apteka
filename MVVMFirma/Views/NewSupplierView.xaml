@@ -35,27 +35,28 @@
             <!-- Nazwa -->
             <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Nazwa:"/>
             <TextBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8" Padding="3"
-                     Text="{Binding Nazwa, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Nazwa, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Telefon -->
             <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Telefon:"/>
             <TextBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" Padding="3"
-                     Text="{Binding Telefon, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Telefon, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Ulica -->
             <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Ulica:"/>
             <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" Padding="3"
-                     Text="{Binding Ulica, UpdateSourceTrigger=PropertyChanged}" />
-
+                     Text="{Binding Ulica, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             <!-- Miasto -->
             <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Miasto:"/>
             <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" Padding="3"
-                     Text="{Binding Miasto, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Miasto, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Kod pocztowy -->
             <Label Grid.Column="0" Grid.Row="4" Margin="0,8,0,8" Content="Kod pocztowy:"/>
             <TextBox Grid.Column="1" Grid.Row="4" Margin="0,8,0,8" Padding="3"
-                     Text="{Binding KodPocztowy, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding KodPocztowy, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+            
         </Grid>
     </Grid>
+    
 </local:OneViewBase>

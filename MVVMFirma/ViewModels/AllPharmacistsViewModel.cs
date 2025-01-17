@@ -1,4 +1,5 @@
-﻿using MVVMFirma.Helper;
+﻿using GalaSoft.MvvmLight.Messaging;
+using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
 using MVVMFirma.Models.EntitiesForView;
 using System;
@@ -24,6 +25,22 @@ namespace MVVMFirma.ViewModels
         {
             return new List<string> { "Imię", "Nazwisko", "Numer Licencji" };
         }
+        private PharmacistForAllView _SelectedPharmacist;
+        public PharmacistForAllView SelectedPharmacist
+        {
+            get => _SelectedPharmacist;
+            set
+            {
+                _SelectedPharmacist = value;
+                if (_SelectedPharmacist != null)
+                {
+                    Messenger.Default.Send(_SelectedPharmacist);
+                    OnRequestClose();
+                }
+            }
+        }
+
+
 
         public override void Sort()
         {

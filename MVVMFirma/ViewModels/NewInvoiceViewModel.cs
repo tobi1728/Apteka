@@ -2,15 +2,17 @@
 using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
 using MVVMFirma.Models.EntitiesForView;
+using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewInvoiceViewModel : OneViewModel<Faktury_Dostawców>
+    public class NewInvoiceViewModel : OneViewModel<Faktury_Dostawców>, IDataErrorInfo
     {
         private AptekaEntities aptekaEntities;
         private BaseCommand _ShowSuppliers;
@@ -137,12 +139,42 @@ namespace MVVMFirma.ViewModels
 
         public override void Save()
         {
-            if (IDDostawcy == 0)
-            {
-                throw new InvalidOperationException("Musisz wybrać dostawcę.");
-            }
-            aptekaEntities.Faktury_Dostawców.Add(item);
-            aptekaEntities.SaveChanges();
+            
+                if (IsValid())
+                {
+                    aptekaEntities.Faktury_Dostawców.Add(item);
+                    aptekaEntities.SaveChanges();
+                }
+                else
+                {
+                    ShowMessageBox("Popraw błędy w formularzu");
+                }
+            
+  
         }
+    
+    #region Validation
+        private string _validationMessage = string.Empty;
+
+        public string this[string properties]
+        {
+            get
+            {
+
+                if (properties == "Kwota")
+                {
+                    _validationMessage = ValueValidator.ValidateValue(Kwota);
+                }
+                return _validationMessage;
+            }
+        }
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(_validationMessage);
+        }
+        public string Error => string.Empty;
+
+        #endregion
     }
 }

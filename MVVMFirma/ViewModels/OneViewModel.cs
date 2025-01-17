@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
@@ -55,12 +56,22 @@ namespace MVVMFirma.ViewModels
         #endregion
 
         #region Helpers
+
+
         public abstract void Save();
         public void SaveAndClose()
         {
-            Save();
-            OnRequestClose();
+            if (IsValid())
+            { 
+                Save();
+                OnRequestClose();
+            }
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu");
+            }
         }
+        public virtual bool IsValid() => true;
         #endregion
     }
 }
