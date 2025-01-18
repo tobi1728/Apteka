@@ -1,14 +1,16 @@
 ﻿using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewOrderViewModel : OneViewModel<Zamówienia>
+    public class NewOrderViewModel : OneViewModel<Zamówienia>, IDataErrorInfo
     {
         #region Constructor
         public NewOrderViewModel()
@@ -21,6 +23,43 @@ namespace MVVMFirma.ViewModels
             DataDostawy = DateTime.Today;
             LoadDostawcy();
         }
+        #endregion
+        #region Validation
+        private string _validationMessage = string.Empty;
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                _validationMessage = string.Empty;
+                switch (propertyName)
+                {
+                    case nameof(IDDostawcy):
+                        _validationMessage = ValueValidator.ValidateSelection(IDDostawcy);
+                        break;
+                    case nameof(DataZamowienia):
+                        _validationMessage = ValueValidator.ValidatePastOrTodayDate(DataZamowienia);
+                        break;
+                    case nameof(DataDostawy):
+                        _validationMessage = ValueValidator.ValidateEndAfterStartDate(DataZamowienia, DataDostawy);
+                        break;
+                    case nameof(Status):
+                        _validationMessage = ValueValidator.ValidateString(Status, 3);
+                        break;
+                }
+                return _validationMessage;
+            }
+        }
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(this[nameof(IDDostawcy)]) &&
+                   string.IsNullOrEmpty(this[nameof(DataZamowienia)]) &&
+                   string.IsNullOrEmpty(this[nameof(DataDostawy)]) &&
+                   string.IsNullOrEmpty(this[nameof(Status)]);
+        }
+
+        public string Error => string.Empty;
         #endregion
 
         #region Properties
@@ -86,9 +125,17 @@ namespace MVVMFirma.ViewModels
 
         public override void Save()
         {
-            aptekaEntities.Zamówienia.Add(item);
-            aptekaEntities.SaveChanges();
+            if (IsValid())
+            {
+                aptekaEntities.Zamówienia.Add(item);
+                aptekaEntities.SaveChanges();
+            }
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu.");
+            }
         }
+
         #endregion
     }
 }

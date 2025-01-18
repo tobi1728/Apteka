@@ -1,14 +1,16 @@
 ﻿using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewOrderProductViewModel : OneViewModel<Produkty_Zamówienia>
+    public class NewOrderProductViewModel : OneViewModel<Produkty_Zamówienia>, IDataErrorInfo
     {
         #region Constructor
         public NewOrderProductViewModel()
@@ -19,6 +21,39 @@ namespace MVVMFirma.ViewModels
             LoadLeki();
             LoadZamowienia();
         }
+        #endregion
+        #region Validation
+        private string _validationMessage = string.Empty;
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                _validationMessage = string.Empty;
+                switch (propertyName)
+                {
+                    case nameof(ID_Leku):
+                        _validationMessage = ValueValidator.ValidateSelection(ID_Leku);
+                        break;
+                    case nameof(ID_Zamówienia):
+                        _validationMessage = ValueValidator.ValidateSelection(ID_Zamówienia);
+                        break;
+                    case nameof(Ilość):
+                        _validationMessage = ValueValidator.ValidatePositiveInteger(Ilość);
+                        break;
+                }
+                return _validationMessage;
+            }
+        }
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(this[nameof(ID_Leku)]) &&
+                   string.IsNullOrEmpty(this[nameof(ID_Zamówienia)]) &&
+                   string.IsNullOrEmpty(this[nameof(Ilość)]);
+        }
+
+        public string Error => string.Empty;
         #endregion
 
         #region Properties
@@ -92,14 +127,17 @@ namespace MVVMFirma.ViewModels
 
         public override void Save()
         {
-            if (ID_Leku == 0 || ID_Zamówienia == 0)
+            if (IsValid())
             {
-                throw new InvalidOperationException("Musisz wybrać lek i zamówienie.");
+                aptekaEntities.Produkty_Zamówienia.Add(item);
+                aptekaEntities.SaveChanges();
             }
-
-            aptekaEntities.Produkty_Zamówienia.Add(item); // Dodaje do lokalnej kolekcji
-            aptekaEntities.SaveChanges(); // Zapisuje zmiany do bazy danych
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu.");
+            }
         }
+
         #endregion
     }
 }

@@ -1,13 +1,15 @@
 ﻿using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewPrescriptionViewModel : OneViewModel<Recepty>
+    public class NewPrescriptionViewModel : OneViewModel<Recepty>, IDataErrorInfo
     {
         #region Constructor
         public NewPrescriptionViewModel()
@@ -21,6 +23,43 @@ namespace MVVMFirma.ViewModels
             LoadPacjenci();
             LoadFarmaceuci();
         }
+        #endregion
+        #region Validation
+        private string _validationMessage = string.Empty;
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                _validationMessage = string.Empty;
+                switch (propertyName)
+                {
+                    case nameof(IDPacjenta):
+                        _validationMessage = ValueValidator.ValidateSelection(IDPacjenta);
+                        break;
+                    case nameof(IDFarmaceuty):
+                        _validationMessage = ValueValidator.ValidateSelection(IDFarmaceuty);
+                        break;
+                    case nameof(DataWystawienia):
+                        _validationMessage = ValueValidator.ValidatePastOrTodayDate(DataWystawienia);
+                        break;
+                    case nameof(DataRealizacji):
+                        _validationMessage = ValueValidator.ValidateEndAfterStartDate(DataWystawienia, DataRealizacji);
+                        break;
+                }
+                return _validationMessage;
+            }
+        }
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(this[nameof(IDPacjenta)]) &&
+                   string.IsNullOrEmpty(this[nameof(IDFarmaceuty)]) &&
+                   string.IsNullOrEmpty(this[nameof(DataWystawienia)]) &&
+                   string.IsNullOrEmpty(this[nameof(DataRealizacji)]);
+        }
+
+        public string Error => string.Empty;
         #endregion
 
         #region Properties
@@ -120,14 +159,17 @@ namespace MVVMFirma.ViewModels
 
         public override void Save()
         {
-            if (IDPacjenta == 0 || IDFarmaceuty == 0)
+            if (IsValid())
             {
-                throw new InvalidOperationException("Musisz wybrać pacjenta i farmaceutę.");
+                aptekaEntities.Recepty.Add(item);
+                aptekaEntities.SaveChanges();
             }
-
-            aptekaEntities.Recepty.Add(item);
-            aptekaEntities.SaveChanges();
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu");
+            }
         }
+
         #endregion
     }
 }

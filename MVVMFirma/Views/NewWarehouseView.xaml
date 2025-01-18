@@ -38,34 +38,34 @@
             <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Lek:"/>
             <ComboBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8"
                       ItemsSource="{Binding Products}"
-                      SelectedValue="{Binding IDLeku, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedValue="{Binding IDLeku, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                       DisplayMemberPath="Nazwa_Leku" 
                       SelectedValuePath="ID_Leku" />
 
             <!-- Ilość -->
             <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Ilość:"/>
             <TextBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" Padding="5"
-                     Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
+         Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Ulica -->
             <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Ulica:"/>
             <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" Padding="5"
-                     Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}" />
+         Text="{Binding Street, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Miasto -->
             <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Miasto:"/>
             <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" Padding="5"
-                     Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" />
+         Text="{Binding City, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Kod Pocztowy -->
             <Label Grid.Column="0" Grid.Row="4" Margin="0,8,0,8" Content="Kod Pocztowy:"/>
             <TextBox Grid.Column="1" Grid.Row="4" Margin="0,8,0,8" Padding="5"
-                     Text="{Binding PostalCode, UpdateSourceTrigger=PropertyChanged}" />
+         Text="{Binding PostalCode, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Telefon -->
             <Label Grid.Column="0" Grid.Row="5" Margin="0,8,0,8" Content="Telefon:"/>
             <TextBox Grid.Column="1" Grid.Row="5" Margin="0,8,0,8" Padding="5"
-                     Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
+         Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
         </Grid>
     </Grid>

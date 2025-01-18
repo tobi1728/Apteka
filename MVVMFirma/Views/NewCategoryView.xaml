@@ -34,13 +34,15 @@
             <!-- Nazwa Kategorii -->
             <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Nazwa Kategorii:"/>
             <TextBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8" Padding="3"
-                     Text="{Binding NazwaKategorii, UpdateSourceTrigger=PropertyChanged}" />
+                              Text="{Binding NazwaKategorii, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+
 
             <!-- Opis -->
             <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Opis:"/>
             <TextBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" Padding="5" Height="150"
-                     Text="{Binding Opis, UpdateSourceTrigger=PropertyChanged}" 
-                     TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                              Text="{Binding Opis, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+         TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" />
+
         </Grid>
     </Grid>
 </local:OneViewBase>

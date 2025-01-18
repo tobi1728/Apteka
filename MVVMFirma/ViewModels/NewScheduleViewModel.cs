@@ -2,14 +2,16 @@
 using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
 using MVVMFirma.Models.EntitiesForView;
+using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewScheduleViewModel : OneViewModel<Grafiki_Pracowników>
+    public class NewScheduleViewModel : OneViewModel<Grafiki_Pracowników>, IDataErrorInfo
     {
         #region Constructor
         public NewScheduleViewModel()
@@ -25,6 +27,48 @@ namespace MVVMFirma.ViewModels
 
         }
         #endregion
+        #region Validation
+        #region Validation
+        private string _validationMessage = string.Empty;
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                _validationMessage = string.Empty;
+                switch (propertyName)
+                {
+                    case nameof(Data):
+                        _validationMessage = ValueValidator.ValidateFutureDate(Data);
+                        break;
+                    case nameof(GodzinaRozpoczecia):
+                        _validationMessage = ValueValidator.ValidateTime(GodzinaRozpoczecia);
+                        break;
+                    case nameof(GodzinaZakonczenia):
+                        _validationMessage = ValueValidator.ValidateEndTime(GodzinaRozpoczecia, GodzinaZakonczenia);
+                        break;
+                    case nameof(IDFarmaceuty):
+                        _validationMessage = ValueValidator.ValidatePharmacist(IDFarmaceuty);
+                        break;
+                }
+                return _validationMessage;
+            }
+        }
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(this[nameof(Data)]) &&
+                   string.IsNullOrEmpty(this[nameof(GodzinaRozpoczecia)]) &&
+                   string.IsNullOrEmpty(this[nameof(GodzinaZakonczenia)]) &&
+                   string.IsNullOrEmpty(this[nameof(IDFarmaceuty)]);
+        }
+
+        public string Error => string.Empty;
+        #endregion
+
+
+
+
 
         #region Properties
         public ICommand ShowPharmacists
@@ -132,14 +176,19 @@ namespace MVVMFirma.ViewModels
 
         public override void Save()
         {
-            if (IDFarmaceuty == 0)
+            if (IsValid())
             {
-                throw new InvalidOperationException("Musisz wybrać farmaceutę.");
+                aptekaEntities.Grafiki_Pracowników.Add(item);
+                aptekaEntities.SaveChanges();
             }
-
-            aptekaEntities.Grafiki_Pracowników.Add(item);
-            aptekaEntities.SaveChanges();
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu");
+            }
         }
+
+
         #endregion
     }
 }
+#endregion

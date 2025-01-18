@@ -36,7 +36,7 @@
             <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Lek:"/>
             <ComboBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8" Padding="5"
                       ItemsSource="{Binding Leki}"
-                      SelectedValue="{Binding ID_Leku, UpdateSourceTrigger=PropertyChanged}"
+          SelectedValue="{Binding ID_Leku, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                       DisplayMemberPath="Nazwa_Leku" 
                       SelectedValuePath="ID_Leku" />
 
@@ -44,14 +44,14 @@
             <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Zamówienie:"/>
             <ComboBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" Padding="5"
                       ItemsSource="{Binding Zamowienia}"
-                      SelectedValue="{Binding ID_Zamówienia, UpdateSourceTrigger=PropertyChanged}"
+          SelectedValue="{Binding ID_Zamówienia, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                       DisplayMemberPath="ID_Zamówienia" 
                       SelectedValuePath="ID_Zamówienia" />
 
             <!-- Ilość -->
             <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Ilość:"/>
             <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" Padding="5"
-                     Text="{Binding Ilość, UpdateSourceTrigger=PropertyChanged}" />
+         Text="{Binding Ilość, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
         </Grid>
     </Grid>
 </local:OneViewBase>

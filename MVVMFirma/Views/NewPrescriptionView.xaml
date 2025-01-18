@@ -34,24 +34,24 @@
             <Label Grid.Column="0" Grid.Row="0" Content="Pacjent:" Margin="0,8,0,8"/>
             <ComboBox Grid.Column="1" Grid.Row="0" 
                       ItemsSource="{Binding Pacjenci}" 
-                      SelectedValue="{Binding IDPacjenta}" 
+          SelectedValue="{Binding IDPacjenta, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                       DisplayMemberPath="PESEL" 
                       SelectedValuePath="ID_Pacjenta" Margin="0,8,0,8"/>
 
             <Label Grid.Column="0" Grid.Row="1" Content="Farmaceuta:" Margin="0,8,0,8"/>
             <ComboBox Grid.Column="1" Grid.Row="1" 
                       ItemsSource="{Binding Farmaceuci}" 
-                      SelectedValue="{Binding IDFarmaceuty}" 
+          SelectedValue="{Binding IDFarmaceuty, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                       DisplayMemberPath="Numer_Licencji" 
                       SelectedValuePath="ID_Farmaceuty" Margin="0,8,0,8"/>
 
             <Label Grid.Column="0" Grid.Row="2" Content="Data wystawienia:" Margin="0,8,0,8"/>
             <DatePicker Grid.Column="1" Grid.Row="2" 
-                        SelectedDate="{Binding DataWystawienia}" Margin="0,8,0,8"/>
+            SelectedDate="{Binding DataWystawienia, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="0,8,0,8"/>
 
             <Label Grid.Column="0" Grid.Row="3" Content="Data realizacji:" Margin="0,8,0,8"/>
             <DatePicker Grid.Column="1" Grid.Row="3" 
-                        SelectedDate="{Binding DataRealizacji}" Margin="0,8,0,8"/>
+            SelectedDate="{Binding DataRealizacji, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Margin="0,8,0,8"/>
         </Grid>
     </Grid>
 </local:OneViewBase>

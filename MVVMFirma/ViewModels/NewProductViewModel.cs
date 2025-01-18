@@ -2,17 +2,19 @@
 using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
 using MVVMFirma.Models.EntitiesForView;
+using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewProductViewModel : OneViewModel<Leki>
+    public class NewProductViewModel : OneViewModel<Leki>, IDataErrorInfo
     {
-       
+
         #region Constructor
         public NewProductViewModel()
             :base("Nowy lek")
@@ -27,6 +29,51 @@ namespace MVVMFirma.ViewModels
             Messenger.Default.Register<ProducerForAllView>(this, getSelectedProducer);
 
         }
+        #endregion
+        #region Validation
+        private string _validationMessage = string.Empty;
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                _validationMessage = string.Empty;
+                switch (propertyName)
+                {
+                    case nameof(Nazwa):
+                        _validationMessage = ValueValidator.ValidateString(Nazwa, 3);
+                        break;
+                    case nameof(IDKategorii):
+                        _validationMessage = ValueValidator.ValidateSelection(IDKategorii);
+                        break;
+                    case nameof(IDProducenta):
+                        _validationMessage = ValueValidator.ValidateSelection(IDProducenta);
+                        break;
+                    case nameof(CenaZakupu):
+                        _validationMessage = ValueValidator.ValidatePositiveDecimal(CenaZakupu);
+                        break;
+                    case nameof(CenaSprzedazy):
+                        _validationMessage = ValueValidator.ValidatePositiveDecimal(CenaSprzedazy);
+                        break;
+                    case nameof(DataWaznosci):
+                        _validationMessage = ValueValidator.ValidateFutureDate(DataWaznosci);
+                        break;
+                }
+                return _validationMessage;
+            }
+        }
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(this[nameof(Nazwa)]) &&
+                   string.IsNullOrEmpty(this[nameof(IDKategorii)]) &&
+                   string.IsNullOrEmpty(this[nameof(IDProducenta)]) &&
+                   string.IsNullOrEmpty(this[nameof(CenaZakupu)]) &&
+                   string.IsNullOrEmpty(this[nameof(CenaSprzedazy)]) &&
+                   string.IsNullOrEmpty(this[nameof(DataWaznosci)]);
+        }
+
+        public string Error => string.Empty;
         #endregion
 
         #region Properties
@@ -222,17 +269,20 @@ namespace MVVMFirma.ViewModels
         }
         public override void Save()
         {
-            if (IDKategorii == 0 || IDProducenta == 0)
+            if (IsValid())
             {
-                throw new InvalidOperationException("Musisz wybrać kategorię i producenta.");
+                item.ID_Producenta = IDProducenta;
+                item.ID_Kategorii = IDKategorii;
+
+                aptekaEntities.Leki.Add(item);
+                aptekaEntities.SaveChanges();
             }
-
-            // Przypisanie ID Producenta do encji
-            item.ID_Producenta = IDProducenta;
-
-            aptekaEntities.Leki.Add(item); // Dodaje do lokalnej kolekcji
-            aptekaEntities.SaveChanges(); // Zapisuje zmiany do bazy danych
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu");
+            }
         }
+
 
 
         #endregion

@@ -1,12 +1,14 @@
 ﻿using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewParagonViewModel : OneViewModel<Paragony>
+    public class NewParagonViewModel : OneViewModel<Paragony>, IDataErrorInfo
     {
         #region Constructor
         public NewParagonViewModel()
@@ -18,6 +20,43 @@ namespace MVVMFirma.ViewModels
 
             LoadSprzedaze();
         }
+        #endregion
+        #region Validation
+        private string _validationMessage = string.Empty;
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                _validationMessage = string.Empty;
+                switch (propertyName)
+                {
+                    case nameof(NumerParagonu):
+                        _validationMessage = ValueValidator.ValidateString(NumerParagonu, 3);
+                        break;
+                    case nameof(IDSprzedazy):
+                        _validationMessage = ValueValidator.ValidateSelection(IDSprzedazy);
+                        break;
+                    case nameof(DataWystawienia):
+                        _validationMessage = ValueValidator.ValidatePastOrTodayDate(DataWystawienia);
+                        break;
+                    case nameof(Kwota):
+                        _validationMessage = ValueValidator.ValidatePositiveDecimal(Kwota);
+                        break;
+                }
+                return _validationMessage;
+            }
+        }
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(this[nameof(NumerParagonu)]) &&
+                   string.IsNullOrEmpty(this[nameof(IDSprzedazy)]) &&
+                   string.IsNullOrEmpty(this[nameof(DataWystawienia)]) &&
+                   string.IsNullOrEmpty(this[nameof(Kwota)]);
+        }
+
+        public string Error => string.Empty;
         #endregion
 
         #region Properties
@@ -81,14 +120,17 @@ namespace MVVMFirma.ViewModels
 
         public override void Save()
         {
-            if (IDSprzedazy == 0)
+            if (IsValid())
             {
-                throw new InvalidOperationException("Musisz wybrać sprzedaż.");
+                aptekaEntities.Paragony.Add(item);
+                aptekaEntities.SaveChanges();
             }
-
-            aptekaEntities.Paragony.Add(item);
-            aptekaEntities.SaveChanges();
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu");
+            }
         }
+
         #endregion
     }
 }

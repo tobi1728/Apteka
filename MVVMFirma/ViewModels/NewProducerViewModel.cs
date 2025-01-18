@@ -1,14 +1,16 @@
 ﻿using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewProducerViewModel : OneViewModel<Producent_Leków>
+    public class NewProducerViewModel : OneViewModel<Producent_Leków>, IDataErrorInfo
     {
         #region Constructor
         public NewProducerViewModel()
@@ -17,6 +19,47 @@ namespace MVVMFirma.ViewModels
             aptekaEntities = new AptekaEntities();
             item = new Producent_Leków();
         }
+        #endregion
+        #region Validation
+        private string _validationMessage = string.Empty;
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                _validationMessage = string.Empty;
+                switch (propertyName)
+                {
+                    case nameof(NazwaProducenta):
+                        _validationMessage = ValueValidator.ValidateString(NazwaProducenta, 3);
+                        break;
+                    case nameof(Telefon):
+                        _validationMessage = ValueValidator.ValidatePhoneNumber(Telefon);
+                        break;
+                    case nameof(Ulica):
+                        _validationMessage = ValueValidator.ValidateString(Ulica, 3);
+                        break;
+                    case nameof(Miasto):
+                        _validationMessage = ValueValidator.ValidateString(Miasto, 3);
+                        break;
+                    case nameof(KodPocztowy):
+                        _validationMessage = ValueValidator.ValidatePostalCode(KodPocztowy);
+                        break;
+                }
+                return _validationMessage;
+            }
+        }
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(this[nameof(NazwaProducenta)]) &&
+                   string.IsNullOrEmpty(this[nameof(Telefon)]) &&
+                   string.IsNullOrEmpty(this[nameof(Ulica)]) &&
+                   string.IsNullOrEmpty(this[nameof(Miasto)]) &&
+                   string.IsNullOrEmpty(this[nameof(KodPocztowy)]);
+        }
+
+        public string Error => string.Empty;
         #endregion
 
         #region Properties
@@ -89,13 +132,15 @@ namespace MVVMFirma.ViewModels
         #region Helpers
         public override void Save()
         {
-            if (string.IsNullOrEmpty(NazwaProducenta))
+            if (IsValid())
             {
-                throw new InvalidOperationException("Musisz podać nazwę producenta.");
+                aptekaEntities.Producent_Leków.Add(item);
+                aptekaEntities.SaveChanges();
             }
-
-            aptekaEntities.Producent_Leków.Add(item); // Dodaje do lokalnej kolekcji
-            aptekaEntities.SaveChanges(); // Zapisuje zmiany do bazy danych
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu");
+            }
         }
         #endregion
     }

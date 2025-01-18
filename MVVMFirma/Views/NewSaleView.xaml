@@ -37,7 +37,7 @@
             <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Lek:"/>
             <ComboBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8" Padding="5"
                       ItemsSource="{Binding Leki}"
-                      SelectedValue="{Binding IDLeku, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedValue="{Binding IDLeku, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                       DisplayMemberPath="Nazwa_Leku" 
                       SelectedValuePath="ID_Leku" />
 
@@ -45,24 +45,24 @@
             <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Pacjent:"/>
             <ComboBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" Padding="5"
                       ItemsSource="{Binding Pacjenci}"
-                      SelectedValue="{Binding IDPacjenta, UpdateSourceTrigger=PropertyChanged}"
+          SelectedValue="{Binding IDPacjenta, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                       DisplayMemberPath="PESEL" 
                       SelectedValuePath="ID_Pacjenta" />
 
             <!-- Data sprzedaży -->
             <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Data sprzedaży:"/>
             <DatePicker Grid.Column="1" Grid.Row="2" Margin="0,8,0,8"
-                        SelectedDate="{Binding DataSprzedazy, UpdateSourceTrigger=PropertyChanged}" />
+            SelectedDate="{Binding DataSprzedazy, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Kwota -->
             <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Kwota:"/>
             <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" Padding="5"
-                     Text="{Binding Kwota, UpdateSourceTrigger=PropertyChanged}" />
+         Text="{Binding Kwota, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Forma płatności -->
             <Label Grid.Column="0" Grid.Row="4" Margin="0,8,0,8" Content="Forma płatności:"/>
             <TextBox Grid.Column="1" Grid.Row="4" Margin="0,8,0,8" Padding="5"
-                     Text="{Binding FormaPlatnosci, UpdateSourceTrigger=PropertyChanged}" />
+         Text="{Binding FormaPlatnosci, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
         </Grid>
     </Grid>
 </local:OneViewBase>

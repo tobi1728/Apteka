@@ -139,31 +139,40 @@ namespace MVVMFirma.ViewModels
 
         public override void Save()
         {
-            
-                if (IsValid())
-                {
-                    aptekaEntities.Faktury_Dostawców.Add(item);
-                    aptekaEntities.SaveChanges();
-                }
-                else
-                {
-                    ShowMessageBox("Popraw błędy w formularzu");
-                }
-            
-  
+            if (IsValid())
+            {
+                aptekaEntities.Faktury_Dostawców.Add(item);
+                aptekaEntities.SaveChanges();
+            }
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu");
+            }
         }
-    
-    #region Validation
+
+
+        #region Validation
         private string _validationMessage = string.Empty;
 
-        public string this[string properties]
+        public string this[string propertyName]
         {
             get
             {
-
-                if (properties == "Kwota")
+                _validationMessage = string.Empty;
+                switch (propertyName)
                 {
-                    _validationMessage = ValueValidator.ValidateValue(Kwota);
+                    case nameof(Kwota):
+                        _validationMessage = ValueValidator.ValidatePositiveDecimal(Kwota);
+                        break;
+                    case nameof(DataWystawienia):
+                        _validationMessage = ValueValidator.ValidateDate(DataWystawienia);
+                        break;
+                    case nameof(NumerFaktury):
+                        _validationMessage = ValueValidator.ValidateString(NumerFaktury);
+                        break;
+                    case nameof(IDDostawcy):
+                        _validationMessage = IDDostawcy > 0 ? string.Empty : "Musisz wybrać dostawcę.";
+                        break;
                 }
                 return _validationMessage;
             }
@@ -171,10 +180,13 @@ namespace MVVMFirma.ViewModels
 
         public override bool IsValid()
         {
-            return string.IsNullOrEmpty(_validationMessage);
+            return string.IsNullOrEmpty(this[nameof(Kwota)]) &&
+                   string.IsNullOrEmpty(this[nameof(DataWystawienia)]) &&
+                   string.IsNullOrEmpty(this[nameof(NumerFaktury)]) &&
+                   string.IsNullOrEmpty(this[nameof(IDDostawcy)]);
         }
-        public string Error => string.Empty;
 
+        public string Error => string.Empty;
         #endregion
     }
 }

@@ -33,17 +33,18 @@
             <!-- Imię -->
             <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Imię:"/>
             <TextBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8" Padding="3"
-                     Text="{Binding Imie, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Imie, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+           
 
             <!-- Nazwisko -->
             <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Nazwisko:"/>
             <TextBox Grid.Column="1" Grid.Row="1" Margin="0,8,0,8" Padding="3"
-                     Text="{Binding Nazwisko, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Nazwisko, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
             <!-- Numer Licencji -->
             <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Numer licencji:"/>
             <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" Padding="3"
-                     Text="{Binding NumerLicencji, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding NumerLicencji, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
             
         </Grid>

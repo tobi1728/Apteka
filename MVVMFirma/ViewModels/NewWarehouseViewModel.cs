@@ -1,14 +1,16 @@
 ﻿using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewWarehouseViewModel : OneViewModel<Magazyn>
+    public class NewWarehouseViewModel : OneViewModel<Magazyn>, IDataErrorInfo
     {
         #region Constructor
         public NewWarehouseViewModel()
@@ -19,6 +21,51 @@ namespace MVVMFirma.ViewModels
 
             LoadProducts();
         }
+        #endregion
+        #region Validation
+        private string _validationMessage = string.Empty;
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                _validationMessage = string.Empty;
+                switch (propertyName)
+                {
+                    case nameof(IDLeku):
+                        _validationMessage = ValueValidator.ValidateSelection(IDLeku);
+                        break;
+                    case nameof(Quantity):
+                        _validationMessage = ValueValidator.ValidatePositiveInteger(Quantity);
+                        break;
+                    case nameof(Street):
+                        _validationMessage = ValueValidator.ValidateString(Street, 3);
+                        break;
+                    case nameof(City):
+                        _validationMessage = ValueValidator.ValidateString(City, 3);
+                        break;
+                    case nameof(PostalCode):
+                        _validationMessage = ValueValidator.ValidatePostalCode(PostalCode);
+                        break;
+                    case nameof(Phone):
+                        _validationMessage = ValueValidator.ValidatePhoneNumber(Phone);
+                        break;
+                }
+                return _validationMessage;
+            }
+        }
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(this[nameof(IDLeku)]) &&
+                   string.IsNullOrEmpty(this[nameof(Quantity)]) &&
+                   string.IsNullOrEmpty(this[nameof(Street)]) &&
+                   string.IsNullOrEmpty(this[nameof(City)]) &&
+                   string.IsNullOrEmpty(this[nameof(PostalCode)]) &&
+                   string.IsNullOrEmpty(this[nameof(Phone)]);
+        }
+
+        public string Error => string.Empty;
         #endregion
 
         #region Properties
@@ -124,8 +171,15 @@ namespace MVVMFirma.ViewModels
 
         public override void Save()
         {
-            aptekaEntities.Magazyn.Add(item);
-            aptekaEntities.SaveChanges();
+            if (IsValid())
+            {
+                aptekaEntities.Magazyn.Add(item);
+                aptekaEntities.SaveChanges();
+            }
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu");
+            }
         }
         #endregion
     }

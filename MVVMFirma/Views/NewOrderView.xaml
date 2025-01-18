@@ -36,24 +36,24 @@
             <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Dostawca:"/>
             <ComboBox Grid.Column="1" Grid.Row="0" Margin="0,8,0,8" Padding="5"
                       ItemsSource="{Binding Dostawcy}"
-                      SelectedValue="{Binding IDDostawcy, UpdateSourceTrigger=PropertyChanged}"
+          SelectedValue="{Binding IDDostawcy, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                       DisplayMemberPath="Nazwa" 
                       SelectedValuePath="ID_Dostawcy" />
 
             <!-- Data zamówienia -->
             <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Data zamówienia:"/>
             <DatePicker Grid.Column="1" Grid.Row="1" Margin="0,8,0,8"
-                        SelectedDate="{Binding DataZamowienia, UpdateSourceTrigger=PropertyChanged}" />
+            SelectedDate="{Binding DataZamowienia, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Data dostawy -->
             <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Data dostawy:"/>
             <DatePicker Grid.Column="1" Grid.Row="2" Margin="0,8,0,8"
-                        SelectedDate="{Binding DataDostawy, UpdateSourceTrigger=PropertyChanged}" />
+            SelectedDate="{Binding DataDostawy, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Status -->
             <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Status:"/>
             <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" Padding="5"
-                     Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" />
+         Text="{Binding Status, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
         </Grid>
     </Grid>
 </local:OneViewBase>

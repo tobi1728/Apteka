@@ -35,22 +35,22 @@
             <!-- Data Rozpoczęcia -->
             <Label Grid.Column="0" Grid.Row="0" Margin="0,8,0,8" Content="Data Rozpoczęcia:"/>
             <DatePicker Grid.Column="1" Grid.Row="0" Margin="0,8,0,8"
-                        SelectedDate="{Binding DataRozpoczecia, UpdateSourceTrigger=PropertyChanged}" />
+            SelectedDate="{Binding DataRozpoczecia, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Data Zakończenia -->
             <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Data Zakończenia:"/>
             <DatePicker Grid.Column="1" Grid.Row="1" Margin="0,8,0,8"
-                        SelectedDate="{Binding DataZakonczenia, UpdateSourceTrigger=PropertyChanged}" />
+            SelectedDate="{Binding DataZakonczenia, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Łączna Sprzedaż -->
             <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Łączna Sprzedaż:"/>
             <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" Padding="3"
-                     Text="{Binding LacznaSprzedaz, UpdateSourceTrigger=PropertyChanged}" />
+         Text="{Binding LacznaSprzedaz, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
             <!-- Liczba Transakcji -->
             <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Liczba Transakcji:"/>
             <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" Padding="3"
-                     Text="{Binding LiczbaTransakcji, UpdateSourceTrigger=PropertyChanged}" />
+         Text="{Binding LiczbaTransakcji, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
         </Grid>
     </Grid>
 </local:OneViewBase>

@@ -1,14 +1,16 @@
 ﻿using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewSalesReportViewModel : OneViewModel<Raporty_Sprzedaży>
+    public class NewSalesReportViewModel : OneViewModel<Raporty_Sprzedaży>, IDataErrorInfo
     {
         #region Constructor
         public NewSalesReportViewModel()
@@ -19,6 +21,43 @@ namespace MVVMFirma.ViewModels
             DataRozpoczecia = DateTime.Today;
             DataZakonczenia = DateTime.Today;
         }
+        #endregion
+        #region Validation
+        private string _validationMessage = string.Empty;
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                _validationMessage = string.Empty;
+                switch (propertyName)
+                {
+                    case nameof(DataRozpoczecia):
+                        _validationMessage = ValueValidator.ValidatePastOrTodayDate(DataRozpoczecia);
+                        break;
+                    case nameof(DataZakonczenia):
+                        _validationMessage = ValueValidator.ValidateEndAfterStartDate(DataRozpoczecia, DataZakonczenia);
+                        break;
+                    case nameof(LacznaSprzedaz):
+                        _validationMessage = ValueValidator.ValidatePositiveDecimal(LacznaSprzedaz);
+                        break;
+                    case nameof(LiczbaTransakcji):
+                        _validationMessage = ValueValidator.ValidateNonNegativeInteger(LiczbaTransakcji);
+                        break;
+                }
+                return _validationMessage;
+            }
+        }
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(this[nameof(DataRozpoczecia)]) &&
+                   string.IsNullOrEmpty(this[nameof(DataZakonczenia)]) &&
+                   string.IsNullOrEmpty(this[nameof(LacznaSprzedaz)]) &&
+                   string.IsNullOrEmpty(this[nameof(LiczbaTransakcji)]);
+        }
+
+        public string Error => string.Empty;
         #endregion
 
         #region Properties
@@ -68,13 +107,15 @@ namespace MVVMFirma.ViewModels
         #region Helpers
         public override void Save()
         {
-            if (DataZakonczenia < DataRozpoczecia)
+            if (IsValid())
             {
-                throw new InvalidOperationException("Data zakończenia nie może być wcześniejsza niż data rozpoczęcia.");
+                aptekaEntities.Raporty_Sprzedaży.Add(item);
+                aptekaEntities.SaveChanges();
             }
-
-            aptekaEntities.Raporty_Sprzedaży.Add(item); // Dodanie do lokalnej kolekcji
-            aptekaEntities.SaveChanges(); // Zapisanie zmian w bazie danych
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu.");
+            }
         }
         #endregion
     }

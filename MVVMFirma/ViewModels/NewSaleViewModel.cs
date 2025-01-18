@@ -1,14 +1,16 @@
 ﻿using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
-    public class NewSaleViewModel : OneViewModel<Sprzedaż>
+    public class NewSaleViewModel : OneViewModel<Sprzedaż>, IDataErrorInfo
     {
         #region Constructor
         public NewSaleViewModel()
@@ -21,6 +23,47 @@ namespace MVVMFirma.ViewModels
             LoadLeki();
             LoadPacjenci();
         }
+        #endregion
+        #region Validation
+        private string _validationMessage = string.Empty;
+
+        public string this[string propertyName]
+        {
+            get
+            {
+                _validationMessage = string.Empty;
+                switch (propertyName)
+                {
+                    case nameof(IDLeku):
+                        _validationMessage = ValueValidator.ValidateSelection(IDLeku);
+                        break;
+                    case nameof(IDPacjenta):
+                        _validationMessage = ValueValidator.ValidateOptionalSelection(IDPacjenta);
+                        break;
+                    case nameof(DataSprzedazy):
+                        _validationMessage = ValueValidator.ValidatePastOrTodayDate(DataSprzedazy);
+                        break;
+                    case nameof(Kwota):
+                        _validationMessage = ValueValidator.ValidatePositiveDecimal(Kwota);
+                        break;
+                    case nameof(FormaPlatnosci):
+                        _validationMessage = ValueValidator.ValidateString(FormaPlatnosci, 3);
+                        break;
+                }
+                return _validationMessage;
+            }
+        }
+
+        public override bool IsValid()
+        {
+            return string.IsNullOrEmpty(this[nameof(IDLeku)]) &&
+                   string.IsNullOrEmpty(this[nameof(IDPacjenta)]) &&
+                   string.IsNullOrEmpty(this[nameof(DataSprzedazy)]) &&
+                   string.IsNullOrEmpty(this[nameof(Kwota)]) &&
+                   string.IsNullOrEmpty(this[nameof(FormaPlatnosci)]);
+        }
+
+        public string Error => string.Empty;
         #endregion
 
         #region Properties
@@ -112,9 +155,17 @@ namespace MVVMFirma.ViewModels
 
         public override void Save()
         {
-            aptekaEntities.Sprzedaż.Add(item);
-            aptekaEntities.SaveChanges();
+            if (IsValid())
+            {
+                aptekaEntities.Sprzedaż.Add(item);
+                aptekaEntities.SaveChanges();
+            }
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu.");
+            }
         }
+
         #endregion
     }
 }
