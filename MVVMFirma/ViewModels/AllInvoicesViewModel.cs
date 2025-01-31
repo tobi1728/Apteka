@@ -1,5 +1,4 @@
 ﻿using MVVMFirma.Helper;
-using MVVMFirma.Models.Entities;
 using MVVMFirma.Models.EntitiesForView;
 using System;
 using System.Collections.Generic;
@@ -11,15 +10,80 @@ namespace MVVMFirma.ViewModels
 {
     public class AllInvoicesViewModel : AllViewModel<InvoiceForAllView>
     {
-        #region Constructor
+        // -------------------------------
+        // 1) Przechowuj oryginalną listę
+        // -------------------------------
+        private List<InvoiceForAllView> _allInvoices;
+
+        // -------------------------------
+        // 2) Właściwości do filtrowania
+        // -------------------------------
+        private DateTime? _dataOd;
+        public DateTime? DataOd
+        {
+            get => _dataOd;
+            set
+            {
+                _dataOd = value;
+                // Zgłaszamy zmianę właściwości
+                OnPropertyChanged(() => DataOd);
+                // Filtruj po ustawieniu wartości (opcjonalnie)
+                Filter();
+            }
+        }
+
+        private DateTime? _dataDo;
+        public DateTime? DataDo
+        {
+            get => _dataDo;
+            set
+            {
+                _dataDo = value;
+                OnPropertyChanged(() => DataDo);
+                Filter();
+            }
+        }
+
+        private decimal? _kwotaOd;
+        public decimal? KwotaOd
+        {
+            get => _kwotaOd;
+            set
+            {
+                _kwotaOd = value;
+                OnPropertyChanged(() => KwotaOd);
+                Filter();
+            }
+        }
+
+        private decimal? _kwotaDo;
+        public decimal? KwotaDo
+        {
+            get => _kwotaDo;
+            set
+            {
+                _kwotaDo = value;
+                OnPropertyChanged(() => KwotaDo);
+                Filter();
+            }
+        }
+
+
+        // -------------------------------
+        // 3) Komenda "Filtruj" (opcjonalna)
+        // -------------------------------
+        public ICommand FilterCommand { get; set; }
+
+        #region Konstruktor
         public AllInvoicesViewModel()
             : base("Wszystkie faktury dostawców")
         {
+            // Jeśli chcesz wywoływać Filter() przyciskiem, a nie w seterach:
+            FilterCommand = new BaseCommand(() => Filter());
         }
         #endregion
 
-        #region Sort & Find 
-        // tu decydujemy po czym sortowac
+        #region Sortowanie i wyszukiwanie
         public override List<string> GetComboboxSortList()
         {
             return new List<string> { "Numer Faktury", "Nazwa Dostawcy", "Data Wystawienia", "Kwota" };
@@ -53,7 +117,6 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // tu decydujemy po czym wyszukiwac
         public override List<string> GetComboboxFindList()
         {
             return new List<string> { "Numer Faktury", "Nazwa Dostawcy" };
@@ -61,39 +124,79 @@ namespace MVVMFirma.ViewModels
 
         public override void Find()
         {
-            Load(); // Przywracamy pełną listę przed wyszukiwaniem
+            // Przywracamy pełną listę przed wyszukiwaniem (z bazy)
+            Load();
+
             if (FindField == "Numer Faktury")
             {
                 List = new ObservableCollection<InvoiceForAllView>(
-                    List.Where(item => item.Numer_Faktury != null && item.Numer_Faktury.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase)).ToList()
+                    List.Where(item => item.Numer_Faktury != null &&
+                                       item.Numer_Faktury.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
+                        .ToList()
                 );
             }
             else if (FindField == "Nazwa Dostawcy")
             {
                 List = new ObservableCollection<InvoiceForAllView>(
-                    List.Where(item => item.Nazwa_Dostawcy != null && item.Nazwa_Dostawcy.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase)).ToList()
+                    List.Where(item => item.Nazwa_Dostawcy != null &&
+                                       item.Nazwa_Dostawcy.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
+                        .ToList()
                 );
             }
         }
-
         #endregion
 
-        #region Helpers
+        #region Metody pomocnicze
+        // Wczytanie listy z bazy i zapamiętanie w _allInvoices
         public override void Load()
         {
-            List = new ObservableCollection<InvoiceForAllView>
-                (
-                    from invoice in aptekaEntities.Faktury_Dostawców
-                    select new InvoiceForAllView
-                    {
-                        ID_Faktury = invoice.ID_Faktury,
-                        Numer_Faktury = invoice.Numer_Faktury,
-                        Nazwa_Dostawcy = invoice.Dostawcy.Nazwa,
-                        Data_Wystawienia = invoice.Data_Wystawienia,
-                        Kwota = invoice.Kwota,
-                        Numer_Zamówienia = invoice.Zamówienia.ID_Zamówienia.ToString(),
-                    }
-                );
+            var invoicesQuery = from invoice in aptekaEntities.Faktury_Dostawców
+                                select new InvoiceForAllView
+                                {
+                                    ID_Faktury = invoice.ID_Faktury,
+                                    Numer_Faktury = invoice.Numer_Faktury,
+                                    Nazwa_Dostawcy = invoice.Dostawcy.Nazwa,
+                                    Data_Wystawienia = invoice.Data_Wystawienia,
+                                    Kwota = invoice.Kwota,
+                                    Numer_Zamówienia = invoice.Zamówienia.ID_Zamówienia.ToString(),
+                                };
+
+            // Zapisujemy pełną listę w pamięci (bez filtrów)
+            _allInvoices = invoicesQuery.ToList();
+
+            // Domyślnie wyświetlamy pełną listę
+            List = new ObservableCollection<InvoiceForAllView>(_allInvoices);
+        }
+
+        // -------------------------------
+        // 4) Metoda Filter() – filtruje po DataOd, DataDo, KwotaOd, KwotaDo
+        // -------------------------------
+        private void Filter()
+        {
+            if (_allInvoices == null)
+                return;
+
+            // Startujemy od oryginalnej listy
+            var filtered = _allInvoices.AsEnumerable();
+
+            // Filtr daty OD
+            if (DataOd.HasValue)
+                filtered = filtered.Where(f => f.Data_Wystawienia >= DataOd.Value);
+
+            // Filtr daty DO
+            if (DataDo.HasValue)
+                filtered = filtered.Where(f => f.Data_Wystawienia <= DataDo.Value);
+
+            // Filtr kwoty OD
+            if (KwotaOd.HasValue)
+                filtered = filtered.Where(f => f.Kwota >= KwotaOd.Value);
+
+            // Filtr kwoty DO
+            if (KwotaDo.HasValue)
+                filtered = filtered.Where(f => f.Kwota <= KwotaDo.Value);
+
+            // Tworzymy nową ObservableCollection i przypisujemy do List
+            List = new ObservableCollection<InvoiceForAllView>(filtered.ToList());
         }
         #endregion
     }

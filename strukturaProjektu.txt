@@ -1,0 +1,1123 @@
+Folder PATH listing
+Volume serial number is 8A26-6C26
+C:.
+-   .gitignore
+-   apteka_tabele.txt
+-   MVVMFirma.sln
+-   README.md
+-   script.txt
+-   strukturaProjektu.txt
+-   
++¦¦¦.vs
+-   -   ProjectSettings.json
+-   -   slnx.sqlite
+-   -   VSWorkspaceState.json
+-   -   
+-   +¦¦¦Apteka
+-   -   +¦¦¦FileContentIndex
+-   -   -       53ce7f06-0765-4fcd-a675-e0deedd7ef6c.vsidx
+-   -   -       5ba8bd1b-94f1-4857-b185-36d3c2f790e8.vsidx
+-   -   -       77762b8d-b280-4b99-966a-3f6faf6e3aba.vsidx
+-   -   -       893e4a43-c3b1-4a7a-8ee8-fc754f154914.vsidx
+-   -   -       
+-   -   L¦¦¦v17
+-   -           DocumentLayout.backup.json
+-   -           DocumentLayout.json
+-   -           
+-   L¦¦¦MVVMFirma
+-       +¦¦¦FileContentIndex
+-       -       26ba8b01-f134-4acd-b7fe-b7387163f928.vsidx
+-       -       5352f6e4-1d77-49d7-9cc0-8b2f318f75f9.vsidx
+-       -       97595346-c094-4d01-b42e-c0a428d2eb8d.vsidx
+-       -       a7b99005-395a-4e61-9309-db2d9a83b26a.vsidx
+-       -       f34b2450-c1b5-4a23-98a1-deeb4b75eb7c.vsidx
+-       -       
+-       L¦¦¦v17
+-               DocumentLayout.backup.json
+-               DocumentLayout.json
+-               HierarchyCache.v1.txt
+-               
++¦¦¦MVVMFirma
+-   -   app.config
+-   -   App.xaml
+-   -   App.xaml.cs
+-   -   main-icon.ico
+-   -   MVVMFirma.csproj
+-   -   MVVMFirma.csproj.user
+-   -   packages.config
+-   -   ViewModels.zip
+-   -   
+-   +¦¦¦bin
+-   -   +¦¦¦Debug
+-   -   -   -   CommonServiceLocator.dll
+-   -   -   -   EntityFramework.dll
+-   -   -   -   EntityFramework.SqlServer.dll
+-   -   -   -   EntityFramework.SqlServer.xml
+-   -   -   -   EntityFramework.xml
+-   -   -   -   GalaSoft.MvvmLight.dll
+-   -   -   -   GalaSoft.MvvmLight.Extras.dll
+-   -   -   -   GalaSoft.MvvmLight.Extras.pdb
+-   -   -   -   GalaSoft.MvvmLight.Extras.xml
+-   -   -   -   GalaSoft.MvvmLight.pdb
+-   -   -   -   GalaSoft.MvvmLight.Platform.dll
+-   -   -   -   GalaSoft.MvvmLight.Platform.pdb
+-   -   -   -   GalaSoft.MvvmLight.Platform.xml
+-   -   -   -   GalaSoft.MvvmLight.xml
+-   -   -   -   MVVMFirma.exe
+-   -   -   -   MVVMFirma.exe.config
+-   -   -   -   MVVMFirma.pdb
+-   -   -   -   MVVMFirma.vshost.exe
+-   -   -   -   MVVMFirma.vshost.exe.manifest
+-   -   -   -   System.Windows.Interactivity.dll
+-   -   -   -   WPF MVVM Application.exe
+-   -   -   -   WPF MVVM Application.pdb
+-   -   -   -   WPF MVVM Application.vshost.exe
+-   -   -   -   
+-   -   -   +¦¦¦ar-DZ
+-   -   -   +¦¦¦cs
+-   -   -   +¦¦¦cs-CZ
+-   -   -   +¦¦¦de
+-   -   -   +¦¦¦fr
+-   -   -   +¦¦¦fr-FR
+-   -   -   +¦¦¦pt
+-   -   -   +¦¦¦pt-BR
+-   -   -   +¦¦¦Ru
+-   -   -   +¦¦¦ru-ru
+-   -   -   L¦¦¦uz-Latn-UZ
+-   -   L¦¦¦Release
+-   +¦¦¦Helper
+-   -       BaseCommand.cs
+-   -       
+-   +¦¦¦Models
+-   -   +¦¦¦Entities
+-   -   -       Apteka.Context.cs
+-   -   -       Apteka.Context.tt
+-   -   -       Apteka.cs
+-   -   -       Apteka.Designer.cs
+-   -   -       Apteka.edmx
+-   -   -       Apteka.edmx.diagram
+-   -   -       Apteka.tt
+-   -   -       Dostawcy.cs
+-   -   -       Faktury_Dostawców.cs
+-   -   -       Farmaceuci.cs
+-   -   -       Grafiki_Pracowników.cs
+-   -   -       Kategorie_Leków.cs
+-   -   -       Leki.cs
+-   -   -       Magazyn.cs
+-   -   -       Pacjenci.cs
+-   -   -       Paragony.cs
+-   -   -       Producent_Leków.cs
+-   -   -       Produkty_Zamówienia.cs
+-   -   -       Raporty_Sprzeda¿y.cs
+-   -   -       Recepty.cs
+-   -   -       Sprzeda¿.cs
+-   -   -       sysdiagrams.cs
+-   -   -       Zamówienia.cs
+-   -   -       
+-   -   L¦¦¦EntitiesForView
+-   -           DrugCategoryForAllView.cs
+-   -           InvoiceForAllView.cs
+-   -           OrderForAllView.cs
+-   -           OrderProductForAllView.cs
+-   -           PatientForAllView.cs
+-   -           PharmacistForAllView.cs
+-   -           PrescriptionForAllView.cs
+-   -           ProducerForAllView.cs
+-   -           ProductForAllView.cs
+-   -           ReceiptForAllView.cs
+-   -           SaleForAllView.cs
+-   -           SalesReportForAllView.cs
+-   -           ScheduleForAllView.cs
+-   -           SupplierForAllView.cs
+-   -           WarehouseForAllView.cs
+-   -           
+-   +¦¦¦obj
+-   -   L¦¦¦x86
+-   -       +¦¦¦Debug
+-   -       -   -   .NETFramework,Version=v4.0,Profile=Client.AssemblyAttributes.cs
+-   -       -   -   .NETFramework,Version=v4.8.AssemblyAttributes.cs
+-   -       -   -   App.baml
+-   -       -   -   App.g.cs
+-   -       -   -   App.g.i.cs
+-   -       -   -   DesignTimeResolveAssemblyReferences.cache
+-   -       -   -   DesignTimeResolveAssemblyReferencesInput.cache
+-   -       -   -   GeneratedInternalTypeHelper.g.cs
+-   -       -   -   GeneratedInternalTypeHelper.g.i.cs
+-   -       -   -   GenerateResource.read.1.tlog
+-   -       -   -   GenerateResource.write.1.tlog
+-   -       -   -   MVVMFirma.csproj.AssemblyReference.cache
+-   -       -   -   MVVMFirma.csproj.CoreCompileInputs.cache
+-   -       -   -   MVVMFirma.csproj.FileListAbsolute.txt
+-   -       -   -   MVVMFirma.csproj.GenerateResource.cache
+-   -       -   -   MVVMFirma.csproj.Up2Date
+-   -       -   -   MVVMFirma.csprojAssemblyReference.cache
+-   -       -   -   MVVMFirma.csprojResolveAssemblyReference.cache
+-   -       -   -   MVVMFirma.exe
+-   -       -   -   MVVMFirma.g.resources
+-   -       -   -   MVVMFirma.pdb
+-   -       -   -   MVVMFirma.Properties.Resources.resources
+-   -       -   -   MVVMFirma_Content.g.cs
+-   -       -   -   MVVMFirma_Content.g.i.cs
+-   -       -   -   MVVMFirma_MarkupCompile.cache
+-   -       -   -   MVVMFirma_MarkupCompile.i.cache
+-   -       -   -   MVVMFirma_MarkupCompile.lref
+-   -       -   -   WPF MVVM Application.exe
+-   -       -   -   WPF MVVM Application.g.resources
+-   -       -   -   WPF MVVM Application.pdb
+-   -       -   -   WPF MVVM Application_MarkupCompile.cache
+-   -       -   -   WPF MVVM Application_MarkupCompile.i.cache
+-   -       -   -   WPF MVVM Application_MarkupCompile.i.lref
+-   -       -   -   WPF MVVM Application_MarkupCompile.lref
+-   -       -   -   WPFFirma.csproj.FileListAbsolute.txt
+-   -       -   -   WPFFirma.Properties.Resources.resources
+-   -       -   -   
+-   -       -   +¦¦¦edmxResourcesToEmbed
+-   -       -   -   L¦¦¦Models
+-   -       -   -       L¦¦¦Entities
+-   -       -   -               Apteka.csdl
+-   -       -   -               Apteka.msl
+-   -       -   -               Apteka.ssdl
+-   -       -   -               
+-   -       -   +¦¦¦TempPE
+-   -       -   -       Models.Entities.Apteka.Context.cs.dll
+-   -       -   -       Models.Entities.Apteka.cs.dll
+-   -       -   -       Models.Entities.Apteka.Designer.cs.dll
+-   -       -   -       Properties.Resources.Designer.cs.dll
+-   -       -   -       
+-   -       -   +¦¦¦Themes
+-   -       -   -       Generic.baml
+-   -       -   -       
+-   -       -   L¦¦¦Views
+-   -       -           AllDrugCategoriesView.baml
+-   -       -           AllDrugCategoriesView.g.cs
+-   -       -           AllDrugCategoriesView.g.i.cs
+-   -       -           AllInvoicesView.baml
+-   -       -           AllInvoicesView.g.cs
+-   -       -           AllInvoicesView.g.i.cs
+-   -       -           AllOrderProductsView.baml
+-   -       -           AllOrderProductsView.g.cs
+-   -       -           AllOrderProductsView.g.i.cs
+-   -       -           AllOrdersView.baml
+-   -       -           AllOrdersView.g.cs
+-   -       -           AllOrdersView.g.i.cs
+-   -       -           AllPatientsView.baml
+-   -       -           AllPatientsView.g.cs
+-   -       -           AllPatientsView.g.i.cs
+-   -       -           AllPharmacistsView.baml
+-   -       -           AllPharmacistsView.g.cs
+-   -       -           AllPharmacistsView.g.i.cs
+-   -       -           AllPrescriptionsView.baml
+-   -       -           AllPrescriptionsView.g.cs
+-   -       -           AllPrescriptionsView.g.i.cs
+-   -       -           AllProducersView.baml
+-   -       -           AllProducersView.g.cs
+-   -       -           AllProducersView.g.i.cs
+-   -       -           AllProductsView.baml
+-   -       -           AllProductsView.g.cs
+-   -       -           AllProductsView.g.i.cs
+-   -       -           AllReceiptsView.baml
+-   -       -           AllReceiptsView.g.cs
+-   -       -           AllReceiptsView.g.i.cs
+-   -       -           AllSalesReportsView.baml
+-   -       -           AllSalesReportsView.g.cs
+-   -       -           AllSalesReportsView.g.i.cs
+-   -       -           AllSalesView.baml
+-   -       -           AllSalesView.g.cs
+-   -       -           AllSalesView.g.i.cs
+-   -       -           AllSchedulesView.baml
+-   -       -           AllSchedulesView.g.cs
+-   -       -           AllSchedulesView.g.i.cs
+-   -       -           AllSuppliersView.baml
+-   -       -           AllSuppliersView.g.cs
+-   -       -           AllSuppliersView.g.i.cs
+-   -       -           AllWarehousesView.baml
+-   -       -           AllWarehousesView.g.cs
+-   -       -           AllWarehousesView.g.i.cs
+-   -       -           MainWindow.baml
+-   -       -           MainWindow.g.cs
+-   -       -           MainWindow.g.i.cs
+-   -       -           MainWindowResources.baml
+-   -       -           NewCategoryView.baml
+-   -       -           NewCategoryView.g.cs
+-   -       -           NewCategoryView.g.i.cs
+-   -       -           NewEmployeeScheduleView.g.i.cs
+-   -       -           NewInvoiceView.baml
+-   -       -           NewInvoiceView.g.cs
+-   -       -           NewInvoiceView.g.i.cs
+-   -       -           NewOrderProductView.baml
+-   -       -           NewOrderProductView.g.cs
+-   -       -           NewOrderProductView.g.i.cs
+-   -       -           NewOrderView.baml
+-   -       -           NewOrderView.g.cs
+-   -       -           NewOrderView.g.i.cs
+-   -       -           NewParagonView.baml
+-   -       -           NewParagonView.g.cs
+-   -       -           NewParagonView.g.i.cs
+-   -       -           NewPatientView.baml
+-   -       -           NewPatientView.g.cs
+-   -       -           NewPatientView.g.i.cs
+-   -       -           NewPharmacistView.baml
+-   -       -           NewPharmacistView.g.cs
+-   -       -           NewPharmacistView.g.i.cs
+-   -       -           NewPrescriptionView.baml
+-   -       -           NewPrescriptionView.g.cs
+-   -       -           NewPrescriptionView.g.i.cs
+-   -       -           NewProducerView.baml
+-   -       -           NewProducerView.g.cs
+-   -       -           NewProducerView.g.i.cs
+-   -       -           NewProductView.baml
+-   -       -           NewProductView.g.cs
+-   -       -           NewProductView.g.i.cs
+-   -       -           NewSalesReportView.baml
+-   -       -           NewSalesReportView.g.cs
+-   -       -           NewSalesReportView.g.i.cs
+-   -       -           NewSaleView.baml
+-   -       -           NewSaleView.g.cs
+-   -       -           NewSaleView.g.i.cs
+-   -       -           NewScheduleView.baml
+-   -       -           NewScheduleView.g.cs
+-   -       -           NewScheduleView.g.i.cs
+-   -       -           NewSupplierView.baml
+-   -       -           NewSupplierView.g.cs
+-   -       -           NewSupplierView.g.i.cs
+-   -       -           NewWarehouseView.baml
+-   -       -           NewWarehouseView.g.cs
+-   -       -           NewWarehouseView.g.i.cs
+-   -       -           NowaFakturaView.g.i.cs
+-   -       -           NowyTowarView.g.i.cs
+-   -       -           UserControl1.g.i.cs
+-   -       -           Window1.g.i.cs
+-   -       -           WszystkieFakturyView.g.i.cs
+-   -       -           WszystkieTowaryView.g.i.cs
+-   -       -           
+-   -       L¦¦¦Release
+-   -           -   .NETFramework,Version=v4.8.AssemblyAttributes.cs
+-   -           -   App.g.cs
+-   -           -   GeneratedInternalTypeHelper.g.cs
+-   -           -   MVVMFirma.csproj.AssemblyReference.cache
+-   -           -   MVVMFirma_Content.g.cs
+-   -           -   MVVMFirma_MarkupCompile.cache
+-   -           -   MVVMFirma_MarkupCompile.lref
+-   -           -   
+-   -           +¦¦¦Themes
+-   -           L¦¦¦Views
+-   -                   AllDrugCategoriesView.g.cs
+-   -                   AllInvoicesView.g.cs
+-   -                   AllOrderProductsView.g.cs
+-   -                   AllOrdersView.g.cs
+-   -                   AllPatientsView.g.cs
+-   -                   AllPharmacistsView.g.cs
+-   -                   AllPrescriptionsView.g.cs
+-   -                   AllProducersView.g.cs
+-   -                   AllProductsView.g.cs
+-   -                   AllReceiptsView.g.cs
+-   -                   AllSalesReportsView.g.cs
+-   -                   AllSalesView.g.cs
+-   -                   AllSchedulesView.g.cs
+-   -                   AllSuppliersView.g.cs
+-   -                   AllWarehousesView.g.cs
+-   -                   MainWindow.g.cs
+-   -                   NewCategoryView.g.cs
+-   -                   NewInvoiceView.g.cs
+-   -                   NewOrderProductView.g.cs
+-   -                   NewOrderView.g.cs
+-   -                   NewParagonView.g.cs
+-   -                   NewPatientView.g.cs
+-   -                   NewPharmacistView.g.cs
+-   -                   NewPrescriptionView.g.cs
+-   -                   NewProducerView.g.cs
+-   -                   NewProductView.g.cs
+-   -                   NewSalesReportView.g.cs
+-   -                   NewSaleView.g.cs
+-   -                   NewScheduleView.g.cs
+-   -                   NewSupplierView.g.cs
+-   -                   NewWarehouseView.g.cs
+-   -                   
+-   +¦¦¦Properties
+-   -       AssemblyInfo.cs
+-   -       Resources.Designer.cs
+-   -       Resources.resx
+-   -       Settings.Designer.cs
+-   -       Settings.settings
+-   -       
+-   +¦¦¦Resources
+-   -   L¦¦¦Images
+-   -           window-close-solid.png
+-   -           window-close-solid.svg
+-   -           
+-   +¦¦¦Themes
+-   -       Generic.xaml
+-   -       
+-   +¦¦¦Validators
+-   -       ValueValidator.cs
+-   -       
+-   +¦¦¦ViewModel
+-   -       MainViewModel.cs
+-   -       ViewModelLocator.cs
+-   -       
+-   +¦¦¦ViewModels
+-   -       AllDrugCategoriesViewModel.cs
+-   -       AllInvoicesViewModel.cs
+-   -       AllOrderProductsViewModel.cs
+-   -       AllOrdersViewModel.cs
+-   -       AllPatientsViewModel.cs
+-   -       AllPharmacistsViewModel.cs
+-   -       AllPrescriptionsViewModel.cs
+-   -       AllProducersViewModel.cs
+-   -       AllProductsViewModel.cs
+-   -       AllReceiptsViewModel.cs
+-   -       AllSalesReportsViewModel.cs
+-   -       AllSalesViewModel.cs
+-   -       AllSchedulesViewModel.cs
+-   -       AllSuppliersViewModel.cs
+-   -       AllViewModel.cs
+-   -       AllWarehousesViewModel.cs
+-   -       BaseViewModel.cs
+-   -       CommandViewModel.cs
+-   -       MainWindowViewModel.cs
+-   -       NewCategoryViewModel.cs
+-   -       NewInvoiceViewModel.cs
+-   -       NewOrderProductViewModel.cs
+-   -       NewOrderViewModel.cs
+-   -       NewParagonViewModel.cs
+-   -       NewPatientViewModel.cs
+-   -       NewPharmacistViewMode.cs
+-   -       NewPrescriptionViewModel.cs
+-   -       NewProducerViewModel.cs
+-   -       NewProductViewModel.cs
+-   -       NewSalesReportViewModel.cs
+-   -       NewSaleViewModel.cs
+-   -       NewScheduleViewModel.cs
+-   -       NewSupplierViewModel.cs
+-   -       NewWarehouseViewModel.cs
+-   -       OneViewModel.cs
+-   -       WorkspaceViewModel.cs
+-   -       
+-   L¦¦¦Views
+-           AllDrugCategoriesView.xaml
+-           AllDrugCategoriesView.xaml.cs
+-           AllInvoicesView.xaml
+-           AllInvoicesView.xaml.cs
+-           AllOrderProductsView.xaml
+-           AllOrderProductsView.xaml.cs
+-           AllOrdersView.xaml
+-           AllOrdersView.xaml.cs
+-           AllPatientsView.xaml
+-           AllPatientsView.xaml.cs
+-           AllPharmacistsView.xaml
+-           AllPharmacistsView.xaml.cs
+-           AllPrescriptionsView.xaml
+-           AllPrescriptionsView.xaml.cs
+-           AllProducersView.xaml
+-           AllProducersView.xaml.cs
+-           AllProductsView.xaml
+-           AllProductsView.xaml.cs
+-           AllReceiptsView.xaml
+-           AllReceiptsView.xaml.cs
+-           AllSalesReportsView.xaml
+-           AllSalesReportsView.xaml.cs
+-           AllSalesView.xaml
+-           AllSalesView.xaml.cs
+-           AllSchedulesView.xaml
+-           AllSchedulesView.xaml.cs
+-           AllSuppliersView.xaml
+-           AllSuppliersView.xaml.cs
+-           AllViewBase.cs
+-           AllWarehousesView.xaml
+-           AllWarehousesView.xaml.cs
+-           MainWindow.xaml
+-           MainWindow.xaml.cs
+-           MainWindowResources.xaml
+-           NewCategoryView.xaml
+-           NewCategoryView.xaml.cs
+-           NewInvoiceView.xaml
+-           NewInvoiceView.xaml.cs
+-           NewOrderProductView.xaml
+-           NewOrderProductView.xaml.cs
+-           NewOrderView.xaml
+-           NewOrderView.xaml.cs
+-           NewParagonView.xaml
+-           NewParagonView.xaml.cs
+-           NewPatientView.xaml
+-           NewPatientView.xaml.cs
+-           NewPharmacistView.xaml
+-           NewPharmacistView.xaml.cs
+-           NewPrescriptionView.xaml
+-           NewPrescriptionView.xaml.cs
+-           NewProducerView.xaml
+-           NewProducerView.xaml.cs
+-           NewProductView.xaml
+-           NewProductView.xaml.cs
+-           NewSalesReportView.xaml
+-           NewSalesReportView.xaml.cs
+-           NewSaleView.xaml
+-           NewSaleView.xaml.cs
+-           NewScheduleView.xaml
+-           NewScheduleView.xaml.cs
+-           NewSupplierView.xaml
+-           NewSupplierView.xaml.cs
+-           NewWarehouseView.xaml
+-           NewWarehouseView.xaml.cs
+-           OneViewBase.cs
+-           
+L¦¦¦packages
+    +¦¦¦CommonServiceLocator.2.0.2
+    -   -   .signature.p7s
+    -   -   CommonServiceLocator.2.0.2.nupkg
+    -   -   
+    -   L¦¦¦lib
+    -       +¦¦¦net40
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦net45
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦net47
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦netcoreapp1.0
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦netstandard1.0
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       L¦¦¦netstandard2.0
+    -               CommonServiceLocator.dll
+    -               
+    +¦¦¦CommonServiceLocator.2.0.7
+    -   -   .signature.p7s
+    -   -   CommonServiceLocator.2.0.7.nupkg
+    -   -   
+    -   L¦¦¦lib
+    -       +¦¦¦net46
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦net47
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦net48
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦net5.0
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦net6.0
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦net7.0
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦netcoreapp1.0
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦netcoreapp2.0
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦netcoreapp3.0
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦netstandard1.0
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       +¦¦¦netstandard2.0
+    -       -       CommonServiceLocator.dll
+    -       -       
+    -       L¦¦¦netstandard2.1
+    -               CommonServiceLocator.dll
+    -               
+    +¦¦¦ControlzEx.4.3.0
+    -   -   .signature.p7s
+    -   -   ControlzEx.4.3.0.nupkg
+    -   -   logo-mini.png
+    -   -   
+    -   L¦¦¦lib
+    -       +¦¦¦net45
+    -       -       ControlzEx.dll
+    -       -       ControlzEx.pdb
+    -       -       ControlzEx.xml
+    -       -       
+    -       +¦¦¦net462
+    -       -       ControlzEx.dll
+    -       -       ControlzEx.pdb
+    -       -       ControlzEx.xml
+    -       -       
+    -       +¦¦¦netcoreapp3.0
+    -       -       ControlzEx.dll
+    -       -       ControlzEx.pdb
+    -       -       ControlzEx.xml
+    -       -       
+    -       L¦¦¦netcoreapp3.1
+    -               ControlzEx.dll
+    -               ControlzEx.pdb
+    -               ControlzEx.xml
+    -               
+    +¦¦¦EntityFramework.6.2.0
+    -   -   .signature.p7s
+    -   -   EntityFramework.6.2.0.nupkg
+    -   -   
+    -   +¦¦¦content
+    -   -   L¦¦¦net40
+    -   -           App.config.transform
+    -   -           Web.config.transform
+    -   -           
+    -   +¦¦¦lib
+    -   -   +¦¦¦net40
+    -   -   -       EntityFramework.dll
+    -   -   -       EntityFramework.SqlServer.dll
+    -   -   -       EntityFramework.SqlServer.xml
+    -   -   -       EntityFramework.xml
+    -   -   -       
+    -   -   L¦¦¦net45
+    -   -           EntityFramework.dll
+    -   -           EntityFramework.SqlServer.dll
+    -   -           EntityFramework.SqlServer.xml
+    -   -           EntityFramework.xml
+    -   -           
+    -   L¦¦¦tools
+    -           about_EntityFramework.help.txt
+    -           EntityFramework.PowerShell.dll
+    -           EntityFramework.PowerShell.Utility.dll
+    -           EntityFramework.psd1
+    -           EntityFramework.psm1
+    -           init.ps1
+    -           install.ps1
+    -           migrate.exe
+    -           
+    +¦¦¦EntityFramework.6.5.1
+    -   -   .signature.p7s
+    -   -   EntityFramework.6.5.1.nupkg
+    -   -   Icon.png
+    -   -   README.md
+    -   -   
+    -   +¦¦¦build
+    -   -   -   EntityFramework.DefaultItems.props
+    -   -   -   EntityFramework.props
+    -   -   -   EntityFramework.targets
+    -   -   -   Microsoft.Data.Entity.Build.Tasks.dll
+    -   -   -   
+    -   -   L¦¦¦net6.0
+    -   -           EntityFramework.props
+    -   -           EntityFramework.targets
+    -   -           
+    -   +¦¦¦buildTransitive
+    -   -   -   EntityFramework.props
+    -   -   -   EntityFramework.targets
+    -   -   -   
+    -   -   L¦¦¦net6.0
+    -   -           EntityFramework.props
+    -   -           EntityFramework.targets
+    -   -           
+    -   +¦¦¦content
+    -   -   L¦¦¦net40
+    -   -           App.config.install.xdt
+    -   -           App.config.transform
+    -   -           Web.config.install.xdt
+    -   -           Web.config.transform
+    -   -           
+    -   +¦¦¦lib
+    -   -   +¦¦¦net40
+    -   -   -       EntityFramework.dll
+    -   -   -       EntityFramework.SqlServer.dll
+    -   -   -       EntityFramework.SqlServer.xml
+    -   -   -       EntityFramework.xml
+    -   -   -       
+    -   -   +¦¦¦net45
+    -   -   -       EntityFramework.dll
+    -   -   -       EntityFramework.SqlServer.dll
+    -   -   -       EntityFramework.SqlServer.xml
+    -   -   -       EntityFramework.xml
+    -   -   -       
+    -   -   L¦¦¦netstandard2.1
+    -   -           EntityFramework.dll
+    -   -           EntityFramework.SqlServer.dll
+    -   -           EntityFramework.SqlServer.xml
+    -   -           EntityFramework.xml
+    -   -           
+    -   L¦¦¦tools
+    -       -   about_EntityFramework6.help.txt
+    -       -   EntityFramework6.PS2.psd1
+    -       -   EntityFramework6.PS2.psm1
+    -       -   EntityFramework6.psd1
+    -       -   EntityFramework6.psm1
+    -       -   init.ps1
+    -       -   install.ps1
+    -       -   
+    -       +¦¦¦net40
+    -       -   +¦¦¦any
+    -       -   -       ef6.exe
+    -       -   -       ef6.pdb
+    -       -   -       
+    -       -   +¦¦¦win-arm64
+    -       -   -       ef6.exe
+    -       -   -       ef6.pdb
+    -       -   -       
+    -       -   L¦¦¦win-x86
+    -       -           ef6.exe
+    -       -           ef6.pdb
+    -       -           
+    -       +¦¦¦net45
+    -       -   +¦¦¦any
+    -       -   -       ef6.exe
+    -       -   -       ef6.pdb
+    -       -   -       
+    -       -   +¦¦¦win-arm64
+    -       -   -       ef6.exe
+    -       -   -       ef6.pdb
+    -       -   -       
+    -       -   L¦¦¦win-x86
+    -       -           ef6.exe
+    -       -           ef6.pdb
+    -       -           
+    -       L¦¦¦net6.0
+    -           L¦¦¦any
+    -                   ef6.dll
+    -                   ef6.pdb
+    -                   ef6.runtimeconfig.json
+    -                   
+    +¦¦¦MahApps.Metro.2.0.0
+    -   -   .signature.p7s
+    -   -   MahApps.Metro.2.0.0.nupkg
+    -   -   mahapps.metro.logo.png
+    -   -   
+    -   L¦¦¦lib
+    -       +¦¦¦net452
+    -       -       MahApps.Metro.dll
+    -       -       MahApps.Metro.pdb
+    -       -       MahApps.Metro.xml
+    -       -       
+    -       +¦¦¦net46
+    -       -       MahApps.Metro.dll
+    -       -       MahApps.Metro.pdb
+    -       -       MahApps.Metro.xml
+    -       -       
+    -       +¦¦¦net47
+    -       -       MahApps.Metro.dll
+    -       -       MahApps.Metro.pdb
+    -       -       MahApps.Metro.xml
+    -       -       
+    -       +¦¦¦netcoreapp3.0
+    -       -       MahApps.Metro.dll
+    -       -       MahApps.Metro.pdb
+    -       -       MahApps.Metro.xml
+    -       -       
+    -       L¦¦¦netcoreapp3.1
+    -               MahApps.Metro.dll
+    -               MahApps.Metro.pdb
+    -               MahApps.Metro.xml
+    -               
+    +¦¦¦MaterialDesignColors.3.1.0
+    -   -   .signature.p7s
+    -   -   MaterialDesignColors.3.1.0.nupkg
+    -   -   
+    -   +¦¦¦docs
+    -   -       README.md
+    -   -       
+    -   +¦¦¦images
+    -   -       MaterialDesignColors.Icon.png
+    -   -       
+    -   L¦¦¦lib
+    -       +¦¦¦net462
+    -       -       MaterialDesignColors.dll
+    -       -       MaterialDesignColors.pdb
+    -       -       
+    -       +¦¦¦net6.0
+    -       -       MaterialDesignColors.dll
+    -       -       MaterialDesignColors.pdb
+    -       -       
+    -       L¦¦¦net8.0
+    -               MaterialDesignColors.dll
+    -               MaterialDesignColors.pdb
+    -               
+    +¦¦¦MaterialDesignExtensions.3.3.0
+    -   -   .signature.p7s
+    -   -   License.txt
+    -   -   MaterialDesignExtensions.3.3.0.nupkg
+    -   -   Notice.txt
+    -   -   Readme.md
+    -   -   
+    -   L¦¦¦lib
+    -       +¦¦¦net45
+    -       -   -   MaterialDesignExtensions.dll
+    -       -   -   MaterialDesignExtensions.xml
+    -       -   -   
+    -       -   +¦¦¦ar-DZ
+    -       -   -       MaterialDesignExtensions.resources.dll
+    -       -   -       
+    -       -   +¦¦¦cs
+    -       -   -       MaterialDesignExtensions.resources.dll
+    -       -   -       
+    -       -   +¦¦¦cs-CZ
+    -       -   -       MaterialDesignExtensions.resources.dll
+    -       -   -       
+    -       -   +¦¦¦de
+    -       -   -       MaterialDesignExtensions.resources.dll
+    -       -   -       
+    -       -   +¦¦¦fr
+    -       -   -       MaterialDesignExtensions.resources.dll
+    -       -   -       
+    -       -   +¦¦¦fr-FR
+    -       -   -       MaterialDesignExtensions.resources.dll
+    -       -   -       
+    -       -   +¦¦¦pt
+    -       -   -       MaterialDesignExtensions.resources.dll
+    -       -   -       
+    -       -   +¦¦¦pt-BR
+    -       -   -       MaterialDesignExtensions.resources.dll
+    -       -   -       
+    -       -   +¦¦¦Ru
+    -       -   -       MaterialDesignExtensions.resources.dll
+    -       -   -       
+    -       -   +¦¦¦ru-ru
+    -       -   -       MaterialDesignExtensions.resources.dll
+    -       -   -       
+    -       -   L¦¦¦uz-Latn-UZ
+    -       -           MaterialDesignExtensions.resources.dll
+    -       -           
+    -       L¦¦¦netcoreapp3.1
+    -           -   MaterialDesignExtensions.dll
+    -           -   MaterialDesignExtensions.xml
+    -           -   
+    -           +¦¦¦ar-DZ
+    -           -       MaterialDesignExtensions.resources.dll
+    -           -       
+    -           +¦¦¦cs
+    -           -       MaterialDesignExtensions.resources.dll
+    -           -       
+    -           +¦¦¦cs-CZ
+    -           -       MaterialDesignExtensions.resources.dll
+    -           -       
+    -           +¦¦¦de
+    -           -       MaterialDesignExtensions.resources.dll
+    -           -       
+    -           +¦¦¦fr
+    -           -       MaterialDesignExtensions.resources.dll
+    -           -       
+    -           +¦¦¦fr-FR
+    -           -       MaterialDesignExtensions.resources.dll
+    -           -       
+    -           +¦¦¦pt
+    -           -       MaterialDesignExtensions.resources.dll
+    -           -       
+    -           +¦¦¦pt-BR
+    -           -       MaterialDesignExtensions.resources.dll
+    -           -       
+    -           +¦¦¦Ru
+    -           -       MaterialDesignExtensions.resources.dll
+    -           -       
+    -           +¦¦¦ru-ru
+    -           -       MaterialDesignExtensions.resources.dll
+    -           -       
+    -           L¦¦¦uz-Latn-UZ
+    -                   MaterialDesignExtensions.resources.dll
+    -                   
+    +¦¦¦MaterialDesignThemes.5.1.0
+    -   -   .signature.p7s
+    -   -   MaterialDesignThemes.5.1.0.nupkg
+    -   -   
+    -   +¦¦¦build
+    -   -   -   MaterialDesignThemes.targets
+    -   -   -   
+    -   -   L¦¦¦Resources
+    -   -       L¦¦¦Roboto
+    -   -               Roboto-Black.ttf
+    -   -               Roboto-BlackItalic.ttf
+    -   -               Roboto-Bold.ttf
+    -   -               Roboto-BoldItalic.ttf
+    -   -               Roboto-Italic.ttf
+    -   -               Roboto-Light.ttf
+    -   -               Roboto-LightItalic.ttf
+    -   -               Roboto-Medium.ttf
+    -   -               Roboto-MediumItalic.ttf
+    -   -               Roboto-Regular.ttf
+    -   -               Roboto-Thin.ttf
+    -   -               Roboto-ThinItalic.ttf
+    -   -               RobotoCondensed-Bold.ttf
+    -   -               RobotoCondensed-BoldItalic.ttf
+    -   -               RobotoCondensed-Italic.ttf
+    -   -               RobotoCondensed-Light.ttf
+    -   -               RobotoCondensed-LightItalic.ttf
+    -   -               RobotoCondensed-Regular.ttf
+    -   -               
+    -   +¦¦¦docs
+    -   -       README.md
+    -   -       
+    -   +¦¦¦images
+    -   -       MaterialDesignThemes.Icon.png
+    -   -       
+    -   +¦¦¦lib
+    -   -   +¦¦¦net462
+    -   -   -       MaterialDesignThemes.Wpf.dll
+    -   -   -       MaterialDesignThemes.Wpf.pdb
+    -   -   -       MaterialDesignThemes.Wpf.xml
+    -   -   -       
+    -   -   +¦¦¦net6.0
+    -   -   -       MaterialDesignThemes.Wpf.dll
+    -   -   -       MaterialDesignThemes.Wpf.pdb
+    -   -   -       MaterialDesignThemes.Wpf.xml
+    -   -   -       
+    -   -   L¦¦¦net8.0
+    -   -           MaterialDesignThemes.Wpf.dll
+    -   -           MaterialDesignThemes.Wpf.pdb
+    -   -           MaterialDesignThemes.Wpf.xml
+    -   -           
+    -   L¦¦¦tools
+    -           VisualStudioToolsManifest.xml
+    -           
+    +¦¦¦MaterialDesignThemes.MahApps.3.1.0
+    -   -   .signature.p7s
+    -   -   MaterialDesignThemes.MahApps.3.1.0.nupkg
+    -   -   
+    -   +¦¦¦docs
+    -   -       README.md
+    -   -       
+    -   +¦¦¦images
+    -   -       MaterialDesignThemes.MahApps.Icon.png
+    -   -       
+    -   L¦¦¦lib
+    -       +¦¦¦net462
+    -       -       MaterialDesignThemes.MahApps.dll
+    -       -       MaterialDesignThemes.MahApps.pdb
+    -       -       
+    -       +¦¦¦net6.0
+    -       -       MaterialDesignThemes.MahApps.dll
+    -       -       MaterialDesignThemes.MahApps.pdb
+    -       -       
+    -       L¦¦¦net8.0
+    -               MaterialDesignThemes.MahApps.dll
+    -               MaterialDesignThemes.MahApps.pdb
+    -               
+    +¦¦¦Microsoft.Xaml.Behaviors.Wpf.1.1.135
+    -   -   .signature.p7s
+    -   -   Microsoft.Xaml.Behaviors.Wpf.1.1.135.nupkg
+    -   -   
+    -   +¦¦¦lib
+    -   -   +¦¦¦net462
+    -   -   -   -   Microsoft.Xaml.Behaviors.dll
+    -   -   -   -   Microsoft.Xaml.Behaviors.pdb
+    -   -   -   -   Microsoft.Xaml.Behaviors.xml
+    -   -   -   -   
+    -   -   -   L¦¦¦Design
+    -   -   -           Microsoft.Xaml.Behaviors.Design.dll
+    -   -   -           Microsoft.Xaml.Behaviors.DesignTools.dll
+    -   -   -           
+    -   -   L¦¦¦net6.0-windows7.0
+    -   -       -   Microsoft.Xaml.Behaviors.dll
+    -   -       -   Microsoft.Xaml.Behaviors.pdb
+    -   -       -   Microsoft.Xaml.Behaviors.xml
+    -   -       -   
+    -   -       L¦¦¦Design
+    -   -               Microsoft.Xaml.Behaviors.DesignTools.dll
+    -   -               
+    -   L¦¦¦tools
+    -           Install.ps1
+    -           
+    +¦¦¦MvvmLight.5.4.1.1
+    -   -   .signature.p7s
+    -   -   MvvmLight.5.4.1.1.nupkg
+    -   -   
+    -   +¦¦¦Content
+    -   -   L¦¦¦ViewModel
+    -   -           MainViewModel.cs.pp
+    -   -           ViewModelLocator.cs.pp
+    -   -           
+    -   L¦¦¦tools
+    -           install.ps1
+    -           
+    +¦¦¦MvvmLightLibs.5.4.1.1
+    -   -   .signature.p7s
+    -   -   MvvmLightLibs.5.4.1.1.nupkg
+    -   -   
+    -   L¦¦¦lib
+    -       +¦¦¦monoandroid1
+    -       -       GalaSoft.MvvmLight.dll
+    -       -       GalaSoft.MvvmLight.Extras.dll
+    -       -       GalaSoft.MvvmLight.Extras.pdb
+    -       -       GalaSoft.MvvmLight.Extras.XML
+    -       -       GalaSoft.MvvmLight.pdb
+    -       -       GalaSoft.MvvmLight.Platform.dll
+    -       -       GalaSoft.MvvmLight.Platform.pdb
+    -       -       GalaSoft.MvvmLight.Platform.XML
+    -       -       GalaSoft.MvvmLight.XML
+    -       -       
+    -       +¦¦¦net35
+    -       -       GalaSoft.MvvmLight.dll
+    -       -       GalaSoft.MvvmLight.Extras.dll
+    -       -       GalaSoft.MvvmLight.Extras.pdb
+    -       -       GalaSoft.MvvmLight.Extras.xml
+    -       -       GalaSoft.MvvmLight.pdb
+    -       -       GalaSoft.MvvmLight.xml
+    -       -       System.Windows.Interactivity.dll
+    -       -       System.Windows.Interactivity.xml
+    -       -       
+    -       +¦¦¦net40
+    -       -       GalaSoft.MvvmLight.dll
+    -       -       GalaSoft.MvvmLight.Extras.dll
+    -       -       GalaSoft.MvvmLight.Extras.pdb
+    -       -       GalaSoft.MvvmLight.Extras.xml
+    -       -       GalaSoft.MvvmLight.pdb
+    -       -       GalaSoft.MvvmLight.xml
+    -       -       System.Windows.Interactivity.dll
+    -       -       System.Windows.Interactivity.xml
+    -       -       
+    -       +¦¦¦net45
+    -       -       GalaSoft.MvvmLight.dll
+    -       -       GalaSoft.MvvmLight.Extras.dll
+    -       -       GalaSoft.MvvmLight.Extras.pdb
+    -       -       GalaSoft.MvvmLight.Extras.xml
+    -       -       GalaSoft.MvvmLight.pdb
+    -       -       GalaSoft.MvvmLight.Platform.dll
+    -       -       GalaSoft.MvvmLight.Platform.pdb
+    -       -       GalaSoft.MvvmLight.Platform.xml
+    -       -       GalaSoft.MvvmLight.xml
+    -       -       System.Windows.Interactivity.dll
+    -       -       
+    -       +¦¦¦portable-net45+wp8+wpa81+netcore45+monoandroid1+xamarin.ios10
+    -       -       GalaSoft.MvvmLight.dll
+    -       -       GalaSoft.MvvmLight.Extras.dll
+    -       -       GalaSoft.MvvmLight.Extras.pdb
+    -       -       GalaSoft.MvvmLight.Extras.XML
+    -       -       GalaSoft.MvvmLight.pdb
+    -       -       GalaSoft.MvvmLight.XML
+    -       -       
+    -       +¦¦¦SL5
+    -       -       GalaSoft.MvvmLight.dll
+    -       -       GalaSoft.MvvmLight.Extras.dll
+    -       -       GalaSoft.MvvmLight.Extras.pdb
+    -       -       GalaSoft.MvvmLight.Extras.xml
+    -       -       GalaSoft.MvvmLight.pdb
+    -       -       GalaSoft.MvvmLight.xml
+    -       -       System.Windows.Interactivity.dll
+    -       -       
+    -       +¦¦¦uap10.0
+    -       -       GalaSoft.MvvmLight.dll
+    -       -       GalaSoft.MvvmLight.Extras.dll
+    -       -       GalaSoft.MvvmLight.Extras.pdb
+    -       -       GalaSoft.MvvmLight.Extras.xml
+    -       -       GalaSoft.MvvmLight.pdb
+    -       -       GalaSoft.MvvmLight.Platform.dll
+    -       -       GalaSoft.MvvmLight.Platform.pdb
+    -       -       GalaSoft.MvvmLight.Platform.pri
+    -       -       GalaSoft.MvvmLight.Platform.xml
+    -       -       GalaSoft.MvvmLight.xml
+    -       -       
+    -       +¦¦¦windows81
+    -       -       GalaSoft.MvvmLight.dll
+    -       -       GalaSoft.MvvmLight.Extras.dll
+    -       -       GalaSoft.MvvmLight.Extras.pdb
+    -       -       GalaSoft.MvvmLight.Extras.xml
+    -       -       GalaSoft.MvvmLight.pdb
+    -       -       GalaSoft.MvvmLight.Platform.dll
+    -       -       GalaSoft.MvvmLight.Platform.pdb
+    -       -       GalaSoft.MvvmLight.Platform.pri
+    -       -       GalaSoft.MvvmLight.Platform.xml
+    -       -       GalaSoft.MvvmLight.xml
+    -       -       
+    -       +¦¦¦wp8
+    -       -       GalaSoft.MvvmLight.dll
+    -       -       GalaSoft.MvvmLight.Extras.dll
+    -       -       GalaSoft.MvvmLight.Extras.pdb
+    -       -       GalaSoft.MvvmLight.Extras.xml
+    -       -       GalaSoft.MvvmLight.pdb
+    -       -       GalaSoft.MvvmLight.Platform.dll
+    -       -       GalaSoft.MvvmLight.Platform.pdb
+    -       -       GalaSoft.MvvmLight.Platform.xml
+    -       -       GalaSoft.MvvmLight.xml
+    -       -       System.Windows.Interactivity.dll
+    -       -       
+    -       +¦¦¦wp81
+    -       -       GalaSoft.MvvmLight.dll
+    -       -       GalaSoft.MvvmLight.Extras.dll
+    -       -       GalaSoft.MvvmLight.Extras.pdb
+    -       -       GalaSoft.MvvmLight.Extras.xml
+    -       -       GalaSoft.MvvmLight.pdb
+    -       -       GalaSoft.MvvmLight.Platform.dll
+    -       -       GalaSoft.MvvmLight.Platform.pdb
+    -       -       GalaSoft.MvvmLight.Platform.xml
+    -       -       GalaSoft.MvvmLight.xml
+    -       -       System.Windows.Interactivity.dll
+    -       -       
+    -       +¦¦¦wpa81
+    -       -       GalaSoft.MvvmLight.dll
+    -       -       GalaSoft.MvvmLight.Extras.dll
+    -       -       GalaSoft.MvvmLight.Extras.pdb
+    -       -       GalaSoft.MvvmLight.Extras.XML
+    -       -       GalaSoft.MvvmLight.pdb
+    -       -       GalaSoft.MvvmLight.Platform.dll
+    -       -       GalaSoft.MvvmLight.Platform.pdb
+    -       -       GalaSoft.MvvmLight.Platform.pri
+    -       -       GalaSoft.MvvmLight.Platform.XML
+    -       -       GalaSoft.MvvmLight.XML
+    -       -       
+    -       L¦¦¦xamarin.ios10
+    -               GalaSoft.MvvmLight.dll
+    -               GalaSoft.MvvmLight.Extras.dll
+    -               GalaSoft.MvvmLight.Extras.pdb
+    -               GalaSoft.MvvmLight.Extras.XML
+    -               GalaSoft.MvvmLight.pdb
+    -               GalaSoft.MvvmLight.Platform.dll
+    -               GalaSoft.MvvmLight.Platform.XML
+    -               GalaSoft.MvvmLight.XML
+    -               
+    +¦¦¦Xceed.Wpf.Themes.4.5.23158.1451
+    -   -   .signature.p7s
+    -   -   License Agreement.txt
+    -   -   Xceed.Wpf.Themes.4.5.23158.1451.nupkg
+    -   -   
+    -   +¦¦¦images
+    -   -       Toolkit.png
+    -   -       
+    -   L¦¦¦lib
+    -       +¦¦¦net40
+    -       -       Xceed.Wpf.Themes.dll
+    -       -       Xceed.Wpf.Themes.xml
+    -       -       
+    -       +¦¦¦net5.0
+    -       -       Xceed.Wpf.Themes.NET5.dll
+    -       -       Xceed.Wpf.Themes.NET5.xml
+    -       -       
+    -       L¦¦¦netcoreapp3.0
+    -               Xceed.Wpf.Themes.NETCore.dll
+    -               Xceed.Wpf.Themes.NETCore.xml
+    -               
+    +¦¦¦Xceed.Wpf.Themes.MaterialDesign.4.5.23158.1451
+    -   -   .signature.p7s
+    -   -   License Agreement.txt
+    -   -   Xceed.Wpf.Themes.MaterialDesign.4.5.23158.1451.nupkg
+    -   -   
+    -   +¦¦¦images
+    -   -       Toolkit.png
+    -   -       
+    -   L¦¦¦lib
+    -       +¦¦¦net40
+    -       -       Xceed.Wpf.Themes.MaterialDesign.dll
+    -       -       Xceed.Wpf.Themes.MaterialDesign.xml
+    -       -       
+    -       +¦¦¦net5.0
+    -       -       Xceed.Wpf.Themes.MaterialDesign.NET5.dll
+    -       -       Xceed.Wpf.Themes.MaterialDesign.NET5.xml
+    -       -       
+    -       L¦¦¦netcoreapp3.0
+    -               Xceed.Wpf.Themes.MaterialDesign.NETCore.dll
+    -               Xceed.Wpf.Themes.MaterialDesign.NETCore.xml
+    -               
+    L¦¦¦Xceed.Wpf.Themes.MaterialDesignColors.4.5.23158.1451
+        -   .signature.p7s
+        -   License Agreement.txt
+        -   Xceed.Wpf.Themes.MaterialDesignColors.4.5.23158.1451.nupkg
+        -   
+        +¦¦¦images
+        -       Toolkit.png
+        -       
+        L¦¦¦lib
+            +¦¦¦net40
+            -       Xceed.Wpf.Themes.MaterialDesignColors.dll
+            -       Xceed.Wpf.Themes.MaterialDesignColors.xml
+            -       
+            +¦¦¦net5.0
+            -       Xceed.Wpf.Themes.MaterialDesignColors.NET5.dll
+            -       Xceed.Wpf.Themes.MaterialDesignColors.NET5.xml
+            -       
+            L¦¦¦netcoreapp3.0
+                    Xceed.Wpf.Themes.MaterialDesignColors.NETCore.dll
+                    Xceed.Wpf.Themes.MaterialDesignColors.NETCore.xml
+                    
