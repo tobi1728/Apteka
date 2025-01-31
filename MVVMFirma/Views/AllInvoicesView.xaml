@@ -5,88 +5,83 @@
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                    xmlns:local="clr-namespace:MVVMFirma.Views"
                    mc:Ignorable="d" 
-                   d:DesignHeight="500" d:DesignWidth="800">
+                   d:DesignHeight="500" 
+                   d:DesignWidth="800">
 
     <Grid Background="#fff">
         <Grid.RowDefinitions>
-            <!-- Nagłówek -->
+            <!-- Pasek 1: sortowanie, wyszukiwanie, drukowanie -->
             <RowDefinition Height="Auto"/>
-            <!-- Sekcja filtrów -->
+            <!-- Pasek 2: filtrowanie (daty, kwota) + Filtruj -->
             <RowDefinition Height="Auto"/>
-            <!-- Główna sekcja -->
+            <!-- Główna sekcja (DataGrid) -->
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Nagłówek -->
-        <TextBlock Grid.Row="0" 
-                   Text="Lista faktur dostawców" 
-                   HorizontalAlignment="Left" 
-                   VerticalAlignment="Center" 
-                   FontSize="20" 
-                   FontWeight="Bold" 
-                   Margin="5,10,0,10"/>
+   
 
-        <!-- Sekcja filtrów (Data od/do, Kwota od/do) -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
-
-            <!-- Data OD -->
-            <TextBlock Text="Data od:" 
-                       VerticalAlignment="Center" 
-                       Margin="0,0,5,0"/>
-            <DatePicker SelectedDate="{Binding DataOd, Mode=TwoWay}" 
+        <!-- Wiersz 1: FILTRY (DataOd/DataDo, KwotaOd/KwotaDo) + Filtruj -->
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Margin="10">
+            <TextBlock Text="Data od:"
+                       Margin="0,0,5,0"
+                       VerticalAlignment="Center"/>
+            <DatePicker SelectedDate="{Binding DataOd, Mode=TwoWay}"
                         Width="120"/>
 
-            <!-- Data DO -->
-            <TextBlock Text="Data do:" 
-                       VerticalAlignment="Center" 
-                       Margin="15,0,5,0"/>
-            <DatePicker SelectedDate="{Binding DataDo, Mode=TwoWay}" 
+            <TextBlock Text="Data do:"
+                       Margin="15,0,5,0"
+                       VerticalAlignment="Center"/>
+            <DatePicker SelectedDate="{Binding DataDo, Mode=TwoWay}"
                         Width="120"/>
 
-            <!-- Kwota OD -->
-            <TextBlock Text="Kwota od:" 
-                       VerticalAlignment="Center" 
-                       Margin="15,0,5,0"/>
-            <TextBox Text="{Binding KwotaOd, Mode=TwoWay}" 
-                     Width="80"/>
+            <TextBlock Text="Kwota od:"
+                       Margin="15,0,5,0"
+                       VerticalAlignment="Center"/>
+            <TextBox Text="{Binding KwotaOd, Mode=TwoWay}"
+                     Width="70"/>
 
-            <!-- Kwota DO -->
-            <TextBlock Text="Kwota do:" 
-                       VerticalAlignment="Center" 
-                       Margin="15,0,5,0"/>
-            <TextBox Text="{Binding KwotaDo, Mode=TwoWay}" 
-                     Width="80"/>
+            <TextBlock Text="Kwota do:"
+                       Margin="15,0,5,0"
+                       VerticalAlignment="Center"/>
+            <TextBox Text="{Binding KwotaDo, Mode=TwoWay}"
+                     Width="70"/>
 
-            <!-- Przycisk Filtruj (opcjonalny) -->
-            <!-- Jeśli chcesz filtrować tylko na klik: 
-                 usuń Filter() w seterach powyżej i tu w XAML 
-                 zrób Command="{Binding FilterCommand}" -->
-            <Button Content="Filtruj" 
-                    Command="{Binding FilterCommand}" 
-                    Margin="15,0,0,0"/>
+            <!-- Przycisk Filtruj -->
+            <Button Content="Filtruj"
+                    Command="{Binding FilterCommand}"
+                    Width="80"
+                    Margin="20,0,0,0"/>
+
+            <Button Content="Drukuj"
+                    Command="{Binding PrintCommand}"
+                    Margin="10,0,0,0"
+                    Width="80"/>
         </StackPanel>
 
-        <!-- Główna tabela dla faktur -->
-        <Grid Grid.Row="2" Margin="10">
-            <DataGrid AutoGenerateColumns="False" 
-                      ItemsSource="{Binding List}" 
-                      CanUserAddRows="False" 
-                      IsReadOnly="True">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID Faktury" 
-                                        Binding="{Binding ID_Faktury}" />
-                    <DataGridTextColumn Header="Numer Faktury" 
-                                        Binding="{Binding Numer_Faktury}" />
-                    <DataGridTextColumn Header="Dostawca" 
-                                        Binding="{Binding Nazwa_Dostawcy}" />
-                    <DataGridTextColumn Header="Data Wystawienia" 
-                                        Binding="{Binding Data_Wystawienia, StringFormat=d}" />
-                    <DataGridTextColumn Header="Kwota" 
-                                        Binding="{Binding Kwota}" />
-                    <DataGridTextColumn Header="Numer Zamówienia" 
-                                        Binding="{Binding Numer_Zamówienia}" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+        <!-- Wiersz 2: Tabela z fakturami -->
+        <DataGrid Grid.Row="2"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding List}"
+                  SelectedItem="{Binding SelectedInvoice, Mode=TwoWay}"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID Faktury"
+                                    Binding="{Binding ID_Faktury}" />
+                <DataGridTextColumn Header="Numer Faktury"
+                                    Binding="{Binding Numer_Faktury}" />
+                <DataGridTextColumn Header="Dostawca"
+                                    Binding="{Binding Nazwa_Dostawcy}" />
+                <DataGridTextColumn Header="Data Wystawienia"
+                                    Binding="{Binding Data_Wystawienia, StringFormat=d}" />
+                <DataGridTextColumn Header="Kwota"
+                                    Binding="{Binding Kwota}" />
+                <DataGridTextColumn Header="Numer Zamówienia"
+                                    Binding="{Binding Numer_Zamówienia}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </local:AllViewBase>

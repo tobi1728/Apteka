@@ -27,10 +27,10 @@ C:.
 -   L¦¦¦MVVMFirma
 -       +¦¦¦FileContentIndex
 -       -       26ba8b01-f134-4acd-b7fe-b7387163f928.vsidx
+-       -       28ec18e4-25c0-4758-80f8-77087e2da8f6.vsidx
+-       -       2a479295-90da-46ed-9138-593511364c44.vsidx
 -       -       5352f6e4-1d77-49d7-9cc0-8b2f318f75f9.vsidx
--       -       97595346-c094-4d01-b42e-c0a428d2eb8d.vsidx
--       -       a7b99005-395a-4e61-9309-db2d9a83b26a.vsidx
--       -       f34b2450-c1b5-4a23-98a1-deeb4b75eb7c.vsidx
+-       -       d48b4936-6e64-4a20-8b4e-4b5b70734482.vsidx
 -       -       
 -       L¦¦¦v17
 -               DocumentLayout.backup.json
@@ -49,6 +49,8 @@ C:.
 -   -   
 -   +¦¦¦bin
 -   -   +¦¦¦Debug
+-   -   -   -   BouncyCastle.Cryptography.dll
+-   -   -   -   BouncyCastle.Cryptography.xml
 -   -   -   -   CommonServiceLocator.dll
 -   -   -   -   EntityFramework.dll
 -   -   -   -   EntityFramework.SqlServer.dll
@@ -63,11 +65,23 @@ C:.
 -   -   -   -   GalaSoft.MvvmLight.Platform.pdb
 -   -   -   -   GalaSoft.MvvmLight.Platform.xml
 -   -   -   -   GalaSoft.MvvmLight.xml
+-   -   -   -   iTextSharp.LGPLv2.Core.dll
+-   -   -   -   iTextSharp.LGPLv2.Core.xml
 -   -   -   -   MVVMFirma.exe
 -   -   -   -   MVVMFirma.exe.config
 -   -   -   -   MVVMFirma.pdb
 -   -   -   -   MVVMFirma.vshost.exe
 -   -   -   -   MVVMFirma.vshost.exe.manifest
+-   -   -   -   SkiaSharp.dll
+-   -   -   -   SkiaSharp.pdb
+-   -   -   -   System.Buffers.dll
+-   -   -   -   System.Buffers.xml
+-   -   -   -   System.Memory.dll
+-   -   -   -   System.Memory.xml
+-   -   -   -   System.Numerics.Vectors.dll
+-   -   -   -   System.Numerics.Vectors.xml
+-   -   -   -   System.Runtime.CompilerServices.Unsafe.dll
+-   -   -   -   System.Runtime.CompilerServices.Unsafe.xml
 -   -   -   -   System.Windows.Interactivity.dll
 -   -   -   -   WPF MVVM Application.exe
 -   -   -   -   WPF MVVM Application.pdb
@@ -160,6 +174,7 @@ C:.
 -   -       -   -   MVVMFirma_Content.g.i.cs
 -   -       -   -   MVVMFirma_MarkupCompile.cache
 -   -       -   -   MVVMFirma_MarkupCompile.i.cache
+-   -       -   -   MVVMFirma_MarkupCompile.i.lref
 -   -       -   -   MVVMFirma_MarkupCompile.lref
 -   -       -   -   WPF MVVM Application.exe
 -   -       -   -   WPF MVVM Application.g.resources
@@ -461,6 +476,26 @@ C:.
 -           OneViewBase.cs
 -           
 L¦¦¦packages
+    +¦¦¦BouncyCastle.Cryptography.2.5.0
+    -   -   .signature.p7s
+    -   -   BouncyCastle.Cryptography.2.5.0.nupkg
+    -   -   LICENSE.md
+    -   -   packageIcon.png
+    -   -   README.md
+    -   -   
+    -   L¦¦¦lib
+    -       +¦¦¦net461
+    -       -       BouncyCastle.Cryptography.dll
+    -       -       BouncyCastle.Cryptography.xml
+    -       -       
+    -       +¦¦¦net6.0
+    -       -       BouncyCastle.Cryptography.dll
+    -       -       BouncyCastle.Cryptography.xml
+    -       -       
+    -       L¦¦¦netstandard2.0
+    -               BouncyCastle.Cryptography.dll
+    -               BouncyCastle.Cryptography.xml
+    -               
     +¦¦¦CommonServiceLocator.2.0.2
     -   -   .signature.p7s
     -   -   CommonServiceLocator.2.0.2.nupkg
@@ -674,6 +709,36 @@ L¦¦¦packages
     -                   ef6.pdb
     -                   ef6.runtimeconfig.json
     -                   
+    +¦¦¦iTextSharp.LGPLv2.Core.3.7.0
+    -   -   .signature.p7s
+    -   -   iTextSharp.LGPLv2.Core.3.7.0.nupkg
+    -   -   README.md
+    -   -   
+    -   L¦¦¦lib
+    -       +¦¦¦net462
+    -       -       iTextSharp.LGPLv2.Core.dll
+    -       -       iTextSharp.LGPLv2.Core.xml
+    -       -       
+    -       +¦¦¦net6.0
+    -       -       iTextSharp.LGPLv2.Core.dll
+    -       -       iTextSharp.LGPLv2.Core.xml
+    -       -       
+    -       +¦¦¦net7.0
+    -       -       iTextSharp.LGPLv2.Core.dll
+    -       -       iTextSharp.LGPLv2.Core.xml
+    -       -       
+    -       +¦¦¦net8.0
+    -       -       iTextSharp.LGPLv2.Core.dll
+    -       -       iTextSharp.LGPLv2.Core.xml
+    -       -       
+    -       +¦¦¦net9.0
+    -       -       iTextSharp.LGPLv2.Core.dll
+    -       -       iTextSharp.LGPLv2.Core.xml
+    -       -       
+    -       L¦¦¦netstandard2.0
+    -               iTextSharp.LGPLv2.Core.dll
+    -               iTextSharp.LGPLv2.Core.xml
+    -               
     +¦¦¦MahApps.Metro.2.0.0
     -   -   .signature.p7s
     -   -   MahApps.Metro.2.0.0.nupkg
@@ -1057,6 +1122,392 @@ L¦¦¦packages
     -               GalaSoft.MvvmLight.Platform.dll
     -               GalaSoft.MvvmLight.Platform.XML
     -               GalaSoft.MvvmLight.XML
+    -               
+    +¦¦¦SkiaSharp.3.116.1
+    -   -   .signature.p7s
+    -   -   icon.png
+    -   -   LICENSE.txt
+    -   -   README.md
+    -   -   SkiaSharp.3.116.1.nupkg
+    -   -   
+    -   +¦¦¦interactive-extensions
+    -   -   L¦¦¦dotnet
+    -   -           SkiaSharp.DotNet.Interactive.dll
+    -   -           
+    -   +¦¦¦lib
+    -   -   +¦¦¦net462
+    -   -   -       SkiaSharp.dll
+    -   -   -       SkiaSharp.pdb
+    -   -   -       
+    -   -   +¦¦¦net6.0
+    -   -   -       SkiaSharp.dll
+    -   -   -       SkiaSharp.pdb
+    -   -   -       
+    -   -   +¦¦¦net8.0
+    -   -   -       SkiaSharp.dll
+    -   -   -       SkiaSharp.pdb
+    -   -   -       
+    -   -   +¦¦¦net8.0-android34.0
+    -   -   -       SkiaSharp.dll
+    -   -   -       SkiaSharp.pdb
+    -   -   -       SkiaSharp.xml
+    -   -   -       
+    -   -   +¦¦¦net8.0-ios17.0
+    -   -   -       SkiaSharp.dll
+    -   -   -       SkiaSharp.pdb
+    -   -   -       
+    -   -   +¦¦¦net8.0-maccatalyst17.0
+    -   -   -       SkiaSharp.dll
+    -   -   -       SkiaSharp.pdb
+    -   -   -       
+    -   -   +¦¦¦net8.0-macos14.0
+    -   -   -       SkiaSharp.dll
+    -   -   -       SkiaSharp.pdb
+    -   -   -       
+    -   -   +¦¦¦net8.0-tizen7.0
+    -   -   -       SkiaSharp.dll
+    -   -   -       SkiaSharp.pdb
+    -   -   -       
+    -   -   +¦¦¦net8.0-tvos17.0
+    -   -   -       SkiaSharp.dll
+    -   -   -       SkiaSharp.pdb
+    -   -   -       
+    -   -   +¦¦¦net8.0-windows10.0.19041
+    -   -   -       SkiaSharp.dll
+    -   -   -       SkiaSharp.pdb
+    -   -   -       
+    -   -   +¦¦¦netstandard2.0
+    -   -   -       SkiaSharp.dll
+    -   -   -       SkiaSharp.pdb
+    -   -   -       
+    -   -   L¦¦¦netstandard2.1
+    -   -           SkiaSharp.dll
+    -   -           SkiaSharp.pdb
+    -   -           
+    -   L¦¦¦ref
+    -       +¦¦¦net462
+    -       -       SkiaSharp.dll
+    -       -       
+    -       +¦¦¦net6.0
+    -       -       SkiaSharp.dll
+    -       -       
+    -       +¦¦¦net8.0
+    -       -       SkiaSharp.dll
+    -       -       
+    -       +¦¦¦net8.0-android34.0
+    -       -       SkiaSharp.dll
+    -       -       
+    -       +¦¦¦net8.0-ios17.0
+    -       -       SkiaSharp.dll
+    -       -       
+    -       +¦¦¦net8.0-maccatalyst17.0
+    -       -       SkiaSharp.dll
+    -       -       
+    -       +¦¦¦net8.0-macos14.0
+    -       -       SkiaSharp.dll
+    -       -       
+    -       +¦¦¦net8.0-tizen7.0
+    -       -       SkiaSharp.dll
+    -       -       
+    -       +¦¦¦net8.0-tvos17.0
+    -       -       SkiaSharp.dll
+    -       -       
+    -       +¦¦¦net8.0-windows10.0.19041
+    -       -       SkiaSharp.dll
+    -       -       
+    -       +¦¦¦netstandard2.0
+    -       -       SkiaSharp.dll
+    -       -       
+    -       L¦¦¦netstandard2.1
+    -               SkiaSharp.dll
+    -               
+    +¦¦¦SkiaSharp.NativeAssets.macOS.3.116.1
+    -   -   .signature.p7s
+    -   -   icon.png
+    -   -   LICENSE.txt
+    -   -   README.md
+    -   -   SkiaSharp.NativeAssets.macOS.3.116.1.nupkg
+    -   -   THIRD-PARTY-NOTICES.txt
+    -   -   
+    -   +¦¦¦buildTransitive
+    -   -   +¦¦¦net462
+    -   -   -       SkiaSharp.NativeAssets.macOS.targets
+    -   -   -       
+    -   -   L¦¦¦net8.0-macos14.0
+    -   -           SkiaSharp.NativeAssets.macOS.targets
+    -   -           
+    -   +¦¦¦lib
+    -   -   +¦¦¦net462
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦net6.0
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦net8.0
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦net8.0-macos14.0
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦netstandard2.0
+    -   -   -       _._
+    -   -   -       
+    -   -   L¦¦¦netstandard2.1
+    -   -           _._
+    -   -           
+    -   L¦¦¦runtimes
+    -       L¦¦¦osx
+    -           L¦¦¦native
+    -                   libSkiaSharp.dylib
+    -                   
+    +¦¦¦SkiaSharp.NativeAssets.Win32.3.116.1
+    -   -   .signature.p7s
+    -   -   icon.png
+    -   -   LICENSE.txt
+    -   -   README.md
+    -   -   SkiaSharp.NativeAssets.Win32.3.116.1.nupkg
+    -   -   THIRD-PARTY-NOTICES.txt
+    -   -   
+    -   +¦¦¦buildTransitive
+    -   -   L¦¦¦net462
+    -   -           SkiaSharp.NativeAssets.Win32.targets
+    -   -           
+    -   +¦¦¦lib
+    -   -   +¦¦¦net462
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦net6.0
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦net6.0-windows10.0.19041
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦net8.0
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦net8.0-windows10.0.19041
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦netstandard2.0
+    -   -   -       _._
+    -   -   -       
+    -   -   L¦¦¦netstandard2.1
+    -   -           _._
+    -   -           
+    -   L¦¦¦runtimes
+    -       +¦¦¦win-arm64
+    -       -   L¦¦¦native
+    -       -           libSkiaSharp.dll
+    -       -           
+    -       +¦¦¦win-x64
+    -       -   L¦¦¦native
+    -       -           libSkiaSharp.dll
+    -       -           
+    -       L¦¦¦win-x86
+    -           L¦¦¦native
+    -                   libSkiaSharp.dll
+    -                   
+    +¦¦¦System.Buffers.4.5.1
+    -   -   .signature.p7s
+    -   -   LICENSE.TXT
+    -   -   System.Buffers.4.5.1.nupkg
+    -   -   THIRD-PARTY-NOTICES.TXT
+    -   -   useSharedDesignerContext.txt
+    -   -   version.txt
+    -   -   
+    -   +¦¦¦lib
+    -   -   +¦¦¦net461
+    -   -   -       System.Buffers.dll
+    -   -   -       System.Buffers.xml
+    -   -   -       
+    -   -   +¦¦¦netcoreapp2.0
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦netstandard1.1
+    -   -   -       System.Buffers.dll
+    -   -   -       System.Buffers.xml
+    -   -   -       
+    -   -   +¦¦¦netstandard2.0
+    -   -   -       System.Buffers.dll
+    -   -   -       System.Buffers.xml
+    -   -   -       
+    -   -   L¦¦¦uap10.0.16299
+    -   -           _._
+    -   -           
+    -   L¦¦¦ref
+    -       +¦¦¦net45
+    -       -       System.Buffers.dll
+    -       -       System.Buffers.xml
+    -       -       
+    -       +¦¦¦netcoreapp2.0
+    -       -       _._
+    -       -       
+    -       +¦¦¦netstandard1.1
+    -       -       System.Buffers.dll
+    -       -       System.Buffers.xml
+    -       -       
+    -       +¦¦¦netstandard2.0
+    -       -       System.Buffers.dll
+    -       -       System.Buffers.xml
+    -       -       
+    -       L¦¦¦uap10.0.16299
+    -               _._
+    -               
+    +¦¦¦System.Memory.4.5.5
+    -   -   .signature.p7s
+    -   -   LICENSE.TXT
+    -   -   System.Memory.4.5.5.nupkg
+    -   -   THIRD-PARTY-NOTICES.TXT
+    -   -   useSharedDesignerContext.txt
+    -   -   version.txt
+    -   -   
+    -   +¦¦¦lib
+    -   -   +¦¦¦net461
+    -   -   -       System.Memory.dll
+    -   -   -       System.Memory.xml
+    -   -   -       
+    -   -   +¦¦¦netcoreapp2.1
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦netstandard1.1
+    -   -   -       System.Memory.dll
+    -   -   -       System.Memory.xml
+    -   -   -       
+    -   -   L¦¦¦netstandard2.0
+    -   -           System.Memory.dll
+    -   -           System.Memory.xml
+    -   -           
+    -   L¦¦¦ref
+    -       L¦¦¦netcoreapp2.1
+    -               _._
+    -               
+    +¦¦¦System.Numerics.Vectors.4.5.0
+    -   -   .signature.p7s
+    -   -   LICENSE.TXT
+    -   -   System.Numerics.Vectors.4.5.0.nupkg
+    -   -   THIRD-PARTY-NOTICES.TXT
+    -   -   useSharedDesignerContext.txt
+    -   -   version.txt
+    -   -   
+    -   +¦¦¦lib
+    -   -   +¦¦¦MonoAndroid10
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦MonoTouch10
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦net46
+    -   -   -       System.Numerics.Vectors.dll
+    -   -   -       System.Numerics.Vectors.xml
+    -   -   -       
+    -   -   +¦¦¦netcoreapp2.0
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦netstandard1.0
+    -   -   -       System.Numerics.Vectors.dll
+    -   -   -       System.Numerics.Vectors.xml
+    -   -   -       
+    -   -   +¦¦¦netstandard2.0
+    -   -   -       System.Numerics.Vectors.dll
+    -   -   -       System.Numerics.Vectors.xml
+    -   -   -       
+    -   -   +¦¦¦portable-net45+win8+wp8+wpa81
+    -   -   -       System.Numerics.Vectors.dll
+    -   -   -       System.Numerics.Vectors.xml
+    -   -   -       
+    -   -   +¦¦¦uap10.0.16299
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦xamarinios10
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦xamarinmac20
+    -   -   -       _._
+    -   -   -       
+    -   -   +¦¦¦xamarintvos10
+    -   -   -       _._
+    -   -   -       
+    -   -   L¦¦¦xamarinwatchos10
+    -   -           _._
+    -   -           
+    -   L¦¦¦ref
+    -       +¦¦¦MonoAndroid10
+    -       -       _._
+    -       -       
+    -       +¦¦¦MonoTouch10
+    -       -       _._
+    -       -       
+    -       +¦¦¦net45
+    -       -       System.Numerics.Vectors.dll
+    -       -       System.Numerics.Vectors.xml
+    -       -       
+    -       +¦¦¦net46
+    -       -       System.Numerics.Vectors.dll
+    -       -       System.Numerics.Vectors.xml
+    -       -       
+    -       +¦¦¦netcoreapp2.0
+    -       -       _._
+    -       -       
+    -       +¦¦¦netstandard1.0
+    -       -       System.Numerics.Vectors.dll
+    -       -       System.Numerics.Vectors.xml
+    -       -       
+    -       +¦¦¦netstandard2.0
+    -       -       System.Numerics.Vectors.dll
+    -       -       System.Numerics.Vectors.xml
+    -       -       
+    -       +¦¦¦uap10.0.16299
+    -       -       _._
+    -       -       
+    -       +¦¦¦xamarinios10
+    -       -       _._
+    -       -       
+    -       +¦¦¦xamarinmac20
+    -       -       _._
+    -       -       
+    -       +¦¦¦xamarintvos10
+    -       -       _._
+    -       -       
+    -       L¦¦¦xamarinwatchos10
+    -               _._
+    -               
+    +¦¦¦System.Runtime.CompilerServices.Unsafe.4.5.3
+    -   -   .signature.p7s
+    -   -   LICENSE.TXT
+    -   -   System.Runtime.CompilerServices.Unsafe.4.5.3.nupkg
+    -   -   THIRD-PARTY-NOTICES.TXT
+    -   -   useSharedDesignerContext.txt
+    -   -   version.txt
+    -   -   
+    -   +¦¦¦lib
+    -   -   +¦¦¦net461
+    -   -   -       System.Runtime.CompilerServices.Unsafe.dll
+    -   -   -       System.Runtime.CompilerServices.Unsafe.xml
+    -   -   -       
+    -   -   +¦¦¦netcoreapp2.0
+    -   -   -       System.Runtime.CompilerServices.Unsafe.dll
+    -   -   -       System.Runtime.CompilerServices.Unsafe.xml
+    -   -   -       
+    -   -   +¦¦¦netstandard1.0
+    -   -   -       System.Runtime.CompilerServices.Unsafe.dll
+    -   -   -       System.Runtime.CompilerServices.Unsafe.xml
+    -   -   -       
+    -   -   L¦¦¦netstandard2.0
+    -   -           System.Runtime.CompilerServices.Unsafe.dll
+    -   -           System.Runtime.CompilerServices.Unsafe.xml
+    -   -           
+    -   L¦¦¦ref
+    -       +¦¦¦net461
+    -       -       System.Runtime.CompilerServices.Unsafe.dll
+    -       -       System.Runtime.CompilerServices.Unsafe.xml
+    -       -       
+    -       +¦¦¦netstandard1.0
+    -       -       System.Runtime.CompilerServices.Unsafe.dll
+    -       -       System.Runtime.CompilerServices.Unsafe.xml
+    -       -       
+    -       L¦¦¦netstandard2.0
+    -               System.Runtime.CompilerServices.Unsafe.dll
+    -               System.Runtime.CompilerServices.Unsafe.xml
     -               
     +¦¦¦Xceed.Wpf.Themes.4.5.23158.1451
     -   -   .signature.p7s
