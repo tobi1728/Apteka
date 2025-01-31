@@ -17,6 +17,28 @@ namespace MVVMFirma.ViewModels
     {
         private List<PatientForAllView> _allPatients;
 
+        private PatientForAllView _selectedPatient;
+        public PatientForAllView SelectedPatient
+        {
+            get => _selectedPatient;
+            set
+            {
+                _selectedPatient = value;
+                OnPropertyChanged(() => SelectedPatient);
+
+                if (_selectedPatient != null && IsModal)
+                {
+                    // Wysyłamy pacjenta do VM recepty
+                    Messenger.Default.Send(_selectedPatient);
+                    // Zamykamy okno
+                    OnRequestClose();
+                }
+            }
+        }
+
+        public bool IsModal { get; set; } = false;
+
+
         #region Filtry
         private DateTime? _dataUrodzeniaOd;
         public DateTime? DataUrodzeniaOd

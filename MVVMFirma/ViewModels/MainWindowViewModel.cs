@@ -212,6 +212,14 @@ namespace MVVMFirma.ViewModels
                 };
                 CreateView(salesVM);
             }
+            if (name == "ShowPatients")
+            {
+                var patientsVM = new AllPatientsViewModel
+                {
+                    IsModal = true
+                };
+                CreateView(patientsVM);
+            }
 
 
 

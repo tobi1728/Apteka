@@ -17,19 +17,16 @@ namespace MVVMFirma.ViewModels
                 _selectedPharmacist = value;
                 OnPropertyChanged(() => SelectedPharmacist);
 
-                // Jeśli okno jest modalne, a user wybrał wiersz:
                 if (_selectedPharmacist != null && IsModal)
                 {
-                    // Wysyłamy farmaceutę do VM, który nas otworzył (np. NewScheduleViewModel)
                     Messenger.Default.Send(_selectedPharmacist);
-                    // Zamykamy okno (modalne)
                     OnRequestClose();
                 }
             }
         }
 
-        // Domyślnie false, ustawiamy w MainWindowViewModel jeśli chcemy modalnie
         public bool IsModal { get; set; } = false;
+
 
         public AllPharmacistsViewModel()
             : base("Wszyscy farmaceuci")

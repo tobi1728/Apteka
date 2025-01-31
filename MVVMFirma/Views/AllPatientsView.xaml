@@ -55,6 +55,7 @@
         <Grid Grid.Row="2" Margin="10" HorizontalAlignment="Left">
             <DataGrid AutoGenerateColumns="False"
                       ItemsSource="{Binding List}"
+                      SelectedItem="{Binding SelectedPatient, Mode=TwoWay}"
                       CanUserAddRows="False"
                       IsReadOnly="True">
                 <DataGrid.Columns>
