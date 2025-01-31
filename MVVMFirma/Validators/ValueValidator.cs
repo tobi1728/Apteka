@@ -138,6 +138,13 @@ namespace MVVMFirma.Validators
             return string.Empty;
         }
 
+        public static string ValidateNotToday(DateTime date)
+        {
+            if (date != DateTime.Today)
+                return "Data wystawienia musi być w dniu dzisiejszym.";
+            return string.Empty;
+        }
+
         public static string ValidateEndAfterStartDate(DateTime startDate, DateTime endDate)
         {
             if (endDate < startDate)

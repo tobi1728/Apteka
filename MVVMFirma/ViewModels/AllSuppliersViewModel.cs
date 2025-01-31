@@ -12,19 +12,25 @@ namespace MVVMFirma.ViewModels
     public class AllSuppliersViewModel : AllViewModel<SupplierForAllView>
     {
         private SupplierForAllView _SelectedSupplier;
+
         public SupplierForAllView SelectedSupplier
         {
             get => _SelectedSupplier;
             set
             {
                 _SelectedSupplier = value;
-                if (_SelectedSupplier != null)
+
+                if (_SelectedSupplier != null && IsModal)
                 {
                     Messenger.Default.Send(_SelectedSupplier);
-                    OnRequestClose();
+                    OnRequestClose(); 
                 }
             }
+
         }
+
+        public bool IsModal { get; set; }
+
 
 
         #region Sort & Find 

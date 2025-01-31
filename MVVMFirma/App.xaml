@@ -10,7 +10,35 @@
                             <DockPanel LastChildFill="True">
                                 <TextBlock Foreground="Red" Margin="-300,25,0,0" FontStyle="Italic"
                                        Text="{Binding [0].ErrorContent}" DockPanel.Dock="Right"/>
+                             
 
+
+                                <AdornedElementPlaceholder/>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="ComboBox">
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="True">
+                                <TextBlock Foreground="Red" Margin="-300,25,0,0" FontStyle="Italic"
+                               Text="{Binding [0].ErrorContent}" DockPanel.Dock="Right"/>
+                                <AdornedElementPlaceholder/>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="True">
+                                <TextBlock Foreground="Red" Margin="-300,25,0,0" FontStyle="Italic"
+                               Text="{Binding [0].ErrorContent}" DockPanel.Dock="Right"/>
                                 <AdornedElementPlaceholder/>
                             </DockPanel>
                         </ControlTemplate>

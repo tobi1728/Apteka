@@ -41,7 +41,7 @@ namespace MVVMFirma.ViewModels
                         _validationMessage = ValueValidator.ValidateSelection(IDFarmaceuty);
                         break;
                     case nameof(DataWystawienia):
-                        _validationMessage = ValueValidator.ValidatePastOrTodayDate(DataWystawienia);
+                        _validationMessage = ValueValidator.ValidateNotToday(DataWystawienia);
                         break;
                     case nameof(DataRealizacji):
                         _validationMessage = ValueValidator.ValidateEndAfterStartDate(DataWystawienia, DataRealizacji);

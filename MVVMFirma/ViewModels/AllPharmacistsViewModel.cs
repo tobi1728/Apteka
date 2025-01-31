@@ -32,7 +32,8 @@ namespace MVVMFirma.ViewModels
             set
             {
                 _SelectedPharmacist = value;
-                if (_SelectedPharmacist != null)
+
+                if (_SelectedPharmacist != null && IsModal)
                 {
                     Messenger.Default.Send(_SelectedPharmacist);
                     OnRequestClose();
@@ -40,6 +41,7 @@ namespace MVVMFirma.ViewModels
             }
         }
 
+        public bool IsModal { get; set; }
 
 
         public override void Sort()

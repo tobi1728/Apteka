@@ -30,6 +30,7 @@ namespace MVVMFirma.ViewModels
                 return _LoadCommand;
             }
         }
+        public bool isModal { get; set; }
 
         private BaseCommand _AddCommand; // to jest komenda ktora bedzie wywolywala funkcje Add wywolujaca okno do dodawania i bedzie podpieta pod dodaj
 

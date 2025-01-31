@@ -32,7 +32,7 @@ namespace MVVMFirma.ViewModels
                 return _Commands;
             }
         }
-
+        
         public MainWindowViewModel()
         {
             Messenger.Default.Register<string>(this, open);
@@ -164,6 +164,39 @@ namespace MVVMFirma.ViewModels
 
         private void open(string name)
         {
+            if (name == "ShowSuppliers")
+            {
+                var suppliersViewModel = new AllSuppliersViewModel
+                {
+                    IsModal = true // Otwieramy jako modalne okno
+                };
+                CreateView(suppliersViewModel);
+            }
+            else if (name == "Wszyscy dostawcy")
+            {
+                var suppliersViewModel = new AllSuppliersViewModel
+                {
+                    IsModal = false // Standardowe otwieranie z listy linków
+                };
+                CreateView(suppliersViewModel);
+            }
+            if (name == "ShowPharmacists")
+            {
+                var pharmacistsViewModel = new AllPharmacistsViewModel
+                {
+                    IsModal = true // Otwieramy jako modalne okno
+                };
+                CreateView(pharmacistsViewModel);
+            }
+            else if (name == "Wszyscy farmaceuci")
+            {
+                var pharmacistsViewModel = new AllPharmacistsViewModel
+                {
+                    IsModal = false // Standardowe otwieranie z listy linków
+                };
+                CreateView(pharmacistsViewModel);
+            }
+
             // Obsługa komunikatów typu string — np. otwieranie formularzy "Add" lub list "All".
             if (name == "Wszystkie lekiAdd")
                 CreateView(new NewProductViewModel());
@@ -195,8 +228,7 @@ namespace MVVMFirma.ViewModels
                 CreateView(new NewOrderViewModel());
             if (name == "Wszystkie sprzedażeAdd")
                 CreateView(new NewSaleViewModel());
-            if (name == "ShowSuppliers")
-                CreateView(new AllSuppliersViewModel());
+            
             if (name == "ShowPharmacists")
                 CreateView(new AllPharmacistsViewModel());
             if (name == "Wszyscy producenci")
