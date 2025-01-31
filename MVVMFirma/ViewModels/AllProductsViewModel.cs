@@ -5,6 +5,7 @@ using MVVMFirma.Models.EntitiesForView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 
@@ -176,11 +177,15 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // Przykład komendy ExportCsv (opcjonalnie)
         private ICommand _exportCsvCommand;
         public ICommand ExportCsvCommand
         {
-            get => _exportCsvCommand;
+            get
+            {
+                if (_exportCsvCommand == null)
+                    _exportCsvCommand = new BaseCommand(() => ExportCsv());
+                return _exportCsvCommand;
+            }
             set
             {
                 _exportCsvCommand = value;
@@ -191,14 +196,13 @@ namespace MVVMFirma.ViewModels
         #endregion
 
         #region Konstruktor
-
         public AllProductsViewModel()
             : base("Wszystkie leki")
         {
-            // Ewentualna komenda ExportCsv:
+            // Domyślnie ustawiamy komendę ExportCsv,
+            // jeśli chcesz od razu z tego korzystać:
             // ExportCsvCommand = new BaseCommand(() => ExportCsv());
         }
-
         #endregion
 
         #region Implementacja abstrakcyjnych metod
@@ -208,7 +212,7 @@ namespace MVVMFirma.ViewModels
         /// </summary>
         public override void Load()
         {
-            // Wczytanie z bazy do List
+            // Pobieramy z bazy i zamieniamy na listę
             List = new ObservableCollection<ProductForAllView>
             (
                 from product in aptekaEntities.Leki
@@ -220,19 +224,16 @@ namespace MVVMFirma.ViewModels
                     Nazwa_Kategorii = product.Kategorie_Leków.Nazwa_Kategorii,
                     Cena_Zakupu = product.Cena_Zakupu,
                     Cena_Sprzedaży = product.Cena_Sprzedaży,
-                    Data_Waznosci = product.Data_Waznosci,
+                    Data_Waznosci = product.Data_Waznosci,  // zwykły DateTime
                     Nazwa_Producenta = product.Producent_Leków.Nazwa_Producenta,
                     Na_Recepte = product.Na_Recepte,
                     Refundacja = product.Refundacja
                 }
             );
 
-            UpdateStatistics(); // liczymy statystyki po wczytaniu
+            UpdateStatistics();
         }
 
-        /// <summary>
-        /// Metoda Sort – decyduje wg jakiego pola sortujemy.
-        /// </summary>
         public override void Sort()
         {
             if (SortField == "Nazwa")
@@ -266,16 +267,12 @@ namespace MVVMFirma.ViewModels
                 );
             }
 
-            UpdateStatistics(); // after sorting
+            UpdateStatistics();
         }
 
-        /// <summary>
-        /// Metoda Find – wyszukiwanie wg wybranego pola.
-        /// </summary>
         public override void Find()
         {
-            // Przywracamy pełną listę
-            Load();
+            Load(); // przywracamy pełną listę
 
             if (FindField == "Nazwa")
             {
@@ -299,20 +296,14 @@ namespace MVVMFirma.ViewModels
                 );
             }
 
-            UpdateStatistics(); // after searching
+            UpdateStatistics();
         }
 
-        /// <summary>
-        /// Lista pól, wg których można sortować.
-        /// </summary>
         public override List<string> GetComboboxSortList()
         {
             return new List<string> { "Nazwa", "Kategoria", "Cena sprzedaży", "Cena zakupu", "Data ważności" };
         }
 
-        /// <summary>
-        /// Lista pól, wg których można wyszukiwać.
-        /// </summary>
         public override List<string> GetComboboxFindList()
         {
             return new List<string> { "Nazwa", "Kategoria", "Producent" };
@@ -321,15 +312,11 @@ namespace MVVMFirma.ViewModels
         #endregion
 
         #region Filter()
-        /// <summary>
-        /// Filtrowanie wg cen, checkboxów.
-        /// </summary>
         private void Filter()
         {
-            // Najpierw wczytujemy pełną listę (by odświeżyć)
+            // Przywróć pełną listę
             Load();
 
-            // Konstruujemy listę z warunkami
             var filtered = List.AsEnumerable();
 
             // Cena zakupu od/do
@@ -346,19 +333,19 @@ namespace MVVMFirma.ViewModels
             if (CenaSprzedazyDo.HasValue)
                 filtered = filtered.Where(p => p.Cena_Sprzedaży <= CenaSprzedazyDo.Value);
 
-            // TylkoNaRecepte
+            // Na receptę
             if (TylkoNaRecepte)
                 filtered = filtered.Where(p => p.Na_Recepte);
 
-            // TylkoRefundacja
+            // Refundacja
             if (TylkoRefundacja)
                 filtered = filtered.Where(p => p.Refundacja);
 
-            // TylkoPrzeterminowane
+            // Przeterminowane
             if (TylkoPrzeterminowane)
                 filtered = filtered.Where(p => p.Data_Waznosci < DateTime.Today);
 
-            // Na koniec przypisujemy do List
+            // Gotowa lista
             List = new ObservableCollection<ProductForAllView>(filtered.ToList());
 
             UpdateStatistics();
@@ -366,9 +353,6 @@ namespace MVVMFirma.ViewModels
         #endregion
 
         #region UpdateStatistics()
-        /// <summary>
-        /// Liczenie liczby produktów, liczby przeterminowanych, średnich cen.
-        /// </summary>
         private void UpdateStatistics()
         {
             if (List == null || List.Count == 0)
@@ -381,7 +365,6 @@ namespace MVVMFirma.ViewModels
             }
 
             CountOfProducts = List.Count;
-            // Przeterminowane => Data_Waznosci < DateTime.Today
             CountExpired = List.Count(p => p.Data_Waznosci < DateTime.Today);
 
             AvgPurchasePrice = Math.Round((decimal)List.Average(p => p.Cena_Zakupu), 2);
@@ -389,13 +372,46 @@ namespace MVVMFirma.ViewModels
         }
         #endregion
 
-        #region Ewentualna metoda ExportCsv (opcjonalnie)
-        /*
+        #region ExportCsv()
         private void ExportCsv()
         {
-            // ...
+            try
+            {
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                string csvPath = Path.Combine(desktopPath, "products_export.csv");
+
+                using (var writer = new StreamWriter(csvPath))
+                {
+                    // Nagłówek CSV
+                    writer.WriteLine("ID_Leku;Nazwa;Opis;Kategoria;CenaZakupu;CenaSprzedazy;DataWaznosci;Producent;NaRecepte;Refundacja");
+
+                    foreach (var p in List)
+                    {
+                        // Jeżeli Data_Waznosci to zwykły DateTime, wystarczy:
+                        // $"{p.Data_Waznosci:yyyy-MM-dd}"
+                        // O ile w ProductForAllView jest "public DateTime Data_Waznosci { get; set; }"
+                        writer.WriteLine(
+                            $"{p.ID_Leku};" +
+                            $"{p.Nazwa_Leku};" +
+                            $"{p.Opis};" +
+                            $"{p.Nazwa_Kategorii};" +
+                            $"{p.Cena_Zakupu};" +
+                            $"{p.Cena_Sprzedaży};" +
+                            $"{p.Data_Waznosci:yyyy-MM-dd};" +
+                            $"{p.Nazwa_Producenta};" +
+                            $"{p.Na_Recepte};" +
+                            $"{p.Refundacja}"
+                        );
+                    }
+                }
+
+                ShowMessageBox($"Zapisano plik CSV: {csvPath}");
+            }
+            catch (Exception ex)
+            {
+                ShowMessageBox($"Błąd przy eksporcie CSV: {ex.Message}");
+            }
         }
-        */
         #endregion
     }
 }

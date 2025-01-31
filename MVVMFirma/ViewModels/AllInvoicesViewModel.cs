@@ -24,159 +24,98 @@ namespace MVVMFirma.ViewModels
     {
         #region Pola i właściwości
 
-        // Pełna lista (bez filtrów), pobrana z bazy w Load()
         private List<InvoiceForAllView> _allInvoices;
 
-        // ---- FILTRY ----
+        // Filtry
         private DateTime? _dataOd;
         public DateTime? DataOd
         {
             get => _dataOd;
-            set
-            {
-                _dataOd = value;
-                OnPropertyChanged(() => DataOd);
-                Filter();
-            }
+            set { _dataOd = value; OnPropertyChanged(() => DataOd); Filter(); }
         }
 
         private DateTime? _dataDo;
         public DateTime? DataDo
         {
             get => _dataDo;
-            set
-            {
-                _dataDo = value;
-                OnPropertyChanged(() => DataDo);
-                Filter();
-            }
+            set { _dataDo = value; OnPropertyChanged(() => DataDo); Filter(); }
         }
 
         private decimal? _kwotaOd;
         public decimal? KwotaOd
         {
             get => _kwotaOd;
-            set
-            {
-                _kwotaOd = value;
-                OnPropertyChanged(() => KwotaOd);
-                Filter();
-            }
+            set { _kwotaOd = value; OnPropertyChanged(() => KwotaOd); Filter(); }
         }
 
         private decimal? _kwotaDo;
         public decimal? KwotaDo
         {
             get => _kwotaDo;
-            set
-            {
-                _kwotaDo = value;
-                OnPropertyChanged(() => KwotaDo);
-                Filter();
-            }
+            set { _kwotaDo = value; OnPropertyChanged(() => KwotaDo); Filter(); }
         }
 
-        // Wybrana faktura (do drukowania PDF)
+        // Wybrana faktura (do drukowania)
         private InvoiceForAllView _selectedInvoice;
         public InvoiceForAllView SelectedInvoice
         {
             get => _selectedInvoice;
-            set
-            {
-                _selectedInvoice = value;
-                OnPropertyChanged(() => SelectedInvoice);
-            }
+            set { _selectedInvoice = value; OnPropertyChanged(() => SelectedInvoice); }
         }
 
-        // ---- PODSUMOWANIE ----
+        // Statystyki
         private int _countOfInvoices;
         public int CountOfInvoices
         {
             get => _countOfInvoices;
-            set
-            {
-                _countOfInvoices = value;
-                OnPropertyChanged(() => CountOfInvoices);
-            }
+            set { _countOfInvoices = value; OnPropertyChanged(() => CountOfInvoices); }
         }
 
         private decimal _sumOfInvoices;
         public decimal SumOfInvoices
         {
             get => _sumOfInvoices;
-            set
-            {
-                _sumOfInvoices = value;
-                OnPropertyChanged(() => SumOfInvoices);
-            }
+            set { _sumOfInvoices = value; OnPropertyChanged(() => SumOfInvoices); }
         }
 
-        // ---- WYKRES 1: sumy kwot po miesiącach ----
+        // Wykres miesiące
         private SeriesCollection _seriesCollectionMonth;
         public SeriesCollection SeriesCollectionMonth
         {
             get => _seriesCollectionMonth;
-            set
-            {
-                _seriesCollectionMonth = value;
-                OnPropertyChanged(() => SeriesCollectionMonth);
-            }
+            set { _seriesCollectionMonth = value; OnPropertyChanged(() => SeriesCollectionMonth); }
         }
-
         private string[] _labelsMonth;
         public string[] LabelsMonth
         {
             get => _labelsMonth;
-            set
-            {
-                _labelsMonth = value;
-                OnPropertyChanged(() => LabelsMonth);
-            }
+            set { _labelsMonth = value; OnPropertyChanged(() => LabelsMonth); }
         }
-
         private Func<double, string> _yFormatterMonth;
         public Func<double, string> YFormatterMonth
         {
             get => _yFormatterMonth;
-            set
-            {
-                _yFormatterMonth = value;
-                OnPropertyChanged(() => YFormatterMonth);
-            }
+            set { _yFormatterMonth = value; OnPropertyChanged(() => YFormatterMonth); }
         }
 
-        // ---- WYKRES 2: sumy kwot po dostawcach ----
+        // Wykres dostawcy
         private SeriesCollection _seriesCollectionSuppliers;
         public SeriesCollection SeriesCollectionSuppliers
         {
             get => _seriesCollectionSuppliers;
-            set
-            {
-                _seriesCollectionSuppliers = value;
-                OnPropertyChanged(() => SeriesCollectionSuppliers);
-            }
+            set { _seriesCollectionSuppliers = value; OnPropertyChanged(() => SeriesCollectionSuppliers); }
         }
-
         private string[] _labelsSuppliers;
         public string[] LabelsSuppliers
         {
             get => _labelsSuppliers;
-            set
-            {
-                _labelsSuppliers = value;
-                OnPropertyChanged(() => LabelsSuppliers);
-            }
+            set { _labelsSuppliers = value; OnPropertyChanged(() => LabelsSuppliers); }
         }
-
         private Func<double, string> _yFormatterSuppliers;
         public Func<double, string> YFormatterSuppliers
         {
             get => _yFormatterSuppliers;
-            set
-            {
-                _yFormatterSuppliers = value;
-                OnPropertyChanged(() => YFormatterSuppliers);
-            }
+            set { _yFormatterSuppliers = value; OnPropertyChanged(() => YFormatterSuppliers); }
         }
 
         #endregion
@@ -186,12 +125,11 @@ namespace MVVMFirma.ViewModels
         public AllInvoicesViewModel()
             : base("Wszystkie faktury dostawców")
         {
-            // Komendy
             PrintCommand = new BaseCommand(() => PrintSelectedInvoice());
             FilterCommand = new BaseCommand(() => Filter());
             ExportCsvCommand = new BaseCommand(() => ExportCsv());
 
-            // Inicjujemy wykresy
+            // Inicjowanie wykresów
             SeriesCollectionMonth = new SeriesCollection();
             LabelsMonth = new string[] { };
             YFormatterMonth = val => val.ToString("C");
@@ -209,38 +147,26 @@ namespace MVVMFirma.ViewModels
         public ICommand PrintCommand
         {
             get => _printCommand;
-            set
-            {
-                _printCommand = value;
-                OnPropertyChanged(() => PrintCommand);
-            }
+            set { _printCommand = value; OnPropertyChanged(() => PrintCommand); }
         }
 
         private ICommand _filterCommand;
         public ICommand FilterCommand
         {
             get => _filterCommand;
-            set
-            {
-                _filterCommand = value;
-                OnPropertyChanged(() => FilterCommand);
-            }
+            set { _filterCommand = value; OnPropertyChanged(() => FilterCommand); }
         }
 
         private ICommand _exportCsvCommand;
         public ICommand ExportCsvCommand
         {
             get => _exportCsvCommand;
-            set
-            {
-                _exportCsvCommand = value;
-                OnPropertyChanged(() => ExportCsvCommand);
-            }
+            set { _exportCsvCommand = value; OnPropertyChanged(() => ExportCsvCommand); }
         }
 
         #endregion
 
-        #region Nadpisanie metod z AllViewModel<T> (Sort, Find, Load)
+        #region Nadpisanie metod z AllViewModel<InvoiceForAllView>
 
         public override List<string> GetComboboxSortList()
         {
@@ -251,27 +177,19 @@ namespace MVVMFirma.ViewModels
         {
             if (SortField == "Numer Faktury")
             {
-                List = new ObservableCollection<InvoiceForAllView>(
-                    List.OrderBy(i => i.Numer_Faktury)
-                );
+                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(i => i.Numer_Faktury));
             }
             else if (SortField == "Nazwa Dostawcy")
             {
-                List = new ObservableCollection<InvoiceForAllView>(
-                    List.OrderBy(i => i.Nazwa_Dostawcy)
-                );
+                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(i => i.Nazwa_Dostawcy));
             }
             else if (SortField == "Data Wystawienia")
             {
-                List = new ObservableCollection<InvoiceForAllView>(
-                    List.OrderBy(i => i.Data_Wystawienia)
-                );
+                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(i => i.Data_Wystawienia));
             }
             else if (SortField == "Kwota")
             {
-                List = new ObservableCollection<InvoiceForAllView>(
-                    List.OrderBy(i => i.Kwota)
-                );
+                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(i => i.Kwota));
             }
 
             UpdateStatistics();
@@ -373,14 +291,12 @@ namespace MVVMFirma.ViewModels
 
         #region Generowanie danych do wykresów
 
-        // Wywoływane po każdej zmianie List
         private void BuildChartData()
         {
             BuildChartMonth();
             BuildChartSuppliers();
         }
 
-        // 1) Wykres sum po miesiącach
         private void BuildChartMonth()
         {
             var grouped = List
@@ -402,7 +318,6 @@ namespace MVVMFirma.ViewModels
                 decimal kwotaMies = (data != null) ? data.SumaKwota : 0;
                 values.Add(kwotaMies);
 
-                // Etykieta skrócona nazwa miesiąca, np. "Sty", "Lut"
                 labels.Add(System.Globalization.CultureInfo
                            .CurrentCulture
                            .DateTimeFormat
@@ -419,7 +334,6 @@ namespace MVVMFirma.ViewModels
             LabelsMonth = labels.ToArray();
         }
 
-        // 2) Wykres sum po dostawcach
         private void BuildChartSuppliers()
         {
             var grouped = List
@@ -432,8 +346,6 @@ namespace MVVMFirma.ViewModels
                 .OrderByDescending(x => x.SumaKwota)
                 .ToList();
 
-            // Jeżeli dostawców jest dużo, można ograniczyć, np. top 8 i zsumować "Inni"
-            // Tutaj - bierzemy wszystkich
             var values = new ChartValues<decimal>();
             var labels = new List<string>();
 
@@ -469,13 +381,17 @@ namespace MVVMFirma.ViewModels
                 using (var writer = new StreamWriter(csvPath))
                 {
                     writer.WriteLine("ID_Faktury;Numer_Faktury;Dostawca;Data_Wystawienia;Kwota;Numer_Zamowienia");
-
                     foreach (var inv in List)
                     {
-                        writer.WriteLine($"{inv.ID_Faktury};{inv.Numer_Faktury};{inv.Nazwa_Dostawcy};{inv.Data_Wystawienia:d};{inv.Kwota};{inv.Numer_Zamówienia}");
+                        writer.WriteLine($"{inv.ID_Faktury};" +
+                                         $"{inv.Numer_Faktury};" +
+                                         $"{inv.Nazwa_Dostawcy};" +
+                                         $"{inv.Data_Wystawienia:d};" +
+                                         $"{inv.Kwota};" +
+                                         $"{inv.Numer_Zamówienia}"
+                        );
                     }
                 }
-
                 ShowMessageBox($"Zapisano plik CSV: {csvPath}");
             }
             catch (Exception ex)
@@ -486,7 +402,18 @@ namespace MVVMFirma.ViewModels
 
         #endregion
 
-        #region Drukowanie PDF
+        #region Drukowanie PDF (bardziej zbliżone do prawdziwej faktury)
+
+        private ICommand _printPdfCommand;
+        public ICommand PrintPdfCommand
+        {
+            get
+            {
+                if (_printPdfCommand == null)
+                    _printPdfCommand = new BaseCommand(() => PrintSelectedInvoice());
+                return _printPdfCommand;
+            }
+        }
 
         private void PrintSelectedInvoice()
         {
@@ -520,11 +447,80 @@ namespace MVVMFirma.ViewModels
                 var writer = PdfWriter.GetInstance(doc, fs);
                 doc.Open();
 
-                doc.Add(new Paragraph($"Faktura numer: {SelectedInvoice.Numer_Faktury}"));
-                doc.Add(new Paragraph($"Dostawca: {SelectedInvoice.Nazwa_Dostawcy}"));
-                doc.Add(new Paragraph($"Data wystawienia: {SelectedInvoice.Data_Wystawienia:d}"));
-                doc.Add(new Paragraph($"Kwota: {SelectedInvoice.Kwota}"));
-                doc.Add(new Paragraph($"Numer Zamówienia: {SelectedInvoice.Numer_Zamówienia}"));
+                // Nagłówek faktury
+                var fontTitle = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16);
+                var titlePara = new Paragraph($"Faktura nr {SelectedInvoice.Numer_Faktury}\n", fontTitle);
+                titlePara.Alignment = Element.ALIGN_CENTER;
+                doc.Add(titlePara);
+
+                doc.Add(new Paragraph($"Data wystawienia: {SelectedInvoice.Data_Wystawienia:yyyy-MM-dd}"));
+                doc.Add(new Paragraph($"Numer zamówienia: {SelectedInvoice.Numer_Zamówienia}\n"));
+
+                // Sprzedawca + Dostawca sekcja
+                // (Tu w realnym systemie pobrałbyś info o sprzedawcy z bazy, my robimy “mock”)
+                var chunkSprzedawca = new Chunk("Sprzedawca:\nApteka Sp. z o.o.\nul. Medyczna 12\n00-001 Warszawa\nNIP: 1234567890", FontFactory.GetFont(FontFactory.HELVETICA, 10));
+                var chunkNabywca = new Chunk($"Nabywca (dostawca):\n{SelectedInvoice.Nazwa_Dostawcy}\n\n", FontFactory.GetFont(FontFactory.HELVETICA, 10));
+
+                var sprzedawcaPara = new Paragraph(chunkSprzedawca);
+                var nabywcaPara = new Paragraph(chunkNabywca);
+
+                // Dodamy dwie kolumny w tabeli
+                var tableHeader = new PdfPTable(2)
+                {
+                    WidthPercentage = 100
+                };
+                tableHeader.SetWidths(new float[] { 50, 50 });
+
+                var cellLeft = new PdfPCell(sprzedawcaPara)
+                {
+                    Border = Rectangle.NO_BORDER
+                };
+                var cellRight = new PdfPCell(nabywcaPara)
+                {
+                    Border = Rectangle.NO_BORDER
+                };
+                tableHeader.AddCell(cellLeft);
+                tableHeader.AddCell(cellRight);
+
+                doc.Add(tableHeader);
+
+                doc.Add(new Paragraph("\n"));
+
+                // Sekcja "Pozycje faktury" – uproszczona (1 pozycja)
+                var itemsTable = new PdfPTable(5)
+                {
+                    WidthPercentage = 100
+                };
+                itemsTable.SetWidths(new float[] { 10, 40, 15, 15, 20 }); // Lp, Nazwa, Ilość, Cena, Razem
+
+                // Nagłówki
+                itemsTable.AddCell(new PdfPCell(new Phrase("LP", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10))));
+                itemsTable.AddCell(new PdfPCell(new Phrase("Nazwa uslugi/towaru", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10))));
+                itemsTable.AddCell(new PdfPCell(new Phrase("Ilosc", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10))));
+                itemsTable.AddCell(new PdfPCell(new Phrase("Cena", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10))));
+                itemsTable.AddCell(new PdfPCell(new Phrase("Wartosc", FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10))));
+
+                // Przykładowa 1 pozycja na fakturze
+                itemsTable.AddCell(new PdfPCell(new Phrase("1")));
+                itemsTable.AddCell(new PdfPCell(new Phrase($"Faktura dostawcy\n{SelectedInvoice.Numer_Faktury}")));
+                itemsTable.AddCell(new PdfPCell(new Phrase("1")));
+                itemsTable.AddCell(new PdfPCell(new Phrase($"{SelectedInvoice.Kwota} zl")));
+                itemsTable.AddCell(new PdfPCell(new Phrase($"{SelectedInvoice.Kwota} zl")));
+
+                doc.Add(itemsTable);
+
+                doc.Add(new Paragraph("\n"));
+
+                // Podsumowanie
+                var totalParagraph = new Paragraph(
+                    $"Do zaplaty (brutto): {SelectedInvoice.Kwota:0.00} zl",
+                    FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12)
+                );
+                totalParagraph.Alignment = Element.ALIGN_RIGHT;
+                doc.Add(totalParagraph);
+
+                // Informacje dodatkowe
+                doc.Add(new Paragraph("\nDziekujemy za skorzystanie z uslug Apteka Sp. z o.o."));
 
                 doc.Close();
                 writer.Close();
