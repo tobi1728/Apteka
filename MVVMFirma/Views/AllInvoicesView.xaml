@@ -10,20 +10,24 @@
 
     <Grid Background="#fff">
         <Grid.RowDefinitions>
-            <!-- Pasek 1: sortowanie, wyszukiwanie, drukowanie -->
+            <!-- Wiersz 0: (możesz w przyszłości dać tu sort / wyszukiwanie) -->
             <RowDefinition Height="Auto"/>
-            <!-- Pasek 2: filtrowanie (daty, kwota) + Filtruj -->
+
+            <!-- Wiersz 1: Filtry (DataOd/DataDo, KwotaOd/KwotaDo) + Filtruj, Drukuj -->
             <RowDefinition Height="Auto"/>
-            <!-- Główna sekcja (DataGrid) -->
+
+            <!-- Wiersz 2: DataGrid z fakturami -->
             <RowDefinition Height="*"/>
+
+            <!-- Wiersz 3: Podsumowanie (liczba faktur, suma kwot) -->
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-   
-
-        <!-- Wiersz 1: FILTRY (DataOd/DataDo, KwotaOd/KwotaDo) + Filtruj -->
+        <!-- Wiersz 1: Filtry i przyciski -->
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
                     Margin="10">
+
             <TextBlock Text="Data od:"
                        Margin="0,0,5,0"
                        VerticalAlignment="Center"/>
@@ -54,6 +58,7 @@
                     Width="80"
                     Margin="20,0,0,0"/>
 
+            <!-- Przycisk Drukuj -->
             <Button Content="Drukuj"
                     Command="{Binding PrintCommand}"
                     Margin="10,0,0,0"
@@ -63,6 +68,7 @@
         <!-- Wiersz 2: Tabela z fakturami -->
         <DataGrid Grid.Row="2"
                   AutoGenerateColumns="False"
+                  HorizontalAlignment="Left"
                   ItemsSource="{Binding List}"
                   SelectedItem="{Binding SelectedInvoice, Mode=TwoWay}"
                   CanUserAddRows="False"
@@ -83,5 +89,24 @@
                                     Binding="{Binding Numer_Zamówienia}" />
             </DataGrid.Columns>
         </DataGrid>
+
+        <!-- Wiersz 3: Podsumowanie (liczba, suma) -->
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    Margin="10">
+            <TextBlock Text="Liczba faktur:"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding CountOfInvoices}"
+                       Margin="5,0,15,0"
+                       VerticalAlignment="Center"/>
+
+            <TextBlock Text="Łączna kwota:"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding SumOfInvoices}"
+                       Margin="5,0,0,0"
+                       VerticalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </local:AllViewBase>

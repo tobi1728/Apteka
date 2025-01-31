@@ -2,14 +2,13 @@
 using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
 using MVVMFirma.Models.EntitiesForView;
-using MVVMFirma.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
-// Dla PDF (przykład z iTextSharp):
+// iTextSharp do PDF
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
@@ -21,7 +20,7 @@ namespace MVVMFirma.ViewModels
     {
         #region Pola / Properties
 
-        // Przechowujemy pełną listę (bez filtrów)
+        // Lista oryginalna (bez filtrów)
         private List<InvoiceForAllView> _allInvoices;
 
         // Filtrowanie – data od/do
@@ -33,6 +32,7 @@ namespace MVVMFirma.ViewModels
             {
                 _dataOd = value;
                 OnPropertyChanged(() => DataOd);
+                // Dodatkowo w seterze wywołujemy Filter() - automatyczne filtrowanie
                 Filter();
             }
         }
@@ -74,7 +74,7 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // Zaznaczona faktura (do drukowania)
+        // Zaznaczona faktura
         private InvoiceForAllView _selectedInvoice;
         public InvoiceForAllView SelectedInvoice
         {
@@ -86,18 +86,42 @@ namespace MVVMFirma.ViewModels
             }
         }
 
+        // Statystyki (liczba faktur, suma kwot)
+        private int _countOfInvoices;
+        public int CountOfInvoices
+        {
+            get => _countOfInvoices;
+            set
+            {
+                _countOfInvoices = value;
+                OnPropertyChanged(() => CountOfInvoices);
+            }
+        }
+
+        private decimal _sumOfInvoices;
+        public decimal SumOfInvoices
+        {
+            get => _sumOfInvoices;
+            set
+            {
+                _sumOfInvoices = value;
+                OnPropertyChanged(() => SumOfInvoices);
+            }
+        }
+
         #endregion
 
         #region Konstruktor
         public AllInvoicesViewModel()
             : base("Wszystkie faktury dostawców")
         {
-            // Komenda Drukuj
             PrintCommand = new BaseCommand(() => PrintSelectedInvoice());
+            FilterCommand = new BaseCommand(() => Filter());
         }
         #endregion
 
         #region Komendy
+
         private ICommand _printCommand;
         public ICommand PrintCommand
         {
@@ -108,52 +132,57 @@ namespace MVVMFirma.ViewModels
                 OnPropertyChanged(() => PrintCommand);
             }
         }
+
+        // Jeżeli chcesz mieć przycisk Filtruj w widoku, to i tak wywołujemy Filter() z seterów.
+        // Ale tu jest i tak FilterCommand, by w XAML móc się odwołać:
+        private ICommand _filterCommand;
+        public ICommand FilterCommand
+        {
+            get => _filterCommand;
+            set
+            {
+                _filterCommand = value;
+                OnPropertyChanged(() => FilterCommand);
+            }
+        }
+
         #endregion
 
         #region Metody wirtualne z AllViewModel<T>
 
-        // 1) Lista dostępnych pól do sortowania
         public override List<string> GetComboboxSortList()
         {
             return new List<string> { "Numer Faktury", "Nazwa Dostawcy", "Data Wystawienia", "Kwota" };
         }
 
-        // 2) Sortowanie wg wybranego pola
         public override void Sort()
         {
             if (SortField == "Numer Faktury")
             {
-                List = new ObservableCollection<InvoiceForAllView>(
-                    List.OrderBy(item => item.Numer_Faktury)
-                );
+                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(item => item.Numer_Faktury));
             }
             else if (SortField == "Nazwa Dostawcy")
             {
-                List = new ObservableCollection<InvoiceForAllView>(
-                    List.OrderBy(item => item.Nazwa_Dostawcy)
-                );
+                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(item => item.Nazwa_Dostawcy));
             }
             else if (SortField == "Data Wystawienia")
             {
-                List = new ObservableCollection<InvoiceForAllView>(
-                    List.OrderBy(item => item.Data_Wystawienia)
-                );
+                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(item => item.Data_Wystawienia));
             }
             else if (SortField == "Kwota")
             {
-                List = new ObservableCollection<InvoiceForAllView>(
-                    List.OrderBy(item => item.Kwota)
-                );
+                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(item => item.Kwota));
             }
+
+            // Po sortowaniu też uaktualnij statystyki
+            UpdateStatistics();
         }
 
-        // 3) Lista dostępnych pól do wyszukiwania
         public override List<string> GetComboboxFindList()
         {
             return new List<string> { "Numer Faktury", "Nazwa Dostawcy" };
         }
 
-        // 4) Wyszukiwanie (Find)
         public override void Find()
         {
             // Przywracamy pełną listę
@@ -163,19 +192,20 @@ namespace MVVMFirma.ViewModels
             {
                 List = new ObservableCollection<InvoiceForAllView>(
                     List.Where(item => item.Numer_Faktury != null
-                        && item.Numer_Faktury.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
+                                       && item.Numer_Faktury.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
                 );
             }
             else if (FindField == "Nazwa Dostawcy")
             {
                 List = new ObservableCollection<InvoiceForAllView>(
                     List.Where(item => item.Nazwa_Dostawcy != null
-                        && item.Nazwa_Dostawcy.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
+                                       && item.Nazwa_Dostawcy.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
                 );
             }
+
+            UpdateStatistics();
         }
 
-        // 5) Wczytanie danych z bazy
         public override void Load()
         {
             var invoicesQuery = from invoice in aptekaEntities.Faktury_Dostawców
@@ -189,22 +219,22 @@ namespace MVVMFirma.ViewModels
                                     Numer_Zamówienia = invoice.Zamówienia.ID_Zamówienia.ToString(),
                                 };
 
-            // Pełna lista (bez filtrów)
             _allInvoices = invoicesQuery.ToList();
 
-            // Domyślnie – wyświetlamy wszystko
             List = new ObservableCollection<InvoiceForAllView>(_allInvoices);
+
+            UpdateStatistics();
         }
 
         #endregion
 
-        #region Filtrowanie
+        #region Filtrowanie + Statystyki
+
         private void Filter()
         {
             if (_allInvoices == null)
                 return;
 
-            // Zaczynamy od pełnej listy
             var filtered = _allInvoices.AsEnumerable();
 
             // Data od
@@ -223,9 +253,31 @@ namespace MVVMFirma.ViewModels
             if (KwotaDo.HasValue)
                 filtered = filtered.Where(f => f.Kwota <= KwotaDo.Value);
 
-            // Wynik do List
             List = new ObservableCollection<InvoiceForAllView>(filtered.ToList());
+
+            UpdateStatistics();
         }
+
+        private void UpdateStatistics()
+        {
+            // Gdy List pusta lub null
+            if (List == null || List.Count == 0)
+            {
+                CountOfInvoices = 0;
+                SumOfInvoices = 0;
+                return;
+            }
+
+            CountOfInvoices = List.Count;
+
+            decimal sum = 0;
+            foreach (var invoice in List)
+            {
+                sum += invoice.Kwota; // zakładamy, że Kwota jest decimal
+            }
+            SumOfInvoices = sum;
+        }
+
         #endregion
 
         #region Drukowanie PDF
@@ -240,16 +292,13 @@ namespace MVVMFirma.ViewModels
 
             try
             {
-                // Ścieżka docelowa pliku – przykładowo Pulpit
                 string pdfPath = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                     $"Faktura_{SelectedInvoice.Numer_Faktury}.pdf"
                 );
 
-                // Generujemy PDF
                 GeneratePdf(pdfPath);
 
-                // Otwieramy plik w domyślnym programie do PDF
                 Process.Start(pdfPath);
             }
             catch (Exception ex)
@@ -258,7 +307,6 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // Metoda tworzy przykładowy PDF z danymi o fakturze
         private void GeneratePdf(string pdfPath)
         {
             using (var fs = new FileStream(pdfPath, FileMode.Create, FileAccess.Write))
@@ -267,14 +315,11 @@ namespace MVVMFirma.ViewModels
                 var writer = PdfWriter.GetInstance(doc, fs);
                 doc.Open();
 
-                // Proste dane faktury
                 doc.Add(new Paragraph($"Faktura numer: {SelectedInvoice.Numer_Faktury}"));
                 doc.Add(new Paragraph($"Dostawca: {SelectedInvoice.Nazwa_Dostawcy}"));
                 doc.Add(new Paragraph($"Data wystawienia: {SelectedInvoice.Data_Wystawienia:d}"));
                 doc.Add(new Paragraph($"Kwota: {SelectedInvoice.Kwota}"));
                 doc.Add(new Paragraph($"Numer Zamówienia: {SelectedInvoice.Numer_Zamówienia}"));
-
-                // Rozbudowane wydruki: doc.Add( ... ) Tabele, style, itd.
 
                 doc.Close();
                 writer.Close();
