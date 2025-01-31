@@ -74,7 +74,12 @@
         <!-- Wiersz 2: DataGrid -->
         <Grid Grid.Row="2" Margin="10" HorizontalAlignment="Left">
             <DataGrid AutoGenerateColumns="False"
-                      ItemsSource="{Binding List}"
+          ItemsSource="{Binding List}"
+          SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+          SelectionMode="Single"
+          SelectionUnit="FullRow"
+          IsSynchronizedWithCurrentItem="True"
+
                       CanUserAddRows="False"
                       IsReadOnly="True"
                       BorderThickness="0"

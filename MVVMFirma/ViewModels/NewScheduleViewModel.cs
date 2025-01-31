@@ -13,24 +13,133 @@ namespace MVVMFirma.ViewModels
 {
     public class NewScheduleViewModel : OneViewModel<Grafiki_Pracowników>, IDataErrorInfo
     {
-        #region Constructor
-        public NewScheduleViewModel()
+        private AptekaEntities aptekaEntities;
+
+        public  NewScheduleViewModel()
             : base("Nowy grafik")
         {
             aptekaEntities = new AptekaEntities();
             item = new Grafiki_Pracowników();
-            Data = DateTime.Today; // Default date to today
-            GodzinaRozpoczecia = new TimeSpan(8, 0, 0); // Default start time
-            GodzinaZakonczenia = new TimeSpan(16, 0, 0); // Default end time
+
+            Data = DateTime.Today;
+            GodzinaRozpoczecia = new TimeSpan(8, 0, 0);
+            GodzinaZakonczenia = new TimeSpan(16, 0, 0);
+
             LoadFarmaceuci();
+            // Rejestrujemy nasłuch farmaceuty wybranego w oknie modalnym
             Messenger.Default.Register<PharmacistForAllView>(this, getSelectedPharmacist);
-
         }
-        #endregion
-        #region Validation
-        #region Validation
-        private string _validationMessage = string.Empty;
 
+        // Komenda "Wybierz" - otwarcie listy farmaceutów
+        private ICommand _showPharmacists;
+        public ICommand ShowPharmacists
+        {
+            get
+            {
+                if (_showPharmacists == null)
+                    _showPharmacists = new BaseCommand(() => Messenger.Default.Send("ShowPharmacists"));
+                return _showPharmacists;
+            }
+        }
+
+        private void getSelectedPharmacist(PharmacistForAllView pharmacist)
+        {
+            if (pharmacist != null)
+            {
+                PharmacistName = pharmacist.Imię + " " + pharmacist.Nazwisko;
+                IDFarmaceuty = pharmacist.ID_Farmaceuty;
+            }
+        }
+
+        // Właściwość wyświetlana w polu "Farmaceuta"
+        private string _pharmacistName;
+        public string PharmacistName
+        {
+            get => _pharmacistName;
+            set
+            {
+                _pharmacistName = value;
+                OnPropertyChanged(() => PharmacistName);
+            }
+        }
+
+        // Lista farmaceutów z bazy (opcjonalnie)
+        private List<Farmaceuci> _farmaceuci;
+        public List<Farmaceuci> Farmaceuci
+        {
+            get => _farmaceuci;
+            set
+            {
+                _farmaceuci = value;
+                OnPropertyChanged(() => Farmaceuci);
+            }
+        }
+
+        public int IDFarmaceuty
+        {
+            get => item.ID_Farmaceuty;
+            set
+            {
+                item.ID_Farmaceuty = value;
+                OnPropertyChanged(() => IDFarmaceuty);
+            }
+        }
+
+        public DateTime Data
+        {
+            get => item.Data;
+            set
+            {
+                item.Data = value;
+                OnPropertyChanged(() => Data);
+            }
+        }
+
+        public TimeSpan GodzinaRozpoczecia
+        {
+            get => item.Godzina_Rozpoczęcia;
+            set
+            {
+                item.Godzina_Rozpoczęcia = value;
+                OnPropertyChanged(() => GodzinaRozpoczecia);
+            }
+        }
+
+        public TimeSpan GodzinaZakonczenia
+        {
+            get => item.Godzina_Zakończenia;
+            set
+            {
+                item.Godzina_Zakończenia = value;
+                OnPropertyChanged(() => GodzinaZakonczenia);
+            }
+        }
+
+        // Wczytanie listy farmaceutów (opcjonalne)
+        public void LoadFarmaceuci()
+        {
+            Farmaceuci = aptekaEntities.Farmaceuci.ToList();
+        }
+
+        public override void Save()
+        {
+            if (IsValid())
+            {
+                aptekaEntities.Grafiki_Pracowników.Add(item);
+                aptekaEntities.SaveChanges();
+                ShowMessageBox("Zapisano grafik pracownika");
+            }
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu");
+            }
+        }
+
+        #region Walidacja (IDataErrorInfo)
+
+        public string Error => string.Empty;
+
+        private string _validationMessage = string.Empty;
         public string this[string propertyName]
         {
             get
@@ -63,132 +172,6 @@ namespace MVVMFirma.ViewModels
                    string.IsNullOrEmpty(this[nameof(IDFarmaceuty)]);
         }
 
-        public string Error => string.Empty;
-        #endregion
-
-
-
-
-
-        #region Properties
-        public ICommand ShowPharmacists
-        {
-            get
-            {
-                return new BaseCommand(() => Messenger.Default.Send("ShowPharmacists"));
-            }
-        }
-
-        void getSelectedPharmacist(PharmacistForAllView pharmacist)
-        {
-            if (pharmacist != null)
-            {
-                PharmacistName = pharmacist.Imię + " " + pharmacist.Nazwisko;
-                IDFarmaceuty = pharmacist.ID_Farmaceuty;
-
-
-            }
-        }
-
-
-        private string _PharmacistName;
-        public string PharmacistName
-        {
-            get => _PharmacistName;
-            set
-            {
-                _PharmacistName = value;
-            }
-        }
-
-        private List<Farmaceuci> _Farmaceuci;
-        public List<Farmaceuci> Farmaceuci
-        {
-            get => _Farmaceuci;
-            set
-            {
-                _Farmaceuci = value;
-                OnPropertyChanged(() => Farmaceuci);
-            }
-        }
-
-        public int IDFarmaceuty
-        {
-            get
-            {
-                return item.ID_Farmaceuty;
-            }
-            set
-            {
-                item.ID_Farmaceuty = value;
-                OnPropertyChanged(() => IDFarmaceuty);
-            }
-        }
-
-
-
-
-        public DateTime Data
-        {
-            get
-            {
-                return item.Data;
-            }
-            set
-            {
-                item.Data = value;
-                OnPropertyChanged(() => Data);
-            }
-        }
-
-        public TimeSpan GodzinaRozpoczecia
-        {
-            get
-            {
-                return item.Godzina_Rozpoczęcia;
-            }
-            set
-            {
-                item.Godzina_Rozpoczęcia = value;
-                OnPropertyChanged(() => GodzinaRozpoczecia);
-            }
-        }
-
-        public TimeSpan GodzinaZakonczenia
-        {
-            get
-            {
-                return item.Godzina_Zakończenia;
-            }
-            set
-            {
-                item.Godzina_Zakończenia = value;
-                OnPropertyChanged(() => GodzinaZakonczenia);
-            }
-        }
-        #endregion
-
-        #region Helpers
-        public void LoadFarmaceuci()
-        {
-            Farmaceuci = aptekaEntities.Farmaceuci.ToList();
-        }
-
-        public override void Save()
-        {
-            if (IsValid())
-            {
-                aptekaEntities.Grafiki_Pracowników.Add(item);
-                aptekaEntities.SaveChanges();
-            }
-            else
-            {
-                ShowMessageBox("Popraw błędy w formularzu");
-            }
-        }
-
-
         #endregion
     }
 }
-#endregion

@@ -1,90 +1,105 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using MVVMFirma.Helper;
-using MVVMFirma.Models.Entities;
 using MVVMFirma.Models.EntitiesForView;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MVVMFirma.ViewModels
 {
     public class AllPharmacistsViewModel : AllViewModel<PharmacistForAllView>
     {
-        #region Constructor
-        public AllPharmacistsViewModel()
-            : base("Wszyscy farmaceuci")
-        {
-        }
-        #endregion
-        #region Sort & Find 
-        // tu decydujemy po czym sortowac
-        public override List<string> GetComboboxSortList()
-        {
-            return new List<string> { "Imię", "Nazwisko", "Numer Licencji" };
-        }
-        private PharmacistForAllView _SelectedPharmacist;
+        private PharmacistForAllView _selectedPharmacist;
         public PharmacistForAllView SelectedPharmacist
         {
-            get => _SelectedPharmacist;
+            get => _selectedPharmacist;
             set
             {
-                _SelectedPharmacist = value;
+                _selectedPharmacist = value;
+                OnPropertyChanged(() => SelectedPharmacist);
 
-                if (_SelectedPharmacist != null && IsModal)
+                // Jeśli okno jest modalne, a user wybrał wiersz:
+                if (_selectedPharmacist != null && IsModal)
                 {
-                    Messenger.Default.Send(_SelectedPharmacist);
+                    // Wysyłamy farmaceutę do VM, który nas otworzył (np. NewScheduleViewModel)
+                    Messenger.Default.Send(_selectedPharmacist);
+                    // Zamykamy okno (modalne)
                     OnRequestClose();
                 }
             }
         }
 
-        public bool IsModal { get; set; }
+        // Domyślnie false, ustawiamy w MainWindowViewModel jeśli chcemy modalnie
+        public bool IsModal { get; set; } = false;
 
+        public AllPharmacistsViewModel()
+            : base("Wszyscy farmaceuci")
+        {
+        }
+
+        public override void Load()
+        {
+            List = new ObservableCollection<PharmacistForAllView>
+            (
+                from p in aptekaEntities.Farmaceuci
+                select new PharmacistForAllView
+                {
+                    ID_Farmaceuty = p.ID_Farmaceuty,
+                    Imię = p.Imię,
+                    Nazwisko = p.Nazwisko,
+                    Numer_Licencji = p.Numer_Licencji
+                }
+            );
+        }
+
+        public override System.Collections.Generic.List<string> GetComboboxSortList()
+        {
+            return new System.Collections.Generic.List<string> { "Imię", "Nazwisko", "Numer Licencji" };
+        }
 
         public override void Sort()
         {
             if (SortField == "Imię")
-                List = new ObservableCollection<PharmacistForAllView>(List.OrderBy(item => item.Imię).ToList());
+            {
+                List = new ObservableCollection<PharmacistForAllView>(
+                    List.OrderBy(item => item.Imię)
+                );
+            }
             else if (SortField == "Nazwisko")
-                List = new ObservableCollection<PharmacistForAllView>(List.OrderBy(item => item.Nazwisko).ToList());
+            {
+                List = new ObservableCollection<PharmacistForAllView>(
+                    List.OrderBy(item => item.Nazwisko)
+                );
+            }
             else if (SortField == "Numer Licencji")
-                List = new ObservableCollection<PharmacistForAllView>(List.OrderBy(item => item.Numer_Licencji).ToList());
+            {
+                List = new ObservableCollection<PharmacistForAllView>(
+                    List.OrderBy(item => item.Numer_Licencji)
+                );
+            }
         }
 
-        public override List<string> GetComboboxFindList()
+        public override System.Collections.Generic.List<string> GetComboboxFindList()
         {
-            return new List<string> { "Imię", "Nazwisko" };
+            return new System.Collections.Generic.List<string> { "Imię", "Nazwisko" };
         }
 
         public override void Find()
         {
             Load();
             if (FindField == "Imię")
-                List = new ObservableCollection<PharmacistForAllView>(List.Where(item => item.Imię != null && item.Imię.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase)).ToList());
+            {
+                List = new ObservableCollection<PharmacistForAllView>(
+                    List.Where(item => item.Imię != null
+                        && item.Imię.StartsWith(FindTextBox, System.StringComparison.OrdinalIgnoreCase))
+                );
+            }
             else if (FindField == "Nazwisko")
-                List = new ObservableCollection<PharmacistForAllView>(List.Where(item => item.Nazwisko != null && item.Nazwisko.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase)).ToList());
+            {
+                List = new ObservableCollection<PharmacistForAllView>(
+                    List.Where(item => item.Nazwisko != null
+                        && item.Nazwisko.StartsWith(FindTextBox, System.StringComparison.OrdinalIgnoreCase))
+                );
+            }
         }
-
-
-        #endregion
-        #region Helpers
-        public override void Load()
-        {
-            List = new ObservableCollection<PharmacistForAllView>
-            (
-                from pharmacist in aptekaEntities.Farmaceuci
-                select new PharmacistForAllView
-                {
-                    ID_Farmaceuty = pharmacist.ID_Farmaceuty,
-                    Imię = pharmacist.Imię,
-                    Nazwisko = pharmacist.Nazwisko,
-                    Numer_Licencji = pharmacist.Numer_Licencji
-                }
-            );
-        }
-        #endregion
     }
 }

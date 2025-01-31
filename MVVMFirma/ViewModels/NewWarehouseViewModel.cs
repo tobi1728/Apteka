@@ -1,30 +1,150 @@
-﻿using MVVMFirma.Helper;
+﻿using GalaSoft.MvvmLight.Messaging;
+using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Models.EntitiesForView;
 using MVVMFirma.Validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
     public class NewWarehouseViewModel : OneViewModel<Magazyn>, IDataErrorInfo
     {
-        #region Constructor
+        private AptekaEntities aptekaEntities;
+
         public NewWarehouseViewModel()
             : base("Nowy Magazyn")
         {
             aptekaEntities = new AptekaEntities();
             item = new Magazyn();
 
-            LoadProducts();
+            // Domyślnie:
+            Quantity = 1; // np. domyślna ilość
+
+            // Zamiast LoadProducts – rejestrujemy nasłuch na ProductForAllView
+            Messenger.Default.Register<ProductForAllView>(this, getSelectedProduct);
         }
-        #endregion
+
+        // --- Komenda ShowProducts ---
+        private ICommand _showProducts;
+        public ICommand ShowProducts
+        {
+            get
+            {
+                if (_showProducts == null)
+                {
+                    _showProducts = new BaseCommand(() => Messenger.Default.Send("ShowProducts"));
+                }
+                return _showProducts;
+            }
+        }
+
+        // Odbiór wybranego produktu (leka)
+        private void getSelectedProduct(ProductForAllView product)
+        {
+            if (product != null)
+            {
+                // Ustawiamy ID leku w tabeli Magazyn
+                IDLeku = product.ID_Leku;
+                // Wyświetlamy w polu 'ProductName'
+                ProductName = product.Nazwa_Leku;
+            }
+        }
+
+        // --- Właściwość do wyświetlenia nazwy leku w polu ---
+        private string _productName;
+        public string ProductName
+        {
+            get => _productName;
+            set
+            {
+                _productName = value;
+                OnPropertyChanged(() => ProductName);
+            }
+        }
+
+        // Klucz obcy do Leki
+        public int IDLeku
+        {
+            get => item.ID_Leku;
+            set
+            {
+                item.ID_Leku = value;
+                OnPropertyChanged(() => IDLeku);
+            }
+        }
+
+        // Ilość
+        public int Quantity
+        {
+            get => item.Ilość;
+            set
+            {
+                item.Ilość = value;
+                OnPropertyChanged(() => Quantity);
+            }
+        }
+
+        // Adres, telefon, etc.
+        public string Street
+        {
+            get => item.Ulica;
+            set
+            {
+                item.Ulica = value;
+                OnPropertyChanged(() => Street);
+            }
+        }
+
+        public string City
+        {
+            get => item.Miasto;
+            set
+            {
+                item.Miasto = value;
+                OnPropertyChanged(() => City);
+            }
+        }
+
+        public string PostalCode
+        {
+            get => item.Kod_Pocztowy;
+            set
+            {
+                item.Kod_Pocztowy = value;
+                OnPropertyChanged(() => PostalCode);
+            }
+        }
+
+        public string Phone
+        {
+            get => item.Telefon;
+            set
+            {
+                item.Telefon = value;
+                OnPropertyChanged(() => Phone);
+            }
+        }
+
+        public override void Save()
+        {
+            if (IsValid())
+            {
+                aptekaEntities.Magazyn.Add(item);
+                aptekaEntities.SaveChanges();
+                ShowMessageBox("Zapisano nowy magazyn.");
+            }
+            else
+            {
+                ShowMessageBox("Popraw błędy w formularzu");
+            }
+        }
+
         #region Validation
         private string _validationMessage = string.Empty;
-
         public string this[string propertyName]
         {
             get
@@ -68,119 +188,5 @@ namespace MVVMFirma.ViewModels
         public string Error => string.Empty;
         #endregion
 
-        #region Properties
-
-        // Lista leków (klucz obcy)
-        private List<Leki> _Products;
-        public List<Leki> Products
-        {
-            get => _Products;
-            set
-            {
-                _Products = value;
-                OnPropertyChanged(() => Products);
-            }
-        }
-
-        // Nazwa leku (klucz obcy)
-        public int IDLeku
-        {
-            get
-            {
-                return item.ID_Leku;
-            }
-            set
-            {
-                item.ID_Leku = value;
-                OnPropertyChanged(() => IDLeku);
-            }
-        }
-
-        public int Quantity
-        {
-            get
-            {
-                return item.Ilość;
-            }
-            set
-            {
-                item.Ilość = value;
-                OnPropertyChanged(() => Quantity);
-            }
-        }
-
-        public string Street
-        {
-            get
-            {
-                return item.Ulica;
-            }
-            set
-            {
-                item.Ulica = value;
-                OnPropertyChanged(() => Street);
-            }
-        }
-
-        public string City
-        {
-            get
-            {
-                return item.Miasto;
-            }
-            set
-            {
-                item.Miasto = value;
-                OnPropertyChanged(() => City);
-            }
-        }
-
-        public string PostalCode
-        {
-            get
-            {
-                return item.Kod_Pocztowy;
-            }
-            set
-            {
-                item.Kod_Pocztowy = value;
-                OnPropertyChanged(() => PostalCode);
-            }
-        }
-
-        public string Phone
-        {
-            get
-            {
-                return item.Telefon;
-            }
-            set
-            {
-                item.Telefon = value;
-                OnPropertyChanged(() => Phone);
-            }
-        }
-
-        #endregion
-
-        #region Helpers
-        public void LoadProducts()
-        {
-            Products = aptekaEntities.Leki.ToList();
-        }
-
-        public override void Save()
-        {
-            if (IsValid())
-            {
-                aptekaEntities.Magazyn.Add(item);
-                aptekaEntities.SaveChanges();
-            }
-            else
-            {
-                ShowMessageBox("Popraw błędy w formularzu");
-            }
-        }
-        #endregion
     }
 }

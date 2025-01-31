@@ -1,61 +1,94 @@
 ﻿<local:OneViewBase x:Class="MVVMFirma.Views.NewScheduleView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MVVMFirma.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="400">
-    
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:local="clr-namespace:MVVMFirma.Views"
+                   mc:Ignorable="d"
+                   d:DesignHeight="500"
+                   d:DesignWidth="400">
+
     <Grid Background="#fff">
         <Grid.RowDefinitions>
-            <!-- Nagłówek -->
+            <!-- wiersz 0: Tytuł -->
             <RowDefinition Height="Auto"/>
-            <!-- Formularz -->
+            <!-- wiersz 1: Formularz -->
             <RowDefinition Height="*"/>
+            <!-- wiersz 2: (opcjonalnie) Przyciski: Zapisz, Anuluj -->
         </Grid.RowDefinitions>
 
-        <!-- Nagłówek -->
-        <TextBlock Grid.Row="0" Text="Dodaj nowy grafik" 
-                   HorizontalAlignment="Left" VerticalAlignment="Center" 
-                   FontSize="20" FontWeight="Bold" Margin="5,10,0,10"/>
+        <!-- Wiersz 0: Nagłówek -->
+        <TextBlock Grid.Row="0"
+                   Text="Dodaj nowy grafik"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Margin="5,10,0,10"/>
 
-        <!-- Główna siatka dla formularza -->
-        <Grid Grid.Row="1">
-
+        <!-- Wiersz 1: Główna siatka formularza -->
+        <Grid Grid.Row="1"
+              Margin="0,0,0,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="45"/>
+                <!-- Farmaceuta -->
                 <RowDefinition Height="45"/>
+                <!-- Data -->
                 <RowDefinition Height="45"/>
+                <!-- Godzina rozpoczęcia -->
                 <RowDefinition Height="45"/>
+                <!-- Godzina zakończenia -->
             </Grid.RowDefinitions>
 
             <!-- Farmaceuta -->
-            <Label Grid.Column="0" Grid.Row="0" Content="Farmaceuta:" Margin="0,8,0,8" Padding="3"/>
-            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding PharmacistName, Mode=TwoWay}" IsEnabled="False" Margin="0,8,0,8" Padding="3"/>
-            <Button Content="Wybierz" Grid.Column="2" Grid.Row="0" Margin="10,8,-10,8" Command="{Binding ShowPharmacists}" />
-
-
+            <Label Grid.Column="0" Grid.Row="0"
+                   Content="Farmaceuta:"
+                   Margin="0,8,0,8"/>
+            <TextBox Grid.Column="1" Grid.Row="0"
+                     Text="{Binding PharmacistName, Mode=TwoWay}"
+                     IsEnabled="False"
+                     Margin="0,8,0,8"/>
+            <Button Grid.Column="2" Grid.Row="0"
+                    Content="Wybierz"
+                    Command="{Binding ShowPharmacists}"
+                    Margin="10,8,0,8"/>
 
             <!-- Data -->
-            <Label Grid.Column="0" Grid.Row="1" Margin="0,8,0,8" Content="Data:"/>
-            <DatePicker Grid.Column="1" Grid.Row="1" Margin="0,8,0,8"
-                        SelectedDate="{Binding Data, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Column="0" Grid.Row="1"
+                   Content="Data:"
+                   Margin="0,8,0,8"/>
+            <DatePicker Grid.Column="1" Grid.Row="1"
+                        SelectedDate="{Binding Data, Mode=TwoWay, ValidatesOnDataErrors=True}"
+                        Margin="0,8,0,8"/>
 
             <!-- Godzina rozpoczęcia -->
-            <Label Grid.Column="0" Grid.Row="2" Margin="0,8,0,8" Content="Godzina rozpoczęcia:"/>
-            <TextBox Grid.Column="1" Grid.Row="2" Margin="0,8,0,8" Padding="5"
-         Text="{Binding GodzinaRozpoczecia, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+            <Label Grid.Column="0" Grid.Row="2"
+                   Content="Godzina rozpoczęcia:"
+                   Margin="0,8,0,8"/>
+            <TextBox Grid.Column="1" Grid.Row="2"
+                     Text="{Binding GodzinaRozpoczecia, Mode=TwoWay, ValidatesOnDataErrors=True}"
+                     Margin="0,8,0,8"/>
 
             <!-- Godzina zakończenia -->
-            <Label Grid.Column="0" Grid.Row="3" Margin="0,8,0,8" Content="Godzina zakończenia:"/>
-            <TextBox Grid.Column="1" Grid.Row="3" Margin="0,8,0,8" Padding="5"
-         Text="{Binding GodzinaZakonczenia, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+            <Label Grid.Column="0" Grid.Row="3"
+                   Content="Godzina zakończenia:"
+                   Margin="0,8,0,8"/>
+            <TextBox Grid.Column="1" Grid.Row="3"
+                     Text="{Binding GodzinaZakonczenia, Mode=TwoWay, ValidatesOnDataErrors=True}"
+                     Margin="0,8,0,8"/>
         </Grid>
+
+        <!-- (Opcjonalnie) Wiersz 2: Przyciski Zapisz/Anuluj -->
+        <!-- 
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+            <Button Content="Zapisz" Command="{Binding SaveCommand}" Width="80"/>
+            <Button Content="Anuluj" Command="{Binding CancelCommand}" Width="80" Margin="10,0,0,0"/>
+        </StackPanel>
+        -->
     </Grid>
 </local:OneViewBase>

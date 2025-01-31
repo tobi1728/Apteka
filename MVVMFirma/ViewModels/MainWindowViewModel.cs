@@ -184,7 +184,7 @@ namespace MVVMFirma.ViewModels
             {
                 var pharmacistsViewModel = new AllPharmacistsViewModel
                 {
-                    IsModal = true // Otwieramy jako modalne okno
+                    IsModal = true // KLUCZOWE
                 };
                 CreateView(pharmacistsViewModel);
             }
@@ -195,7 +195,16 @@ namespace MVVMFirma.ViewModels
                     IsModal = false // Standardowe otwieranie z listy linków
                 };
                 CreateView(pharmacistsViewModel);
+             } 
+            else if (name == "ShowProducts")
+            {
+                var productsViewModel = new AllProductsViewModel
+                {
+                    IsModal = true
+                };
+                CreateView(productsViewModel);
             }
+
 
             // Obsługa komunikatów typu string — np. otwieranie formularzy "Add" lub list "All".
             if (name == "Wszystkie lekiAdd")
@@ -228,9 +237,6 @@ namespace MVVMFirma.ViewModels
                 CreateView(new NewOrderViewModel());
             if (name == "Wszystkie sprzedażeAdd")
                 CreateView(new NewSaleViewModel());
-            
-            if (name == "ShowPharmacists")
-                CreateView(new AllPharmacistsViewModel());
             if (name == "Wszyscy producenci")
                 CreateView(new AllProducersViewModel());
 
