@@ -10,7 +10,11 @@ using System.IO;
 using System.Linq;
 using System.Windows.Input;
 
-// iTextSharp do PDF
+// Biblioteka LiveCharts
+using LiveCharts;
+using LiveCharts.Wpf;
+
+// Biblioteka iTextSharp do PDF
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 
@@ -18,12 +22,12 @@ namespace MVVMFirma.ViewModels
 {
     public class AllInvoicesViewModel : AllViewModel<InvoiceForAllView>
     {
-        #region Pola / Properties
+        #region Pola i właściwości
 
-        // Lista oryginalna (bez filtrów)
+        // Pełna lista (bez filtrów), pobrana z bazy w Load()
         private List<InvoiceForAllView> _allInvoices;
 
-        // Filtrowanie: Data od/do
+        // ---- FILTRY ----
         private DateTime? _dataOd;
         public DateTime? DataOd
         {
@@ -48,7 +52,6 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // Filtrowanie: Kwota od/do
         private decimal? _kwotaOd;
         public decimal? KwotaOd
         {
@@ -73,7 +76,7 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // Zaznaczona faktura
+        // Wybrana faktura (do drukowania PDF)
         private InvoiceForAllView _selectedInvoice;
         public InvoiceForAllView SelectedInvoice
         {
@@ -85,7 +88,7 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // Statystyki
+        // ---- PODSUMOWANIE ----
         private int _countOfInvoices;
         public int CountOfInvoices
         {
@@ -108,16 +111,96 @@ namespace MVVMFirma.ViewModels
             }
         }
 
+        // ---- WYKRES 1: sumy kwot po miesiącach ----
+        private SeriesCollection _seriesCollectionMonth;
+        public SeriesCollection SeriesCollectionMonth
+        {
+            get => _seriesCollectionMonth;
+            set
+            {
+                _seriesCollectionMonth = value;
+                OnPropertyChanged(() => SeriesCollectionMonth);
+            }
+        }
+
+        private string[] _labelsMonth;
+        public string[] LabelsMonth
+        {
+            get => _labelsMonth;
+            set
+            {
+                _labelsMonth = value;
+                OnPropertyChanged(() => LabelsMonth);
+            }
+        }
+
+        private Func<double, string> _yFormatterMonth;
+        public Func<double, string> YFormatterMonth
+        {
+            get => _yFormatterMonth;
+            set
+            {
+                _yFormatterMonth = value;
+                OnPropertyChanged(() => YFormatterMonth);
+            }
+        }
+
+        // ---- WYKRES 2: sumy kwot po dostawcach ----
+        private SeriesCollection _seriesCollectionSuppliers;
+        public SeriesCollection SeriesCollectionSuppliers
+        {
+            get => _seriesCollectionSuppliers;
+            set
+            {
+                _seriesCollectionSuppliers = value;
+                OnPropertyChanged(() => SeriesCollectionSuppliers);
+            }
+        }
+
+        private string[] _labelsSuppliers;
+        public string[] LabelsSuppliers
+        {
+            get => _labelsSuppliers;
+            set
+            {
+                _labelsSuppliers = value;
+                OnPropertyChanged(() => LabelsSuppliers);
+            }
+        }
+
+        private Func<double, string> _yFormatterSuppliers;
+        public Func<double, string> YFormatterSuppliers
+        {
+            get => _yFormatterSuppliers;
+            set
+            {
+                _yFormatterSuppliers = value;
+                OnPropertyChanged(() => YFormatterSuppliers);
+            }
+        }
+
         #endregion
 
         #region Konstruktor
+
         public AllInvoicesViewModel()
             : base("Wszystkie faktury dostawców")
         {
+            // Komendy
             PrintCommand = new BaseCommand(() => PrintSelectedInvoice());
             FilterCommand = new BaseCommand(() => Filter());
             ExportCsvCommand = new BaseCommand(() => ExportCsv());
+
+            // Inicjujemy wykresy
+            SeriesCollectionMonth = new SeriesCollection();
+            LabelsMonth = new string[] { };
+            YFormatterMonth = val => val.ToString("C");
+
+            SeriesCollectionSuppliers = new SeriesCollection();
+            LabelsSuppliers = new string[] { };
+            YFormatterSuppliers = val => val.ToString("C");
         }
+
         #endregion
 
         #region Komendy
@@ -144,7 +227,6 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // NOWA komenda: Export CSV
         private ICommand _exportCsvCommand;
         public ICommand ExportCsvCommand
         {
@@ -158,7 +240,7 @@ namespace MVVMFirma.ViewModels
 
         #endregion
 
-        #region Metody wirtualne z AllViewModel<T>
+        #region Nadpisanie metod z AllViewModel<T> (Sort, Find, Load)
 
         public override List<string> GetComboboxSortList()
         {
@@ -169,22 +251,31 @@ namespace MVVMFirma.ViewModels
         {
             if (SortField == "Numer Faktury")
             {
-                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(item => item.Numer_Faktury));
+                List = new ObservableCollection<InvoiceForAllView>(
+                    List.OrderBy(i => i.Numer_Faktury)
+                );
             }
             else if (SortField == "Nazwa Dostawcy")
             {
-                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(item => item.Nazwa_Dostawcy));
+                List = new ObservableCollection<InvoiceForAllView>(
+                    List.OrderBy(i => i.Nazwa_Dostawcy)
+                );
             }
             else if (SortField == "Data Wystawienia")
             {
-                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(item => item.Data_Wystawienia));
+                List = new ObservableCollection<InvoiceForAllView>(
+                    List.OrderBy(i => i.Data_Wystawienia)
+                );
             }
             else if (SortField == "Kwota")
             {
-                List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(item => item.Kwota));
+                List = new ObservableCollection<InvoiceForAllView>(
+                    List.OrderBy(i => i.Kwota)
+                );
             }
 
             UpdateStatistics();
+            BuildChartData();
         }
 
         public override List<string> GetComboboxFindList()
@@ -194,43 +285,47 @@ namespace MVVMFirma.ViewModels
 
         public override void Find()
         {
+            // Przywracamy pełną listę
             Load();
 
             if (FindField == "Numer Faktury")
             {
                 List = new ObservableCollection<InvoiceForAllView>(
-                    List.Where(item => item.Numer_Faktury != null &&
-                                       item.Numer_Faktury.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
+                    List.Where(i => i.Numer_Faktury != null &&
+                                    i.Numer_Faktury.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
                 );
             }
             else if (FindField == "Nazwa Dostawcy")
             {
                 List = new ObservableCollection<InvoiceForAllView>(
-                    List.Where(item => item.Nazwa_Dostawcy != null &&
-                                       item.Nazwa_Dostawcy.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
+                    List.Where(i => i.Nazwa_Dostawcy != null &&
+                                    i.Nazwa_Dostawcy.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
                 );
             }
 
             UpdateStatistics();
+            BuildChartData();
         }
 
         public override void Load()
         {
-            var invoicesQuery = from invoice in aptekaEntities.Faktury_Dostawców
+            var invoicesQuery = from inv in aptekaEntities.Faktury_Dostawców
                                 select new InvoiceForAllView
                                 {
-                                    ID_Faktury = invoice.ID_Faktury,
-                                    Numer_Faktury = invoice.Numer_Faktury,
-                                    Nazwa_Dostawcy = invoice.Dostawcy.Nazwa,
-                                    Data_Wystawienia = invoice.Data_Wystawienia,
-                                    Kwota = invoice.Kwota,
-                                    Numer_Zamówienia = invoice.Zamówienia.ID_Zamówienia.ToString()
+                                    ID_Faktury = inv.ID_Faktury,
+                                    Numer_Faktury = inv.Numer_Faktury,
+                                    Nazwa_Dostawcy = inv.Dostawcy.Nazwa,
+                                    Data_Wystawienia = inv.Data_Wystawienia,
+                                    Kwota = inv.Kwota,
+                                    Numer_Zamówienia = inv.Zamówienia.ID_Zamówienia.ToString()
                                 };
 
             _allInvoices = invoicesQuery.ToList();
+
             List = new ObservableCollection<InvoiceForAllView>(_allInvoices);
 
             UpdateStatistics();
+            BuildChartData();
         }
 
         #endregion
@@ -239,30 +334,26 @@ namespace MVVMFirma.ViewModels
 
         private void Filter()
         {
-            if (_allInvoices == null)
-                return;
+            if (_allInvoices == null) return;
 
             var filtered = _allInvoices.AsEnumerable();
 
-            // Data od
             if (DataOd.HasValue)
                 filtered = filtered.Where(f => f.Data_Wystawienia >= DataOd.Value);
 
-            // Data do
             if (DataDo.HasValue)
                 filtered = filtered.Where(f => f.Data_Wystawienia <= DataDo.Value);
 
-            // Kwota od
             if (KwotaOd.HasValue)
                 filtered = filtered.Where(f => f.Kwota >= KwotaOd.Value);
 
-            // Kwota do
             if (KwotaDo.HasValue)
                 filtered = filtered.Where(f => f.Kwota <= KwotaDo.Value);
 
             List = new ObservableCollection<InvoiceForAllView>(filtered.ToList());
 
             UpdateStatistics();
+            BuildChartData();
         }
 
         private void UpdateStatistics()
@@ -275,12 +366,91 @@ namespace MVVMFirma.ViewModels
             }
 
             CountOfInvoices = List.Count;
-            decimal sum = 0;
-            foreach (var invoice in List)
+            SumOfInvoices = List.Sum(i => i.Kwota);
+        }
+
+        #endregion
+
+        #region Generowanie danych do wykresów
+
+        // Wywoływane po każdej zmianie List
+        private void BuildChartData()
+        {
+            BuildChartMonth();
+            BuildChartSuppliers();
+        }
+
+        // 1) Wykres sum po miesiącach
+        private void BuildChartMonth()
+        {
+            var grouped = List
+                .GroupBy(i => i.Data_Wystawienia.Month)
+                .Select(g => new
+                {
+                    Miesiac = g.Key,
+                    SumaKwota = g.Sum(x => x.Kwota)
+                })
+                .OrderBy(x => x.Miesiac)
+                .ToList();
+
+            var values = new ChartValues<decimal>();
+            var labels = new List<string>();
+
+            for (int m = 1; m <= 12; m++)
             {
-                sum += invoice.Kwota;
+                var data = grouped.FirstOrDefault(x => x.Miesiac == m);
+                decimal kwotaMies = (data != null) ? data.SumaKwota : 0;
+                values.Add(kwotaMies);
+
+                // Etykieta skrócona nazwa miesiąca, np. "Sty", "Lut"
+                labels.Add(System.Globalization.CultureInfo
+                           .CurrentCulture
+                           .DateTimeFormat
+                           .GetAbbreviatedMonthName(m));
             }
-            SumOfInvoices = sum;
+
+            var colSeries = new ColumnSeries
+            {
+                Title = "Miesiące",
+                Values = values
+            };
+
+            SeriesCollectionMonth = new SeriesCollection { colSeries };
+            LabelsMonth = labels.ToArray();
+        }
+
+        // 2) Wykres sum po dostawcach
+        private void BuildChartSuppliers()
+        {
+            var grouped = List
+                .GroupBy(i => i.Nazwa_Dostawcy)
+                .Select(g => new
+                {
+                    Dostawca = g.Key,
+                    SumaKwota = g.Sum(x => x.Kwota)
+                })
+                .OrderByDescending(x => x.SumaKwota)
+                .ToList();
+
+            // Jeżeli dostawców jest dużo, można ograniczyć, np. top 8 i zsumować "Inni"
+            // Tutaj - bierzemy wszystkich
+            var values = new ChartValues<decimal>();
+            var labels = new List<string>();
+
+            foreach (var row in grouped)
+            {
+                values.Add(row.SumaKwota);
+                labels.Add(row.Dostawca);
+            }
+
+            var colSeries = new ColumnSeries
+            {
+                Title = "Dostawcy",
+                Values = values
+            };
+
+            SeriesCollectionSuppliers = new SeriesCollection { colSeries };
+            LabelsSuppliers = labels.ToArray();
         }
 
         #endregion
@@ -291,7 +461,6 @@ namespace MVVMFirma.ViewModels
         {
             try
             {
-                // Przykładowa ścieżka: Pulpit, plik "invoices_export.csv"
                 string csvPath = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                     "invoices_export.csv"
@@ -299,15 +468,10 @@ namespace MVVMFirma.ViewModels
 
                 using (var writer = new StreamWriter(csvPath))
                 {
-                    // Nagłówek (pierwsza linia)
                     writer.WriteLine("ID_Faktury;Numer_Faktury;Dostawca;Data_Wystawienia;Kwota;Numer_Zamowienia");
 
-                    // Kolejne wiersze z danymi
                     foreach (var inv in List)
                     {
-                        // Format CSV: dane rozdzielone ";"
-                        // Data_Wystawienia d => np. 2023-05-01
-                        // Ewentualnie .ToString("yyyy-MM-dd") itp. w zależności od potrzeb
                         writer.WriteLine($"{inv.ID_Faktury};{inv.Numer_Faktury};{inv.Nazwa_Dostawcy};{inv.Data_Wystawienia:d};{inv.Kwota};{inv.Numer_Zamówienia}");
                     }
                 }
@@ -340,7 +504,6 @@ namespace MVVMFirma.ViewModels
                 );
 
                 GeneratePdf(pdfPath);
-
                 Process.Start(pdfPath);
             }
             catch (Exception ex)
