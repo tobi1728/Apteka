@@ -22,5 +22,13 @@ namespace MVVMFirma.Models.EntitiesForView
         public bool Na_Recepte { get; set; }
         public bool Refundacja { get; set; }
         public string Opis { get; set; }
+
+        public bool IsExpired
+        {
+            get
+            {
+                return Data_Waznosci < DateTime.Today;
+            }
+        }
     }
 }
