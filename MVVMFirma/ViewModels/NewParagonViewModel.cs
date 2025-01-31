@@ -1,16 +1,18 @@
-﻿using MVVMFirma.Helper;
+﻿using GalaSoft.MvvmLight.Messaging;
+using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
+using MVVMFirma.Models.EntitiesForView;
 using MVVMFirma.Validators;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
+using System.Windows.Input;
 
 namespace MVVMFirma.ViewModels
 {
     public class NewParagonViewModel : OneViewModel<Paragony>, IDataErrorInfo
     {
-        #region Constructor
+        private AptekaEntities aptekaEntities;
+
         public NewParagonViewModel()
             : base("Nowy paragon")
         {
@@ -18,12 +20,91 @@ namespace MVVMFirma.ViewModels
             item = new Paragony();
             DataWystawienia = DateTime.Today;
 
-            LoadSprzedaze();
+            // Rejestr Messenger do odbioru SaleForAllView
+            Messenger.Default.Register<SaleForAllView>(this, getSelectedSale);
         }
-        #endregion
-        #region Validation
-        private string _validationMessage = string.Empty;
 
+        // --- Komenda otwierająca listę sprzedaży w trybie modalnym ---
+        private ICommand _showSales;
+        public ICommand ShowSales
+        {
+            get
+            {
+                if (_showSales == null)
+                    _showSales = new BaseCommand(() => Messenger.Default.Send("ShowSales"));
+                return _showSales;
+            }
+        }
+
+        // --- Odbiór wybranej sprzedaży ---
+        private void getSelectedSale(SaleForAllView sale)
+        {
+            if (sale != null)
+            {
+                IDSprzedazy = sale.ID_Sprzedaży;
+                // np. wyświetlamy datę + kwotę
+                SaleInfo = $"Sprz. {sale.Data_Sprzedaży:d}, kwota = {sale.Kwota}";
+            }
+        }
+
+        // --- Zamiast ComboBox, mamy SaleInfo do wyświetlenia
+        private string _saleInfo;
+        public string SaleInfo
+        {
+            get => _saleInfo;
+            set
+            {
+                _saleInfo = value;
+                OnPropertyChanged(() => SaleInfo);
+            }
+        }
+
+        // Klucz obcy w bazie
+        public int IDSprzedazy
+        {
+            get => item.ID_Sprzedaży;
+            set
+            {
+                item.ID_Sprzedaży = value;
+                OnPropertyChanged(() => IDSprzedazy);
+            }
+        }
+
+        // Numer paragonu
+        public string NumerParagonu
+        {
+            get => item.Numer_Paragonu;
+            set
+            {
+                item.Numer_Paragonu = value;
+                OnPropertyChanged(() => NumerParagonu);
+            }
+        }
+
+        // Data wystawienia
+        public DateTime DataWystawienia
+        {
+            get => item.Data_Wystawienia;
+            set
+            {
+                item.Data_Wystawienia = value;
+                OnPropertyChanged(() => DataWystawienia);
+            }
+        }
+
+        // Kwota
+        public decimal Kwota
+        {
+            get => item.Kwota;
+            set
+            {
+                item.Kwota = value;
+                OnPropertyChanged(() => Kwota);
+            }
+        }
+
+        // Walidacja
+        private string _validationMessage = string.Empty;
         public string this[string propertyName]
         {
             get
@@ -57,66 +138,6 @@ namespace MVVMFirma.ViewModels
         }
 
         public string Error => string.Empty;
-        #endregion
-
-        #region Properties
-        private List<Sprzedaż> _Sprzedaze;
-        public List<Sprzedaż> Sprzedaze
-        {
-            get => _Sprzedaze;
-            set
-            {
-                _Sprzedaze = value;
-                OnPropertyChanged(() => Sprzedaze);
-            }
-        }
-
-        public string NumerParagonu
-        {
-            get => item.Numer_Paragonu;
-            set
-            {
-                item.Numer_Paragonu = value;
-                OnPropertyChanged(() => NumerParagonu);
-            }
-        }
-
-        public int IDSprzedazy
-        {
-            get => item.ID_Sprzedaży;
-            set
-            {
-                item.ID_Sprzedaży = value;
-                OnPropertyChanged(() => IDSprzedazy);
-            }
-        }
-
-        public DateTime DataWystawienia
-        {
-            get => item.Data_Wystawienia;
-            set
-            {
-                item.Data_Wystawienia = value;
-                OnPropertyChanged(() => DataWystawienia);
-            }
-        }
-
-        public decimal Kwota
-        {
-            get => item.Kwota;
-            set
-            {
-                item.Kwota = value;
-                OnPropertyChanged(() => Kwota);
-            }
-        }
-        #endregion
-
-        #region Helpers
-        public void LoadSprzedaze()
-        {
-            Sprzedaze = aptekaEntities.Sprzedaż.ToList();
-        }
 
         public override void Save()
         {
@@ -124,13 +145,12 @@ namespace MVVMFirma.ViewModels
             {
                 aptekaEntities.Paragony.Add(item);
                 aptekaEntities.SaveChanges();
+                ShowMessageBox("Zapisano nowy paragon!");
             }
             else
             {
                 ShowMessageBox("Popraw błędy w formularzu");
             }
         }
-
-        #endregion
     }
 }

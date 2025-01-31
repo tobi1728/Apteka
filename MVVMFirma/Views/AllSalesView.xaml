@@ -89,14 +89,21 @@
 
         <!-- Wiersz 2: DataGrid (Lista sprzedaży) -->
         <DataGrid Grid.Row="2"
-                  ItemsSource="{Binding List}"
-                  AutoGenerateColumns="False"
-                  HorizontalAlignment="Left"
-                  CanUserAddRows="False"
-                  IsReadOnly="True"
-                  Margin="10">
+          ItemsSource="{Binding List}"
+          SelectedItem="{Binding SelectedSale, Mode=TwoWay}"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          IsReadOnly="True"
+          SelectionMode="Single"
+          SelectionUnit="FullRow"
+          IsSynchronizedWithCurrentItem="True"
+        HorizontalAlignment="Left"
+        Background="#fff"
+        BorderThickness="0"
+          Margin="10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID Sprzedaży" Binding="{Binding ID_Sprzedaży}" />
+
                 <DataGridTextColumn Header="Nazwa leku" Binding="{Binding Nazwa_Leku}" />
                 <DataGridTextColumn Header="PESEL pacjenta" Binding="{Binding PESEL_Pacjenta}" />
                 <DataGridTextColumn Header="Data sprzedaży"

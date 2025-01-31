@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+﻿using GalaSoft.MvvmLight.Messaging;
+using LiveCharts;
 using LiveCharts.Wpf;
 using MVVMFirma.Helper;
 using MVVMFirma.Models.Entities;
@@ -31,6 +32,29 @@ namespace MVVMFirma.ViewModels
                 OnPropertyChanged(() => WybranaFormaPlatnosci);
             }
         }
+
+        // Najlepiej na górze
+        private SaleForAllView _selectedSale;
+        public SaleForAllView SelectedSale
+        {
+            get => _selectedSale;
+            set
+            {
+                _selectedSale = value;
+                OnPropertyChanged(() => SelectedSale);
+
+                // Jeśli modalne, wysyłamy i zamykamy
+                if (_selectedSale != null && IsModal)
+                {
+                    Messenger.Default.Send(_selectedSale);
+                    OnRequestClose();
+                }
+            }
+        }
+
+        public bool IsModal { get; set; } = false;
+
+
         #endregion
 
         #region Statystyki

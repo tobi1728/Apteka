@@ -204,6 +204,15 @@ namespace MVVMFirma.ViewModels
                 };
                 CreateView(productsViewModel);
             }
+            else if (name == "ShowSales")
+            {
+                var salesVM = new AllSalesViewModel
+                {
+                    IsModal = true
+                };
+                CreateView(salesVM);
+            }
+
 
 
             // Obsługa komunikatów typu string — np. otwieranie formularzy "Add" lub list "All".
