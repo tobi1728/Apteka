@@ -5,14 +5,14 @@ using MVVMFirma.Models.EntitiesForView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 
 // iTextSharp do PDF
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using System.IO;
-using System.Diagnostics;
 
 namespace MVVMFirma.ViewModels
 {
@@ -23,7 +23,7 @@ namespace MVVMFirma.ViewModels
         // Lista oryginalna (bez filtrów)
         private List<InvoiceForAllView> _allInvoices;
 
-        // Filtrowanie – data od/do
+        // Filtrowanie: Data od/do
         private DateTime? _dataOd;
         public DateTime? DataOd
         {
@@ -32,7 +32,6 @@ namespace MVVMFirma.ViewModels
             {
                 _dataOd = value;
                 OnPropertyChanged(() => DataOd);
-                // Dodatkowo w seterze wywołujemy Filter() - automatyczne filtrowanie
                 Filter();
             }
         }
@@ -49,7 +48,7 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // Filtrowanie – kwota od/do
+        // Filtrowanie: Kwota od/do
         private decimal? _kwotaOd;
         public decimal? KwotaOd
         {
@@ -86,7 +85,7 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // Statystyki (liczba faktur, suma kwot)
+        // Statystyki
         private int _countOfInvoices;
         public int CountOfInvoices
         {
@@ -117,6 +116,7 @@ namespace MVVMFirma.ViewModels
         {
             PrintCommand = new BaseCommand(() => PrintSelectedInvoice());
             FilterCommand = new BaseCommand(() => Filter());
+            ExportCsvCommand = new BaseCommand(() => ExportCsv());
         }
         #endregion
 
@@ -133,8 +133,6 @@ namespace MVVMFirma.ViewModels
             }
         }
 
-        // Jeżeli chcesz mieć przycisk Filtruj w widoku, to i tak wywołujemy Filter() z seterów.
-        // Ale tu jest i tak FilterCommand, by w XAML móc się odwołać:
         private ICommand _filterCommand;
         public ICommand FilterCommand
         {
@@ -143,6 +141,18 @@ namespace MVVMFirma.ViewModels
             {
                 _filterCommand = value;
                 OnPropertyChanged(() => FilterCommand);
+            }
+        }
+
+        // NOWA komenda: Export CSV
+        private ICommand _exportCsvCommand;
+        public ICommand ExportCsvCommand
+        {
+            get => _exportCsvCommand;
+            set
+            {
+                _exportCsvCommand = value;
+                OnPropertyChanged(() => ExportCsvCommand);
             }
         }
 
@@ -174,7 +184,6 @@ namespace MVVMFirma.ViewModels
                 List = new ObservableCollection<InvoiceForAllView>(List.OrderBy(item => item.Kwota));
             }
 
-            // Po sortowaniu też uaktualnij statystyki
             UpdateStatistics();
         }
 
@@ -185,21 +194,20 @@ namespace MVVMFirma.ViewModels
 
         public override void Find()
         {
-            // Przywracamy pełną listę
             Load();
 
             if (FindField == "Numer Faktury")
             {
                 List = new ObservableCollection<InvoiceForAllView>(
-                    List.Where(item => item.Numer_Faktury != null
-                                       && item.Numer_Faktury.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
+                    List.Where(item => item.Numer_Faktury != null &&
+                                       item.Numer_Faktury.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
                 );
             }
             else if (FindField == "Nazwa Dostawcy")
             {
                 List = new ObservableCollection<InvoiceForAllView>(
-                    List.Where(item => item.Nazwa_Dostawcy != null
-                                       && item.Nazwa_Dostawcy.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
+                    List.Where(item => item.Nazwa_Dostawcy != null &&
+                                       item.Nazwa_Dostawcy.StartsWith(FindTextBox, StringComparison.OrdinalIgnoreCase))
                 );
             }
 
@@ -216,11 +224,10 @@ namespace MVVMFirma.ViewModels
                                     Nazwa_Dostawcy = invoice.Dostawcy.Nazwa,
                                     Data_Wystawienia = invoice.Data_Wystawienia,
                                     Kwota = invoice.Kwota,
-                                    Numer_Zamówienia = invoice.Zamówienia.ID_Zamówienia.ToString(),
+                                    Numer_Zamówienia = invoice.Zamówienia.ID_Zamówienia.ToString()
                                 };
 
             _allInvoices = invoicesQuery.ToList();
-
             List = new ObservableCollection<InvoiceForAllView>(_allInvoices);
 
             UpdateStatistics();
@@ -260,7 +267,6 @@ namespace MVVMFirma.ViewModels
 
         private void UpdateStatistics()
         {
-            // Gdy List pusta lub null
             if (List == null || List.Count == 0)
             {
                 CountOfInvoices = 0;
@@ -269,13 +275,49 @@ namespace MVVMFirma.ViewModels
             }
 
             CountOfInvoices = List.Count;
-
             decimal sum = 0;
             foreach (var invoice in List)
             {
-                sum += invoice.Kwota; // zakładamy, że Kwota jest decimal
+                sum += invoice.Kwota;
             }
             SumOfInvoices = sum;
+        }
+
+        #endregion
+
+        #region Export CSV
+
+        private void ExportCsv()
+        {
+            try
+            {
+                // Przykładowa ścieżka: Pulpit, plik "invoices_export.csv"
+                string csvPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                    "invoices_export.csv"
+                );
+
+                using (var writer = new StreamWriter(csvPath))
+                {
+                    // Nagłówek (pierwsza linia)
+                    writer.WriteLine("ID_Faktury;Numer_Faktury;Dostawca;Data_Wystawienia;Kwota;Numer_Zamowienia");
+
+                    // Kolejne wiersze z danymi
+                    foreach (var inv in List)
+                    {
+                        // Format CSV: dane rozdzielone ";"
+                        // Data_Wystawienia d => np. 2023-05-01
+                        // Ewentualnie .ToString("yyyy-MM-dd") itp. w zależności od potrzeb
+                        writer.WriteLine($"{inv.ID_Faktury};{inv.Numer_Faktury};{inv.Nazwa_Dostawcy};{inv.Data_Wystawienia:d};{inv.Kwota};{inv.Numer_Zamówienia}");
+                    }
+                }
+
+                ShowMessageBox($"Zapisano plik CSV: {csvPath}");
+            }
+            catch (Exception ex)
+            {
+                ShowMessageBox($"Błąd przy eksporcie CSV: {ex.Message}");
+            }
         }
 
         #endregion

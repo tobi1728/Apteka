@@ -10,20 +10,20 @@
 
     <Grid Background="#fff">
         <Grid.RowDefinitions>
-            <!-- Wiersz 0: (możesz w przyszłości dać tu sort / wyszukiwanie) -->
+            <!-- Wiersz 0: (opcjonalnie sort/wyszukiwanie, póki co pusty) -->
             <RowDefinition Height="Auto"/>
 
-            <!-- Wiersz 1: Filtry (DataOd/DataDo, KwotaOd/KwotaDo) + Filtruj, Drukuj -->
+            <!-- Wiersz 1: filtry + przyciski (Filtruj, Drukuj, Export CSV) -->
             <RowDefinition Height="Auto"/>
 
             <!-- Wiersz 2: DataGrid z fakturami -->
             <RowDefinition Height="*"/>
 
-            <!-- Wiersz 3: Podsumowanie (liczba faktur, suma kwot) -->
+            <!-- Wiersz 3: Podsumowanie (liczba, suma) -->
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Wiersz 1: Filtry i przyciski -->
+        <!-- Wiersz 1: FILTRY (DataOd/DataDo, KwotaOd/KwotaDo) + Filtruj, Drukuj, Export CSV -->
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
                     Margin="10">
@@ -63,17 +63,23 @@
                     Command="{Binding PrintCommand}"
                     Margin="10,0,0,0"
                     Width="80"/>
+
+            <!-- Nowy przycisk: Export to CSV -->
+            <Button Content="Export CSV"
+                    Command="{Binding ExportCsvCommand}"
+                    Margin="10,0,0,0"
+                    Width="90"/>
         </StackPanel>
 
         <!-- Wiersz 2: Tabela z fakturami -->
         <DataGrid Grid.Row="2"
                   AutoGenerateColumns="False"
-                  HorizontalAlignment="Left"
                   ItemsSource="{Binding List}"
                   SelectedItem="{Binding SelectedInvoice, Mode=TwoWay}"
                   CanUserAddRows="False"
                   IsReadOnly="True"
                   Margin="10">
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID Faktury"
                                     Binding="{Binding ID_Faktury}" />
